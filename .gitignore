@@ -1,0 +1,16 @@
+.DS_Store
+build/
+DerivedData/
+output/
+release/
+*.app/
+*.dmg
+*.zip
+*.xcuserstate
+xcuserdata/
+.env
+.env.*
+*.p8
+*.p12
+*.mobileprovision
+*.provisionprofile

@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f5f7f4" />
+    <title>Clean — 给 Mac 一点呼吸的空间</title>
+    <meta
+      name="description"
+      content="Clean，原生 macOS 磁盘工具。本机扫描、关联卸载、可视化分析与菜单栏实时监控。先看清，再动手。下载已通过 Apple 公证的安装包。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Clean — 给 Mac 一点呼吸的空间" />
+    <meta
+      property="og:description"
+      content="清理、卸载、优化、分析、状态。五个入口，让你的 Mac 井然有序。原生 SwiftUI，扫描留在本机。"
+    />
+    <meta
+      property="og:image"
+      content="https://bennix.github.io/Clean/assets/overview-dark.png"
+    />
+    <meta property="og:url" content="https://bennix.github.io/Clean/" />
+    <link rel="canonical" href="https://bennix.github.io/Clean/" />
+    <link rel="icon" href="assets/icon.png" type="image/png" />
+    <link rel="preload" as="image" href="assets/overview-dark.png" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳转到主要内容</a>
+    <header class="site-header">
+      <nav class="nav wrap" aria-label="主导航">
+        <a class="wordmark" href="#" aria-label="Clean 首页"
+          ><img src="assets/icon.png" width="36" height="36" alt="" /><span
+            >Clean<span class="brand-dot">.</span></span
+          ></a
+        >
+        <div class="nav-links">
+          <a href="#features">五个入口</a><a href="#preview">界面一览</a
+          ><a href="#safety">安全边界</a
+          ><a href="https://github.com/bennix/Clean"
+            >GitHub <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <a class="button button-small button-dark" href="#download"
+          >下载 Clean <span aria-hidden="true">↓</span></a
+        >
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="wrap hero-copy">
+          <a
+            class="release-pill"
+            href="https://github.com/bennix/Clean/releases/tag/v1.0.1"
+            ><span class="live-dot"></span> Clean 1.0.1 现已发布
+            <span aria-hidden="true">↗</span></a
+          >
+          <h1 id="hero-title">
+            给 Mac 一点<br /><span class="soft-heading">呼吸的空间。</span>
+          </h1>
+          <p class="hero-description">
+            从堆积的缓存，到藏得很深的大文件。<br />用一个安静的原生应用，看清、整理，然后轻装再行。
+          </p>
+          <div class="hero-actions">
+            <a
+              class="button button-dark button-large"
+              href="https://github.com/bennix/Clean/releases/download/v1.0.1/Clean-1.0.1-AppleSilicon.dmg"
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                aria-hidden="true"
+              >
+                <path d="M12 3v12m-5-5 5 5 5-5M4 15v5h16v-5" /></svg
+              >下载 macOS 版</a
+            >
+            <a class="text-link" href="#preview"
+              >先看看它的样子 <span aria-hidden="true">↘</span></a
+            >
+          </div>
+          <p class="compatibility">Apple Silicon · macOS 27+ · 约 4.9 MB</p>
+        </div>
+        <figure class="hero-visual wrap">
+          <div class="window-toolbar">
+            <div class="traffic-lights" aria-hidden="true">
+              <i></i><i></i><i></i>
+            </div>
+            <span>Clean · 你的 Mac，井然有序</span
+            ><span class="window-native">原生 SwiftUI</span>
+          </div>
+          <div class="screenshot-clip">
+            <img
+              src="assets/overview-dark.png"
+              alt="Clean 深色概览实机截图，包含磁盘容量、应用程序、下载文件、大型文件、缓存、系统数据与运行状态入口"
+              width="2360"
+              height="1600"
+              fetchpriority="high"
+            />
+          </div>
+          <figcaption>
+            少一点杂乱。多一点心里有数。<span
+              >实际运行界面，数据随设备而异。</span
+            >
+          </figcaption>
+        </figure>
+      </section>
+      <div class="proof-strip wrap" aria-label="应用特性">
+        <span
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="m12 3 8 3v6c0 5-8 9-8 9S4 17 4 12V6l8-3Zm-4 9 3 3 5-6"
+            /></svg
+          >Developer ID 签名</span
+        >
+        <span
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="m8 12 3 3 5-6M12 2l3 2 4 1 1 4 2 3-2 3-1 4-4 1-3 2-3-2-4-1-1-4-2-3 2-3 1-4 4-1 3-2Z"
+            /></svg
+          >已通过 Apple 公证</span
+        >
+        <span
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="4" y="10" width="16" height="11" rx="2" />
+            <path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2" /></svg
+          >扫描留在本机</span
+        >
+        <span
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m8 5-6 7 6 7m8-14 6 7-6 7m-3-16-2 18" /></svg
+          >源码公开可查看</span
+        >
+      </div>
+
+      <section
+        id="features"
+        class="features section wrap"
+        aria-labelledby="features-title"
+      >
+        <div class="section-heading">
+          <p class="section-label">一个 Clean，五种从容</p>
+          <h2 id="features-title">每件事，都有自己的轨道。</h2>
+          <p>
+            整理文件、照看系统，各有边界。<br />你始终知道它在做什么，也知道下一步会发生什么。
+          </p>
+        </div>
+        <div class="feature-layout">
+          <div class="feature-intro">
+            <img
+              src="assets/icon.png"
+              alt="Clean 的青色星球应用图标"
+              width="176"
+              height="176"
+              loading="lazy"
+            />
+            <p>为 Mac 而做。<br />也为你的安心而做。</p>
+            <span>SwiftUI · 本机处理 · 明暗主题</span>
+          </div>
+          <div class="feature-list">
+            <article class="feature-row">
+              <span class="planet planet-green" aria-hidden="true"></span>
+              <h3>清理<span>雨洗旧土，尘随潮去。</span></h3>
+              <p>
+                识别用户缓存、日志、Xcode
+                构建文件与设备备份。先看路径和大小，再选择需要处理的项目。
+              </p>
+            </article>
+            <article class="feature-row">
+              <span class="planet planet-orange" aria-hidden="true"></span>
+              <h3>卸载<span>告别应用，也看清关联。</span></h3>
+              <p>
+                审查偏好设置、支持文件、容器和启动项。个人数据默认保留，共享文件明确标注，上次启动或最近使用时间一目了然。
+              </p>
+            </article>
+            <article class="feature-row">
+              <span class="planet planet-violet" aria-hidden="true"></span>
+              <h3>优化<span>小修有声，运行有序。</span></h3>
+              <p>
+                刷新 DNS、重建 Spotlight 索引、查看本地快照。需要管理员权限时由
+                macOS 授权，不保存你的密码。
+              </p>
+            </article>
+            <article class="feature-row">
+              <span class="planet planet-blue" aria-hidden="true"></span>
+              <h3>分析<span>远目成图，微处可见。</span></h3>
+              <p>
+                用矩形树图查看目录占用，逐层深入。最多 4
+                路后台并发，结果边扫边显示，随时取消。
+              </p>
+            </article>
+            <article class="feature-row">
+              <span class="planet planet-pink" aria-hidden="true"></span>
+              <h3>状态<span>心跳长明，尽收眼底。</span></h3>
+              <p>
+                CPU、内存、上下行网速、磁盘、电池与温度。收起窗口后，菜单栏里仍有一方小小的仪表盘。
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="preview"
+        class="preview-section section"
+        aria-labelledby="preview-title"
+      >
+        <div class="wrap">
+          <div class="preview-header">
+            <div>
+              <p class="section-label">好看，也好用</p>
+              <h2 id="preview-title">从清晨，到深夜。</h2>
+              <p class="section-description">
+                浅色清晰，深色沉静。也可以跟着系统，顺其自然。
+              </p>
+            </div>
+            <div
+              class="theme-switch"
+              role="group"
+              aria-label="选择应用截图主题"
+            >
+              <button type="button" data-preview="dark" aria-pressed="true">
+                <span aria-hidden="true">☾</span> 深色</button
+              ><button type="button" data-preview="light" aria-pressed="false">
+                <span aria-hidden="true">☀</span> 浅色
+              </button>
+            </div>
+          </div>
+          <figure class="preview-window">
+            <div class="window-toolbar">
+              <div class="traffic-lights" aria-hidden="true">
+                <i></i><i></i><i></i>
+              </div>
+              <span id="preview-caption">Clean · 深色主题</span
+              ><a
+                id="preview-original"
+                href="assets/overview-dark.png"
+                target="_blank"
+                rel="noopener"
+                aria-label="查看当前界面原图"
+                >查看原图 ↗</a
+              >
+            </div>
+            <div class="screenshot-clip">
+              <img
+                id="preview-image"
+                src="assets/overview-dark.png"
+                alt="Clean 深色主题实际运行界面"
+                width="2360"
+                height="1600"
+                loading="lazy"
+              />
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="status-section section" aria-labelledby="status-title">
+        <div class="wrap status-layout">
+          <div class="status-copy">
+            <p class="section-label">一眼，就有数</p>
+            <h2 id="status-title">不占舞台。<br />也不漏掉心跳。</h2>
+            <p>
+              点一下菜单栏，看看 Mac 此刻的状态。<br />关掉主窗口，监控仍在；真正退出，由你决定。
+            </p>
+            <div class="status-metrics">
+              <div>
+                <strong>60<span>秒</span></strong>
+                <p>最近采样曲线</p>
+              </div>
+              <div>
+                <strong>1<span>秒</span></strong>
+                <p>CPU / 内存 / 网速更新</p>
+              </div>
+            </div>
+            <ul class="status-details">
+              <li>实时上下行网速与磁盘容量</li>
+              <li>芯片、电池、SSD 温度传感器列表</li>
+              <li>压缩内存、交换空间与系统负载</li>
+            </ul>
+            <p class="fine-print">
+              温度与 GPU 依机型和系统接口支持。磁盘、电源与传感器每 5
+              秒更新；无法读取时明确提示。
+            </p>
+            <a
+              class="text-link light-link"
+              href="assets/status-dark.png"
+              target="_blank"
+              rel="noopener"
+              >查看完整状态界面 <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <figure class="menu-visual">
+            <div class="mini-menu-bar">
+              <span>Clean</span><span aria-hidden="true">◉　⌁　◔</span>
+            </div>
+            <img
+              src="assets/menu-status.png"
+              alt="Clean 菜单栏实机面板，展示 CPU、内存、上下行网速、磁盘容量及温度等实时读数"
+              width="932"
+              height="1452"
+              loading="lazy"
+            />
+            <figcaption>你的 Mac，正在发生什么。</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section
+        id="safety"
+        class="safety-section section wrap"
+        aria-labelledby="safety-title"
+      >
+        <div class="section-heading">
+          <p class="section-label">它的边界</p>
+          <h2 id="safety-title">先看清，再动手。</h2>
+          <p>清理工具最重要的能力，是知道何时该停下。</p>
+        </div>
+        <div class="safety-grid">
+          <article>
+            <span class="safety-number">01 / 本机</span>
+            <h3>你的文件，留在你的 Mac。</h3>
+            <p>
+              文件路径与扫描结果在本机处理。应用不上传扫描数据，官网也不加载第三方统计脚本。
+            </p>
+          </article>
+          <article>
+            <span class="safety-number">02 / 确认</span>
+            <h3>每一次处理，都由你确认。</h3>
+            <p>
+              先展示路径、大小与关联说明。卸载项目移入废纸篓，个人数据默认保留；普通缓存与日志删除前明确提示。
+            </p>
+          </article>
+          <article>
+            <span class="safety-number">03 / 克制</span>
+            <h3>无法确定，就留下来。</h3>
+            <p>
+              拦截未知路径与符号链接。识别到共用容器和系统服务时保留，不把整个“系统数据”当作删除目标。
+            </p>
+          </article>
+        </div>
+        <div class="permission-note">
+          <span class="permission-icon" aria-hidden="true">↗</span>
+          <div>
+            <h3>权限也应当清清楚楚。</h3>
+            <p>
+              探测受限时提供指引，单独列出读取失败的路径，并引导你添加“完全磁盘访问权限”。权限必须由你在
+              macOS 设置中开启，Clean 不会绕过系统保护。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq-section section wrap" aria-labelledby="faq-title">
+        <div class="faq-intro">
+          <p class="section-label">下载之前</p>
+          <h2 id="faq-title">你可能还想知道。</h2>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>
+              Clean 可以清空所有“系统数据”吗？<span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              不能，也不应该。“系统数据”是 macOS 的汇总分类。Clean
+              只处理明确识别的缓存、日志、开发文件与备份，受保护的系统目录不会直接删除。APFS
+              快照和共享块也会影响实际释放空间。
+            </p>
+          </details>
+          <details>
+            <summary>支持哪些 Mac？<span aria-hidden="true">+</span></summary>
+            <p>
+              当前 1.0.1 安装包支持搭载 Apple Silicon 的 Mac，需要 macOS 27
+              或更新版本，暂未提供 Intel 安装包。温度传感器和 GPU
+              数据的可用性因机型而异。
+            </p>
+          </details>
+          <details>
+            <summary>下载后怎么安装？<span aria-hidden="true">+</span></summary>
+            <p>
+              打开 DMG，将 Clean 拖入“应用程序”。首次运行后，按提示在“系统设置 →
+              隐私与安全性 → 完全磁盘访问权限”中添加已安装的
+              Clean.app，开启后重新打开应用。安装包与应用均已通过 Apple
+              公证并附加票据。
+            </p>
+          </details>
+          <details>
+            <summary>
+              卸载会删除全部关联数据吗？<span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              Clean
+              会列出明确匹配的关联文件，让你逐项选择。个人数据默认不勾选，共用文件、系统级后台服务和特权辅助工具可能需要保留或使用厂商卸载器。遇到权限不足会列出失败原因，不保证所有软件都能完全清除。
+            </p>
+          </details>
+          <details>
+            <summary>
+              “上次启动”和“最近使用”有什么区别？<span aria-hidden="true"
+                >+</span
+              >
+            </summary>
+            <p>
+              正在运行的应用和 Clean
+              观察到的启动，可以记录准确启动时间。没有历史启动记录时，会尝试读取
+              Spotlight
+              的最近使用时间并标注来源；没有数据时显示“暂无记录”，不会推测。
+            </p>
+          </details>
+          <details>
+            <summary>
+              当前版本还有哪些限制？<span aria-hidden="true">+</span>
+            </summary>
+            <p>
+              1.0.1
+              已提供五个功能入口，但尚未覆盖所有缓存类型、完整维护任务、进程监控与指标排序置顶。Time
+              Machine 目前只支持查看本地快照，不自动精简或删除。完整范围可在仓库
+              README 中查看。
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section id="download" class="download-section">
+        <div class="wrap download-inner">
+          <img
+            src="assets/icon.png"
+            alt=""
+            width="100"
+            height="100"
+            loading="lazy"
+          />
+          <p class="section-label">让空间，回到你手里</p>
+          <h2>从今天起，<br />轻装一点。</h2>
+          <a
+            class="button button-dark button-large"
+            href="https://github.com/bennix/Clean/releases/download/v1.0.1/Clean-1.0.1-AppleSilicon.dmg"
+            >下载 Clean 1.0.1 <span aria-hidden="true">↓</span></a
+          >
+          <p class="compatibility">Apple Silicon · macOS 27+ · 约 4.9 MB</p>
+          <div class="download-meta">
+            <a href="https://github.com/bennix/Clean/releases/tag/v1.0.1"
+              >发行说明 ↗</a
+            ><a
+              href="https://github.com/bennix/Clean/releases/download/v1.0.1/Clean-1.0.1-AppleSilicon.dmg.sha256"
+              >SHA-256 校验值 ↗</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer wrap">
+      <a class="wordmark" href="#">Clean<span class="brand-dot">.</span></a>
+      <p>为 Mac 留出空间，也为你留一点从容。</p>
+      <div>
+        <a href="https://github.com/bennix/Clean">源码</a
+        ><a href="https://github.com/bennix/Clean/issues">反馈</a
+        ><a href="https://github.com/bennix/Clean/releases">发行版本</a>
+      </div>
+    </footer>
+  </body>
+</html>
