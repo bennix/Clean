@@ -35,7 +35,6 @@ struct ContentView: View {
     @State private var allowSystemAuthorization = false
     @State private var removeDockEntries = true
     @State private var quitCleanupApplications = false
-    @State private var trashTarget: DiskEntry?
     @State private var folder = DiskService.home
     @State private var search = ""
     @State private var used: Int64 = 0
@@ -70,7 +69,7 @@ struct ContentView: View {
                         Label(diskAccess.state.title, systemImage: diskAccess.state == .limited ? "exclamationmark.shield" : "lock.shield")
                             .foregroundStyle(diskAccess.state == .limited ? Color.orange : Color.secondary)
                     }.buttonStyle(.plain).help("查看磁盘权限及授权步骤")
-                    Text("Clean  1.1.1")
+                    Text("Clean  1.1.2")
                 }.font(.system(size: 11)).foregroundStyle(.secondary)
             }.padding(30).frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
@@ -97,15 +96,7 @@ struct ContentView: View {
             }.padding(26).frame(width: 650)
         }
         .sheet(isPresented: $confirm, onDismiss: { cancelReview(); presentDiskAccessIfNeeded() }) { confirmation }
-        .confirmationDialog("移入系统废纸篓？", isPresented: Binding(get: { trashTarget != nil }, set: { if !$0 { trashTarget = nil } }), titleVisibility: .visible) {
-            Button("移入废纸篓", role: .destructive) {
-                guard let entry = trashTarget, DiskService.canTrashAnalyzed(entry.url) else { return }
-                do { _ = try FileManager.default.trashItem(at: entry.url, resultingItemURL: nil); scan(); refreshDisk() }
-                catch { message = error.localizedDescription }
-                trashTarget = nil
-            }
-            Button("取消", role: .cancel) { trashTarget = nil }
-        } message: { Text(trashTarget?.url.path ?? "") }
+
     }
 
     private func presentDiskAccessIfNeeded() {
@@ -269,12 +260,16 @@ struct ContentView: View {
                 ScrollView {
                     LazyVStack(spacing: 0) {
                         ForEach(visible) { entry in
+                            let disabledReason = ScanSelection.disabledReason(entry, mode: selectionMode)
                             HStack(spacing: 12) {
-                                Toggle("选择 " + entry.name, isOn: Binding(get: { selected.contains(entry.id) }, set: { if $0 { selected.insert(entry.id) } else { selected.remove(entry.id) } })).labelsHidden().disabled(busy || !ScanSelection.canSelect(entry, mode: selectionMode))
+                                Toggle("选择 " + entry.name, isOn: Binding(get: { selected.contains(entry.id) }, set: { if $0 { selected.insert(entry.id) } else { selected.remove(entry.id) } })).labelsHidden().disabled(busy || disabledReason != nil).help(busy ? "扫描或处理进行中，请稍候" : disabledReason ?? "选择此项目进行审查")
                                 Image(nsImage: NSWorkspace.shared.icon(forFile: entry.url.path)).resizable().frame(width: 30, height: 30)
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(entry.name).font(.system(size: 12, weight: .medium)).lineLimit(1)
                                     Text(entry.category + (entry.sensitive ? " · 个人数据，请仔细确认" : "") + " · " + entry.url.deletingLastPathComponent().path).font(.system(size: 10)).foregroundStyle(.secondary).lineLimit(1).truncationMode(.middle)
+                                    if page == .analyze, let disabledReason {
+                                        Text(disabledReason).font(.system(size: 10)).foregroundStyle(.orange).fixedSize(horizontal: false, vertical: true)
+                                    }
                                 }
                                 Spacer()
                                 if page == .uninstall { AppUsageColumns(url: entry.url) }
@@ -285,7 +280,7 @@ struct ContentView: View {
                                 Button("在 Finder 中显示") { NSWorkspace.shared.activateFileViewerSelecting([entry.url]) }
                                 if page == .analyze {
                                     Button("打开") { enter(entry) }
-                                    Button("移入废纸篓…", role: .destructive) { trashTarget = entry }.disabled(busy || !entry.isComplete || !DiskService.canTrashAnalyzed(entry.url))
+                                    Button("审查并移入废纸篓…", role: .destructive) { selected = [entry.id]; confirm = true }.disabled(busy || disabledReason != nil)
                                 }
                             }
                             Divider().opacity(0.35)
@@ -336,6 +331,10 @@ struct ContentView: View {
             Text(page == .uninstall ? "审查应用与关联文件" : "最后确认一下").font(.title2.bold())
             Text(page == .uninstall ? "所选应用与勾选的关联文件将移入废纸篓。含个人数据的目录默认不勾选；仍被其他应用使用的共享容器和系统服务会保留。" : page == .analyze ? "所选文件或文件夹将移入系统废纸篓，可从废纸篓恢复。请仔细核对路径和大小；受保护位置、未完成或无法完整统计的项目不会加入全选。" : "普通缓存和日志将永久删除；标记个人数据或共享容器的项目将移入废纸篓。请先退出相关应用。缓存会重新生成，大小不等于实际释放空间。")
                 .font(.callout)
+            if page == .analyze {
+                Text("虚拟机、模型、备份及开发文件可能包含重要数据。请先停止相关应用或虚拟机；移除数据可能导致容器、镜像、卷或离线模型不可用。清空废纸篓后才会释放空间。")
+                    .font(.callout).foregroundStyle(.orange)
+            }
             if page == .uninstall && reviewTask != nil {
                 HStack { ProgressView().controlSize(.small); Text("并行统计关联文件：\(uninstallPlan?.completed ?? 0) / \(uninstallPlan?.files.count ?? 0)").font(.caption) }
             }

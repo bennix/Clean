@@ -2,9 +2,9 @@
 
 # Clean
 
-[简体中文官网](https://bennix.github.io/Clean/) · [下载公证 DMG](https://github.com/bennix/Clean/releases/download/v1.1.1/Clean-1.1.1-AppleSilicon.dmg) · [发行说明](https://github.com/bennix/Clean/releases/tag/v1.1.1)
+[简体中文官网](https://bennix.github.io/Clean/) · [下载公证 DMG](https://github.com/bennix/Clean/releases/download/v1.1.2/Clean-1.1.2-AppleSilicon.dmg) · [发行说明](https://github.com/bennix/Clean/releases/tag/v1.1.2)
 
-> **当前版本：1.1.1 · Apple Silicon · macOS 27+**
+> **当前版本：1.1.2 · Apple Silicon · macOS 27+**
 > 应用与 DMG 均经 Developer ID 签名、Apple 公证并附加票据。
 
 ![Clean 深色实际运行界面](docs/assets/overview-dark.png)
@@ -14,6 +14,13 @@
 ## 运行
 
 打开 `CleanMac.xcodeproj`，选择 `CleanMac` scheme 运行。构建产品、窗口和菜单名称为 **Clean**，内部 Swift module 保留 CleanMac。完整图标位于 Assets.xcassets/AppIcon.appiconset，设计源图位于 Design/Clean-Icon-Source.png。
+
+## 1.1.2 更新
+
+- 修复 `.colima` 内项目无法勾选；分析页开放已识别的隐藏数据、模型、开发缓存和 Library 缓存、日志、构建文件及备份的子项。
+- 未识别隐藏目录、密钥、配置、常用文件夹根目录及符号链接继续保护。禁选时显示原因，统计不完整时提示检查访问权限。
+- 右键与批量清理统一进入审查页，提示虚拟机、模型和备份的数据影响。分析操作移入废纸篓，清空废纸篓前仍占用空间。
+- Release 构建不注入调试权限，发行应用和 DMG 均使用 Developer ID 签名及 Apple 公证。
 
 ## 当前实现
 
@@ -45,7 +52,7 @@
 
 `xcodebuild -project CleanMac.xcodeproj -scheme CleanMac -configuration Debug CODE_SIGNING_ALLOWED=NO -only-testing:CleanMacTests test`
 
-27 项测试覆盖路径边界、符号链接逃逸、分析页废纸篓边界、只读扫描、并发统计一致性、取消、应用过滤、读取错误分类、未知卸载目标、Dock 精确匹配及监控数据处理。开发验证不对用户真实缓存执行删除，也不执行管理员维护。
+31 项测试覆盖路径边界、符号链接逃逸、分析页废纸篓边界、只读扫描、并发统计一致性、取消、应用过滤、读取错误分类、未知卸载目标、Dock 精确匹配及监控数据处理。开发验证不对用户真实缓存执行删除，也不执行管理员维护。
 
 ## 安装与权限
 

@@ -1101,3 +1101,19 @@ details[open] summary > span {
 .film-transcript summary { cursor:pointer; font-size:14px; font-weight:600; }
 .film-transcript a { text-decoration:underline; text-underline-offset:4px; }
 @media(max-width:700px) { .product-film {padding-top:65px;} .film-player video{border-radius:10px;} .film-notes{grid-template-columns:1fr;gap:0;} }
+
+/* Release editorial: generous typography, quiet green accents, real product context. */
+.release-section { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 100px; border-bottom: 1px solid var(--line); }
+.release-heading h2 { font-size: clamp(38px, 4.5vw, 64px); line-height: 1.2; letter-spacing: -2px; margin: 22px 0; }
+.release-heading h2 span { color: #78896d; }
+.release-heading > p:not(.section-label) { color: var(--muted); font-size: 15px; line-height: 2; max-width: 360px; }
+.release-heading .text-link { margin-top: 18px; font-size: 13px; }
+.release-editorial article { display: grid; grid-template-columns: 38px 1fr; gap: 18px; padding: 28px 0; border-top: 1px solid var(--line); }
+.release-editorial article:first-child { padding-top: 0; border-top: 0; }
+.release-index { color: #6d8760; font-family: Georgia, serif; font-size: 24px; padding-top: 3px; }
+.release-editorial h3 { font-size: 21px; font-weight: 550; margin: 0 0 12px; letter-spacing: -.5px; }
+.release-editorial p { color: var(--muted); font-size: 13px; line-height: 1.95; margin: 0; }
+.path-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 17px; }
+.path-tags code { font-size: 11px; background: #e7eddf; border: 1px solid #d8e0cd; border-radius: 5px; padding: 6px 9px; color: #436038; }
+@media (max-width: 1000px) { .release-section { gap: 50px; } .nav-links { gap: 15px; } }
+@media (max-width: 700px) { .release-section { grid-template-columns: 1fr; gap: 36px; } .release-heading > p:not(.section-label) { max-width: none; } .release-heading h2 { font-size: 42px; } }

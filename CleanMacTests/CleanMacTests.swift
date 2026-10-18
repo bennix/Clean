@@ -183,6 +183,43 @@ struct DiskAccessRecoveryTests {
 }
 
 struct ScanSelectionTests {
+    @Test func analysisAllowsColimaContentsButProtectsOtherHiddenDirectories() {
+        let home = DiskService.home
+        let lima = DiskEntry(url: home.appendingPathComponent(".colima/_lima"), bytes: 1, category: "文件", sensitive: false)
+        #expect(ScanSelection.canSelect(lima, mode: .analyze))
+        #expect(!ScanSelection.canSelect(lima, mode: .clean))
+        #expect(!DiskService.canTrashAnalyzed(home.appendingPathComponent(".colima")))
+        #expect(!DiskService.canTrashAnalyzed(home.appendingPathComponent(".ssh/id_ed25519")))
+        #expect(!DiskService.canTrashAnalyzed(home.appendingPathComponent(".colima-backup/data")))
+        #expect(!ScanSelection.canSelect(DiskEntry(url: lima.url, bytes: 1, category: "文件", sensitive: false, isPartial: true), mode: .analyze))
+    }
+    @Test func analysisRecognizesDataDirectoriesWithoutOpeningCredentials() {
+        let home = DiskService.home
+        for path in [".colima/default/disk", ".cache/huggingface/model", ".npm/_cacache/data", ".ollama/models/blobs/model", ".docker/desktop/vms/0/data", ".cargo/registry/src/crate", ".cargo/git/db/repo", ".gradle/caches/modules/data", ".gradle/wrapper/dists/gradle", "Library/Caches/app/nested/cache", "Library/Logs/app/log", "Library/Developer/Xcode/DerivedData/project/Build", "Library/Application Support/MobileSync/Backup/device/file", "Library/Containers/com.example.app/Data/Library/Caches/app/nested/file", "Library/Application Support/Google/Chrome/Default/Cache/Cache_Data/file"] {
+            #expect(DiskService.canTrashAnalyzed(home.appendingPathComponent(path)), "Expected selectable: \(path)")
+        }
+        for path in [".ssh/key", ".gnupg/key", ".aws/credentials", ".config/tool/config", ".docker/config.json", ".docker/contexts/meta", ".ollama/id_ed25519", ".cargo/credentials.toml", ".gradle/gradle.properties", ".cache-other/data", ".colima/../../etc/passwd", "Library/Keychains/login.keychain-db", "Library/Preferences/app.plist", "Library/Application Support/app/database", "Library/Caches", "Library/Containers/com.example.app/Data/Documents/file", "Library/Application Support/Google/Chrome/Default/Cookies"] {
+            #expect(!DiskService.canTrashAnalyzed(home.appendingPathComponent(path)), "Expected protected: \(path)")
+        }
+    }
+    @Test func analysisReportsProtectionAndIncompleteScanReasons() {
+        let url = DiskService.home.appendingPathComponent(".ssh/key")
+        #expect(ScanSelection.disabledReason(DiskEntry(url: url, bytes: 0, category: "文件", sensitive: false), mode: .analyze)?.contains("受保护") == true)
+        #expect(ScanSelection.disabledReason(DiskEntry(url: url, bytes: 0, category: "文件", sensitive: false, isComplete: false), mode: .analyze)?.contains("等待统计") == true)
+        #expect(ScanSelection.disabledReason(DiskEntry(url: url, bytes: 0, category: "文件", sensitive: false, isPartial: true), mode: .analyze)?.contains("统计不完整") == true)
+    }
+    @Test func analysisRejectsSymlinksAndSymlinkAncestors() throws {
+        let fm = FileManager.default
+        let home = fm.temporaryDirectory.resolvingSymlinksInPath().appendingPathComponent(UUID().uuidString)
+        try fm.createDirectory(at: home.appendingPathComponent(".cache"), withIntermediateDirectories: true)
+        defer { try? fm.removeItem(at: home) }
+        let link = home.appendingPathComponent(".cache/escape")
+        try fm.createSymbolicLink(at: link, withDestinationURL: URL(fileURLWithPath: "/System"))
+        #expect(DiskService.analyzedProtectionReason(link, home: home)?.contains("符号链接") == true)
+        #expect(DiskService.analyzedProtectionReason(link.appendingPathComponent("Library"), home: home)?.contains("符号链接") == true)
+        #expect(DiskService.analyzedProtectionReason(home.appendingPathComponent(".cache/../.ssh/key"), home: home) != nil)
+        #expect(DiskService.analyzedProtectionReason(URL(fileURLWithPath: home.path + "-other/.cache/file"), home: home) != nil)
+    }
     @Test func bulkCleanupExcludesRootAndUnfinishedEntries() {
         let root = DiskService.home.appendingPathComponent("Library/Caches")
         let file = root.appendingPathComponent("clean-selection-test")

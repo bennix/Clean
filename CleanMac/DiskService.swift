@@ -112,13 +112,34 @@ nonisolated enum DiskService {
         return "已移入废纸篓 \(count) 项。" + (failures.isEmpty ? "" : "\n未完成：\n" + failures.joined(separator: "\n"))
     }
     static func canTrashAnalyzed(_ url: URL) -> Bool {
+        analyzedProtectionReason(url) == nil
+    }
+    static func analyzedProtectionReason(_ url: URL, home: URL = home) -> String? {
         let path = url.standardizedFileURL.path
-        let base = home.path + "/"
-        guard path.hasPrefix(base), url.resolvingSymlinksInPath().path == path else { return false }
+        let base = home.standardizedFileURL.path + "/"
+        guard path.hasPrefix(base) else { return "受保护：仅支持处理当前用户目录内的项目" }
+        guard url.resolvingSymlinksInPath().path == path else { return "受保护：符号链接或路径经过符号链接" }
         let relative = String(path.dropFirst(base.count))
         let first = relative.split(separator: "/").first.map(String.init) ?? ""
-        return !first.isEmpty && !first.hasPrefix(".") && first != "Library"
-            && !["Desktop", "Documents", "Downloads", "Movies", "Music", "Pictures", "Public", "Applications"].contains(relative)
+        let dataRoots = [".colima", ".cache", ".npm", ".bun/install/cache", ".yarn/berry/cache",
+                         ".ollama/models", ".docker/desktop/vms", ".cargo/registry", ".cargo/git",
+                         ".gradle/caches", ".gradle/wrapper/dists"]
+        if dataRoots.contains(where: { relative.hasPrefix($0 + "/") }) { return nil }
+        if first == "Library" {
+            if CleanupCatalog.baseRules(home: home).contains(where: { path.hasPrefix($0.root.path + "/") }) { return nil }
+            // Also recognize browser and sandbox cache descendants without opening their parent data directories.
+            var candidate = url.standardizedFileURL
+            while candidate.path.hasPrefix(base + "Library/") {
+                if CleanupCatalog.rule(for: candidate, home: home) != nil { return nil }
+                candidate.deleteLastPathComponent()
+            }
+            return "受保护：Library 仅开放已识别的缓存、日志、构建文件和备份的子项，请进入相应目录"
+        }
+        if first.hasPrefix(".") { return "受保护：仅开放已识别的数据目录子项，密钥、配置及其他隐藏项目保留" }
+        if ["Desktop", "Documents", "Downloads", "Movies", "Music", "Pictures", "Public", "Applications"].contains(relative) {
+            return "受保护：保留常用文件夹本身，请进入后选择子项"
+        }
+        return nil
     }
 
 }
