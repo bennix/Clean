@@ -34,6 +34,7 @@ struct ContentView: View {
     @State private var reviewID = UUID()
     @State private var allowSystemAuthorization = false
     @State private var removeDockEntries = true
+    @State private var quitCleanupApplications = false
     @State private var trashTarget: DiskEntry?
     @State private var folder = DiskService.home
     @State private var search = ""
@@ -69,7 +70,7 @@ struct ContentView: View {
                         Label(diskAccess.state.title, systemImage: diskAccess.state == .limited ? "exclamationmark.shield" : "lock.shield")
                             .foregroundStyle(diskAccess.state == .limited ? Color.orange : Color.secondary)
                     }.buttonStyle(.plain).help("查看磁盘权限及授权步骤")
-                    Text("Clean  1.1.0")
+                    Text("Clean  1.1.1")
                 }.font(.system(size: 11)).foregroundStyle(.secondary)
             }.padding(30).frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
@@ -372,6 +373,14 @@ struct ContentView: View {
                     diskAccess.openSettings()
                 }.font(.caption)
             }
+            if page == .clean {
+                Picker("遇到运行中的应用", selection: $quitCleanupApplications) {
+                    Text("跳过运行中项目").tag(false)
+                    Text("退出相关应用后清理").tag(true)
+                }
+                Text("仅正常退出相关第三方桌面应用与 Safari，最多等待 8 秒；请先保存工作。其他系统应用、后台服务、命令行任务以及未退出的应用会跳过，不会强制结束进程。")
+                    .font(.caption2).foregroundStyle(.secondary)
+            }
             HStack {
                 Button("取消") { cancelReview(); confirm = false }
                 Spacer()
@@ -447,12 +456,13 @@ struct ContentView: View {
     }
     private func performDelete() {
         let targets = chosen; let plan = uninstallPlan; let ids = selectedRelated
+        let quitApps = quitCleanupApplications
         let authorization = allowSystemAuthorization; let dock = removeDockEntries; let uninstall = page == .uninstall; let analysis = page == .analyze
         confirm = false; busy = true
         Task {
             message = await Task.detached {
                 if analysis { return DiskService.trashAnalyzed(targets) }
-                if !uninstall { return await DiskService.remove(targets) }
+                if !uninstall { return await DiskService.remove(targets, quitApplications: quitApps) }
                 guard let plan else { return "未生成卸载审查列表，请重新扫描。" }
                 return await UninstallService.execute(plan, selected: ids, systemAuthorization: authorization, removeDockEntries: dock) { url in
                     await MainActor.run { FinderAuthorization.trash(url) }

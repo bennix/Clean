@@ -34,8 +34,32 @@ nonisolated enum DiskService {
     static func canDelete(_ url: URL) -> Bool {
         CleanupCatalog.rule(for: url) != nil
     }
-    static func remove(_ entries: [DiskEntry]) async -> String {
+    static func matchesRunningApp(_ entry: DiskEntry, rule: CleanupRule, id: String, name: String) -> Bool {
+        if rule.ownerIDs.contains(where: { $0 == id || $0.hasPrefix(id + ".") }) { return true }
+        let generic = rule.root == home.appendingPathComponent("Library/Caches") || rule.root == home.appendingPathComponent("Library/Logs")
+        return generic && (entry.name == id || entry.name.hasPrefix(id + ".") || name.lowercased() == entry.name.lowercased() || name.lowercased().hasPrefix(entry.name.lowercased() + " "))
+    }
+    static func remove(_ entries: [DiskEntry], quitApplications: Bool = false) async -> String {
         let rules = CleanupCatalog.discover().rules
+        if quitApplications {
+            let targets = await MainActor.run {
+                NSWorkspace.shared.runningApplications.filter { app in
+                    guard app.activationPolicy == .regular, app.processIdentifier != ProcessInfo.processInfo.processIdentifier,
+                          let id = app.bundleIdentifier, (!id.hasPrefix("com.apple.") || id == "com.apple.Safari"),
+                          let executable = app.executableURL, (!executable.path.hasPrefix("/System/") || id == "com.apple.Safari") else { return false }
+                    return entries.contains { entry in
+                        guard entry.isComplete, !entry.isPartial, let rule = CleanupCatalog.rule(for: entry.url, in: rules) else { return false }
+                        return matchesRunningApp(entry, rule: rule, id: id, name: app.localizedName ?? id)
+                    }
+                }.map { app in app.terminate(); return app.processIdentifier }
+            }
+            // Normal termination allows the app to ask about unsaved work. Never force quit.
+            for _ in 0..<80 {
+                let active = await MainActor.run { targets.contains { NSRunningApplication(processIdentifier: $0)?.isTerminated == false } }
+                if !active { break }
+                try? await Task.sleep(for: .milliseconds(100))
+            }
+        }
         let running: [String: String] = await MainActor.run {
             Dictionary(NSWorkspace.shared.runningApplications.compactMap { app in app.bundleIdentifier.map { ($0, app.localizedName ?? $0) } }, uniquingKeysWith: { a, _ in a })
         }
@@ -44,13 +68,9 @@ nonisolated enum DiskService {
         var toolStates: [String: Bool] = [:]
         for entry in entries {
             guard entry.isComplete, !entry.isPartial, let rule = CleanupCatalog.rule(for: entry.url, in: rules) else { failed.append(entry.url.path + "：不在清理边界内或统计不完整"); continue }
-            let generic = rule.root == home.appendingPathComponent("Library/Caches") || rule.root == home.appendingPathComponent("Library/Logs")
-            let liveOwner = rule.ownerIDs.contains { owner in running.keys.contains { owner == $0 || owner.hasPrefix($0 + ".") } }
-            let liveGeneric = generic && running.contains { id, name in
-                entry.name == id || entry.name.hasPrefix(id + ".") || name.lowercased() == entry.name.lowercased() || name.lowercased().hasPrefix(entry.name.lowercased() + " ")
-            }
-            if liveOwner || liveGeneric {
-                skipped.append(entry.url.path + "：相关应用正在运行，请退出后重试")
+            let live = running.contains { id, name in matchesRunningApp(entry, rule: rule, id: id, name: name) }
+            if live {
+                skipped.append(entry.url.path + "：相关应用仍在运行或未完成退出，已跳过")
                 continue
             }
             if let pattern = CleanupCatalog.toolProcessPattern(rule.root) {
@@ -79,7 +99,7 @@ nonisolated enum DiskService {
         if !remaining.isEmpty { report += "\n\n仍存在 / 已重新生成：\n" + remaining.joined(separator: "\n") }
         if !skipped.isEmpty { report += "\n\n运行中跳过：\n" + skipped.joined(separator: "\n") }
         if !failed.isEmpty { report += "\n\n失败：\n" + failed.joined(separator: "\n") }
-        return report + "\n\n缓存可能由后台进程重新生成；移入废纸篓的项目在清空废纸篓前仍占用磁盘空间。"
+        return report + "\n\nSafari 以外的系统应用、后台服务和命令行任务不会自动退出；缓存可能由后台进程重新生成；移入废纸篓的项目在清空废纸篓前仍占用磁盘空间。"
     }
     static func trashAnalyzed(_ entries: [DiskEntry]) -> String {
         var count = 0

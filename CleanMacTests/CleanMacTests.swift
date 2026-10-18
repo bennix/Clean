@@ -246,3 +246,15 @@ struct CleanupCoverageTests {
         #expect(fm.fileExists(atPath: file.path))
     }
 }
+
+struct CleanupRunningAppTests {
+    @Test func matchesOnlyRelatedCacheOwners() {
+        let root = DiskService.home.appendingPathComponent("Library/Caches")
+        let entry = DiskEntry(url: root.appendingPathComponent("com.example.Editor.cache"), bytes: 1, category: "缓存", sensitive: false)
+        let rule = CleanupRule(root: root, category: "缓存")
+        #expect(DiskService.matchesRunningApp(entry, rule: rule, id: "com.example.Editor", name: "Editor"))
+        #expect(!DiskService.matchesRunningApp(entry, rule: rule, id: "com.example.Other", name: "Other"))
+        let owned = CleanupRule(root: root, category: "缓存", ownerIDs: ["com.example.Editor.helper"])
+        #expect(DiskService.matchesRunningApp(entry, rule: owned, id: "com.example.Editor", name: "Editor"))
+    }
+}
