@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+  <channel>
+    <title>Clean Updates</title>
+    <link>https://bennix.github.io/Clean/</link>
+    <description>Signed updates for Clean.</description>
+    <item>
+      <title>Clean 1.2.0 — Languages &amp; Signed Updates</title>
+      <pubDate>Sun, 18 Oct 2026 07:08:35 GMT</pubDate>
+      <sparkle:version>6</sparkle:version>
+      <sparkle:shortVersionString>1.2.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>27.0</sparkle:minimumSystemVersion>
+      <description>&lt;p&gt;Six UI languages, optional automatic update checks, and signed updates. 六种界面语言，支持手动及可选自动检查更新。&lt;/p&gt;&lt;p&gt;Scanning stays local. 扫描数据留在本机。&lt;/p&gt;</description>
+      <enclosure url="https://github.com/bennix/Clean/releases/download/v1.2.0/Clean-1.2.0-AppleSilicon.dmg" length="5148049" type="application/octet-stream" sparkle:edSignature="E13k4e9WM9L4Bz7uPSc/KIR5qU4haMR/zDL4VDlVO67I1vWNYdSN1mQoin6jSz/cOICaIyNdpm07f7kALOqmAQ==" />
+    </item>
+  </channel>
+</rss>
