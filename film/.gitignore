@@ -1,0 +1,14 @@
+node_modules
+dist
+.DS_Store
+.env
+
+# Ignore the output video from Git but not videos you import into src/.
+out
+reference/
+out/
+
+public/audio/
+production/review-*-frames/
+
+production/music-only.m4a

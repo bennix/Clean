@@ -1,0 +1,214 @@
+{
+  "file": "docs/assets/clean-product-film.mp4",
+  "checks": {
+    "dimensions": true,
+    "fps": true,
+    "frames": true,
+    "duration": true,
+    "audioStereo48k": true,
+    "noBlackFrames": true,
+    "noFreezeOverHalfSecond": true,
+    "totalDuplicateFramesUnderOneSecond": true,
+    "contrast": true,
+    "brandColor": true,
+    "loudness": true,
+    "truePeak": true,
+    "beatOnsetWithinOneFrame": true,
+    "encodedAudioAlignmentWithinOneFrame": true
+  },
+  "passed": true,
+  "video": {
+    "width": 1920,
+    "height": 1080,
+    "r_frame_rate": "60/1",
+    "nb_frames": "1800",
+    "duration": "30.000000"
+  },
+  "containerDuration": "30.000000",
+  "identicalFrameThresholdMeanLuma": 0.001,
+  "longestIdenticalRunFrames": 0,
+  "blackFrames": 0,
+  "fullResolutionDuplicateFrames": 0,
+  "thumbnailNearStillFrames": 0,
+  "ffmpegFreezeDurations": [],
+  "contrast": [
+    {
+      "foreground": "#14201c",
+      "background": "#f5f7f4",
+      "ratio": 15.56
+    },
+    {
+      "foreground": "#ffffff",
+      "background": "#13171d",
+      "ratio": 17.98
+    },
+    {
+      "foreground": "#c7e6b7",
+      "background": "#13171d",
+      "ratio": 13.21
+    },
+    {
+      "foreground": "#14201c",
+      "background": "#c7e6b7",
+      "ratio": 12.31
+    },
+    {
+      "foreground": "#14201c",
+      "background": "#4a9d83",
+      "ratio": 5.14
+    },
+    {
+      "foreground": "#ffffff",
+      "background": "#14201c",
+      "ratio": 16.76
+    }
+  ],
+  "encodedColors": [
+    {
+      "time": 0,
+      "sourceRGB": [
+        245,
+        247,
+        244
+      ],
+      "encodedRGB": [
+        243.0,
+        246.0,
+        243.0
+      ],
+      "maxChannelError": 2
+    },
+    {
+      "time": 5,
+      "sourceRGB": [
+        19,
+        23,
+        29
+      ],
+      "encodedRGB": [
+        17.0,
+        22.0,
+        26.0
+      ],
+      "maxChannelError": 3
+    }
+  ],
+  "audio": {
+    "integratedLUFS": "-14.34",
+    "truePeakDBTP": "-1.99",
+    "LRA": "1.80"
+  },
+  "sync": {
+    "encodedAudioEventOffsets": [
+      {
+        "id": "scanEnter",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99952
+      },
+      {
+        "id": "scanComplete",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99943
+      },
+      {
+        "id": "selectEnter",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99991
+      },
+      {
+        "id": "selectAll",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99997
+      },
+      {
+        "id": "preserveEnter",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99909
+      },
+      {
+        "id": "unselectBackup",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.9997
+      },
+      {
+        "id": "reviewOpen",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99866
+      },
+      {
+        "id": "reviewEnter",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.9999
+      },
+      {
+        "id": "quitOption",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99998
+      },
+      {
+        "id": "confirm",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99995
+      },
+      {
+        "id": "resultComplete",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99943
+      },
+      {
+        "id": "analyzeEnter",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99948
+      },
+      {
+        "id": "openFolder",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99867
+      },
+      {
+        "id": "statusEnter",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99992
+      },
+      {
+        "id": "themeEnter",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99991
+      },
+      {
+        "id": "themeSwitch",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99999
+      },
+      {
+        "id": "signoffEnter",
+        "lagSamples": 0,
+        "lagFrames": 0.0,
+        "correlation": 0.99966
+      }
+    ],
+    "sourceTimelineMaxBeatErrorFrames": 0,
+    "note": "Beat stem onset measured at1ms; event start frames use shared timing. Independent reviewer checks actual video events."
+  },
+  "limits": [
+    "Frame-difference pass does not prove compelling motion; independent director review required.",
+    "UI reconstruction and example data must remain labeled.",
+    "Final speaker/headphone listening and subjective quality require human ears; no fabricated listening claim."
+  ]
+}

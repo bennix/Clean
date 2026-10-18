@@ -1,0 +1,8 @@
+{
+  "family": "Noto Sans SC",
+  "source": "https://github.com/google/fonts/tree/main/ofl/notosanssc",
+  "originalSHA256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+  "subsetSHA256": "0273501dbae917294805c29d411a85853f915a244dc0f754646bbf901e80d6a3",
+  "license": "OFL.txt",
+  "subset": "Text in src and facts.json plus ASCII; original glyph outlines retained."
+}

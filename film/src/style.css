@@ -1,0 +1,16 @@
+@font-face {
+  font-family: CleanSans;
+  src: url("../public/fonts/CleanSans.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: block;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: CleanSans, sans-serif;
+}
+svg {
+  overflow: visible;
+}

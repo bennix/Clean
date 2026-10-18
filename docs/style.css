@@ -1088,3 +1088,16 @@ details[open] summary > span {
     transform: none;
   }
 }
+
+/* Product film: user-controlled playback, complete frame at every viewport. */
+.product-film { padding-block: 100px 40px; }
+.film-player { margin: 36px 0 0; }
+.film-player video { display:block; width:100%; aspect-ratio:16/9; background:#13171d; border-radius:18px; box-shadow:0 24px 65px #14201c18; }
+.film-player figcaption { margin-top:16px; font-size:13px; color:#526058; line-height:1.7; }
+.film-notes { display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:24px; }
+.film-notes p,.film-transcript p { font-size:15px; line-height:1.9; color:#526058; }
+.film-notes strong { color:var(--ink); display:block; margin-bottom:7px; }
+.film-transcript { border-block:1px solid var(--line); padding:20px 0; margin-top:20px; }
+.film-transcript summary { cursor:pointer; font-size:14px; font-weight:600; }
+.film-transcript a { text-decoration:underline; text-underline-offset:4px; }
+@media(max-width:700px) { .product-film {padding-top:65px;} .film-player video{border-radius:10px;} .film-notes{grid-template-columns:1fr;gap:0;} }

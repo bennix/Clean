@@ -1,0 +1,318 @@
+{
+  "fps": 60,
+  "durationFrames": 1800,
+  "bpm": 120,
+  "beats": [
+    0,
+    30,
+    60,
+    90,
+    120,
+    150,
+    180,
+    210,
+    240,
+    270,
+    300,
+    330,
+    360,
+    390,
+    420,
+    450,
+    480,
+    510,
+    540,
+    570,
+    600,
+    630,
+    660,
+    690,
+    720,
+    750,
+    780,
+    810,
+    840,
+    870,
+    900,
+    930,
+    960,
+    990,
+    1020,
+    1050,
+    1080,
+    1110,
+    1140,
+    1170,
+    1200,
+    1230,
+    1260,
+    1290,
+    1320,
+    1350,
+    1380,
+    1410,
+    1440,
+    1470,
+    1500,
+    1530,
+    1560,
+    1590,
+    1620,
+    1650,
+    1680,
+    1710,
+    1740,
+    1770
+  ],
+  "detectedBeatFrames": [
+    0,
+    30,
+    60,
+    90,
+    120,
+    150,
+    180,
+    210,
+    240,
+    270,
+    300,
+    330,
+    360,
+    390,
+    420,
+    450,
+    480,
+    510,
+    540,
+    570,
+    600,
+    630,
+    660,
+    690,
+    720,
+    750,
+    780,
+    810,
+    840,
+    870,
+    900,
+    930,
+    960,
+    990,
+    1020,
+    1050,
+    1080,
+    1110,
+    1140,
+    1170,
+    1200,
+    1230,
+    1260,
+    1290,
+    1320,
+    1350,
+    1380,
+    1410,
+    1440,
+    1470,
+    1500,
+    1530,
+    1560,
+    1590,
+    1620,
+    1650,
+    1680,
+    1710,
+    1740,
+    1770
+  ],
+  "beatDetectionMethod": "1ms RMS onset > .01 in isolated kick stem",
+  "maxBeatErrorFrames": 0,
+  "climaxFrames": [
+    900,
+    1590
+  ],
+  "voice": [],
+  "scenes": [
+    {
+      "id": "hook",
+      "start": 0,
+      "duration": 150
+    },
+    {
+      "id": "scan",
+      "start": 150,
+      "duration": 210
+    },
+    {
+      "id": "select",
+      "start": 360,
+      "duration": 150
+    },
+    {
+      "id": "preserve",
+      "start": 510,
+      "duration": 210
+    },
+    {
+      "id": "review",
+      "start": 720,
+      "duration": 210
+    },
+    {
+      "id": "result",
+      "start": 930,
+      "duration": 180
+    },
+    {
+      "id": "analyze",
+      "start": 1110,
+      "duration": 150
+    },
+    {
+      "id": "status",
+      "start": 1260,
+      "duration": 180
+    },
+    {
+      "id": "theme",
+      "start": 1440,
+      "duration": 150
+    },
+    {
+      "id": "signoff",
+      "start": 1590,
+      "duration": 210
+    }
+  ],
+  "actions": [
+    {
+      "id": "scanEnter",
+      "frame": 150,
+      "kind": "whoosh",
+      "visualFrame": 150,
+      "errorFrames": 0
+    },
+    {
+      "id": "scanComplete",
+      "frame": 270,
+      "kind": "complete",
+      "visualFrame": 270,
+      "errorFrames": 0
+    },
+    {
+      "id": "selectEnter",
+      "frame": 360,
+      "kind": "whoosh",
+      "visualFrame": 360,
+      "errorFrames": 0
+    },
+    {
+      "id": "selectAll",
+      "frame": 420,
+      "kind": "click",
+      "visualFrame": 420,
+      "errorFrames": 0
+    },
+    {
+      "id": "preserveEnter",
+      "frame": 510,
+      "kind": "whoosh",
+      "visualFrame": 510,
+      "errorFrames": 0
+    },
+    {
+      "id": "unselectBackup",
+      "frame": 600,
+      "kind": "click",
+      "visualFrame": 600,
+      "errorFrames": 0
+    },
+    {
+      "id": "reviewOpen",
+      "frame": 690,
+      "kind": "click",
+      "visualFrame": 690,
+      "errorFrames": 0
+    },
+    {
+      "id": "reviewEnter",
+      "frame": 720,
+      "kind": "whoosh",
+      "visualFrame": 720,
+      "errorFrames": 0
+    },
+    {
+      "id": "quitOption",
+      "frame": 780,
+      "kind": "click",
+      "visualFrame": 780,
+      "errorFrames": 0
+    },
+    {
+      "id": "confirm",
+      "frame": 900,
+      "kind": "confirm",
+      "visualFrame": 900,
+      "errorFrames": 0
+    },
+    {
+      "id": "resultComplete",
+      "frame": 990,
+      "kind": "complete",
+      "visualFrame": 990,
+      "errorFrames": 0
+    },
+    {
+      "id": "analyzeEnter",
+      "frame": 1110,
+      "kind": "whoosh",
+      "visualFrame": 1110,
+      "errorFrames": 0
+    },
+    {
+      "id": "openFolder",
+      "frame": 1170,
+      "kind": "click",
+      "visualFrame": 1170,
+      "errorFrames": 0
+    },
+    {
+      "id": "statusEnter",
+      "frame": 1260,
+      "kind": "whoosh",
+      "visualFrame": 1260,
+      "errorFrames": 0
+    },
+    {
+      "id": "themeEnter",
+      "frame": 1440,
+      "kind": "whoosh",
+      "visualFrame": 1440,
+      "errorFrames": 0
+    },
+    {
+      "id": "themeSwitch",
+      "frame": 1500,
+      "kind": "click",
+      "visualFrame": 1500,
+      "errorFrames": 0
+    },
+    {
+      "id": "signoffEnter",
+      "frame": 1590,
+      "kind": "resolve",
+      "visualFrame": 1590,
+      "errorFrames": 0
+    }
+  ],
+  "handoff": {
+    "x": 1320,
+    "y": 540
+  },
+  "motion": {
+    "enterFrames": 28,
+    "exitFrames": 18,
+    "staggerFrames": 7
+  }
+}

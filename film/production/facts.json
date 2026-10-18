@@ -1,0 +1,520 @@
+{
+  "productVersion": "1.1.1",
+  "sourceRevision": "ea370a11a8081c43c4dd5a14280d0eddcd189f3c",
+  "claims": [
+    {
+      "id": "identity",
+      "claim": "Clean 是原生 SwiftUI macOS 磁盘工具",
+      "sourceQuote": "原生 SwiftUI macOS 磁盘工具。清理、关联卸载、维护、可视化分析和菜单栏监控",
+      "url": "https://github.com/bennix/Clean/blob/ea370a11a8081c43c4dd5a14280d0eddcd189f3c/README.md"
+    },
+    {
+      "id": "review",
+      "claim": "先看清，再动手；所有删除均需确认",
+      "sourceQuote": "先看清，再动手。所有删除均需确认。",
+      "url": "https://github.com/bennix/Clean/blob/ea370a11a8081c43c4dd5a14280d0eddcd189f3c/CleanMac/ContentView.swift"
+    },
+    {
+      "id": "local",
+      "claim": "本机处理",
+      "sourceQuote": "本机处理",
+      "url": "https://github.com/bennix/Clean/blob/ea370a11a8081c43c4dd5a14280d0eddcd189f3c/CleanMac/ContentView.swift"
+    },
+    {
+      "id": "scan",
+      "claim": "扫描可识别的用户缓存和开发工具缓存",
+      "sourceQuote": "npm 下载缓存 / Xcode 构建缓存 / 浏览器缓存",
+      "url": "https://github.com/bennix/Clean/blob/ea370a11a8081c43c4dd5a14280d0eddcd189f3c/CleanMac/CleanupCatalog.swift"
+    },
+    {
+      "id": "select",
+      "claim": "全选与手动取消单项勾选",
+      "sourceQuote": "selected.formUnion(selectableVisibleIDs) / selected.remove(entry.id)",
+      "url": "https://github.com/bennix/Clean/blob/ea370a11a8081c43c4dd5a14280d0eddcd189f3c/CleanMac/ContentView.swift"
+    },
+    {
+      "id": "backup",
+      "claim": "取消选择设备备份，保留个人数据",
+      "sourceQuote": "标记个人数据或共享容器的项目将移入废纸篓 / selected.contains(entry.id)",
+      "url": "https://github.com/bennix/Clean/blob/ea370a11a8081c43c4dd5a14280d0eddcd189f3c/CleanMac/ContentView.swift"
+    },
+    {
+      "id": "permanent",
+      "claim": "普通缓存永久删除",
+      "sourceQuote": "普通缓存和日志将永久删除",
+      "url": "https://github.com/bennix/Clean/blob/ea370a11a8081c43c4dd5a14280d0eddcd189f3c/CleanMac/ContentView.swift"
+    },
+    {
+      "id": "quit",
+      "claim": "退出相关应用后清理或跳过运行中项目；正常退出且未退出则跳过",
+      "sourceQuote": "退出相关应用后清理 / 跳过运行中项目 / 不会强制结束进程",
+      "url": "https://github.com/bennix/Clean/blob/ea370a11a8081c43c4dd5a14280d0eddcd189f3c/CleanMac/ContentView.swift"
+    },
+    {
+      "id": "result",
+      "claim": "结果列出已处理、跳过及失败",
+      "sourceQuote": "已处理 / 运行中跳过 / 失败",
+      "url": "https://github.com/bennix/Clean/blob/ea370a11a8081c43c4dd5a14280d0eddcd189f3c/CleanMac/DiskService.swift"
+    },
+    {
+      "id": "analyze",
+      "claim": "逐层查看磁盘占用",
+      "sourceQuote": "目录逐层大小分析、按占用面积生成 treemap",
+      "url": "https://github.com/bennix/Clean/blob/ea370a11a8081c43c4dd5a14280d0eddcd189f3c/README.md"
+    },
+    {
+      "id": "status",
+      "claim": "CPU、内存、网络、温度；温度依机型支持",
+      "sourceQuote": "CPU / 内存 / 上下行网速实时采样 / 温度和 GPU 的可用性依机型与 macOS 版本而定",
+      "url": "https://github.com/bennix/Clean/blob/ea370a11a8081c43c4dd5a14280d0eddcd189f3c/README.md"
+    },
+    {
+      "id": "theme",
+      "claim": "支持浅色与深色",
+      "sourceQuote": "浅色 / 深色 / 跟随系统，自动保存选择",
+      "url": "https://github.com/bennix/Clean/blob/ea370a11a8081c43c4dd5a14280d0eddcd189f3c/README.md"
+    },
+    {
+      "id": "url",
+      "claim": "bennix.github.io/Clean",
+      "sourceQuote": "简体中文官网 https://bennix.github.io/Clean/",
+      "url": "https://github.com/bennix/Clean/blob/ea370a11a8081c43c4dd5a14280d0eddcd189f3c/README.md"
+    }
+  ],
+  "simulation": {
+    "label": "界面重建 · 示例数据 · 演示节奏",
+    "source": "creative demonstration, not measured product outcomes",
+    "values": [
+      "Xcode DerivedData",
+      "npm 下载缓存",
+      "浏览器缓存",
+      "设备备份 · 个人数据",
+      "Projects",
+      "Web",
+      "Design",
+      "CPU 12%",
+      "内存 18.4 GB",
+      "网络 2.4 MB/s",
+      "温度 46°C"
+    ],
+    "note": "All numeric readings and row examples are illustrative; no storage recovery, scan speed, testimonials, price or reviews claimed."
+  },
+  "onScreenText": [
+    {
+      "text": "Clean",
+      "basis": "identity"
+    },
+    {
+      "text": "Clean.",
+      "basis": "identity"
+    },
+    {
+      "text": "原生 macOS 磁盘工具",
+      "basis": "identity"
+    },
+    {
+      "text": "给 Mac 一点呼吸的空间。",
+      "basis": "identity"
+    },
+    {
+      "text": "先看清，再动手。",
+      "basis": "review"
+    },
+    {
+      "text": "普通缓存永久删除",
+      "basis": "review"
+    },
+    {
+      "text": "最后确认一下",
+      "basis": "review"
+    },
+    {
+      "text": "确认处理 2 项",
+      "basis": "review"
+    },
+    {
+      "text": "所有删除均需确认。",
+      "basis": "review"
+    },
+    {
+      "text": "已知缓存，逐项看清。",
+      "basis": "scan"
+    },
+    {
+      "text": "用户缓存 / 浏览器",
+      "basis": "scan"
+    },
+    {
+      "text": "Xcode / npm",
+      "basis": "scan"
+    },
+    {
+      "text": "Xcode 构建缓存",
+      "basis": "scan"
+    },
+    {
+      "text": "npm 下载缓存",
+      "basis": "scan"
+    },
+    {
+      "text": "浏览器缓存",
+      "basis": "scan"
+    },
+    {
+      "text": "已统计",
+      "basis": "scan"
+    },
+    {
+      "text": "扫描中",
+      "basis": "scan"
+    },
+    {
+      "text": "正在读取文件信息…",
+      "basis": "scan"
+    },
+    {
+      "text": "扫描完成",
+      "basis": "scan"
+    },
+    {
+      "text": "扫描过程压缩演示",
+      "basis": "scan"
+    },
+    {
+      "text": "全选之后，仍由你决定。",
+      "basis": "select"
+    },
+    {
+      "text": "未选择项目",
+      "basis": "select"
+    },
+    {
+      "text": "已选 3 项",
+      "basis": "select"
+    },
+    {
+      "text": "全选",
+      "basis": "select"
+    },
+    {
+      "text": "取消全选",
+      "basis": "select"
+    },
+    {
+      "text": "清理 · 逐项审查",
+      "basis": "select"
+    },
+    {
+      "text": "个人数据，自己决定。",
+      "basis": "backup"
+    },
+    {
+      "text": "设备备份 · 个人数据",
+      "basis": "backup"
+    },
+    {
+      "text": "个人数据",
+      "basis": "backup"
+    },
+    {
+      "text": "已取消勾选",
+      "basis": "backup"
+    },
+    {
+      "text": "设备备份未选 · 保留",
+      "basis": "backup"
+    },
+    {
+      "text": "先检查，再选择",
+      "basis": "backup"
+    },
+    {
+      "text": "审查 2 项",
+      "basis": "backup"
+    },
+    {
+      "text": "审查 3 项",
+      "basis": "backup"
+    },
+    {
+      "text": "清理 · 手动取消设备备份",
+      "basis": "backup"
+    },
+    {
+      "text": "先退出，再清理。",
+      "basis": "quit"
+    },
+    {
+      "text": "先保存工作。",
+      "basis": "quit"
+    },
+    {
+      "text": "正常退出，未退出则跳过。",
+      "basis": "quit"
+    },
+    {
+      "text": "已选 2 项 · 设备备份未选",
+      "basis": "quit"
+    },
+    {
+      "text": "遇到运行中的应用",
+      "basis": "quit"
+    },
+    {
+      "text": "跳过运行中项目",
+      "basis": "quit"
+    },
+    {
+      "text": "退出相关应用后清理",
+      "basis": "quit"
+    },
+    {
+      "text": "仅相关桌面应用与 Safari；其他运行中项目跳过",
+      "basis": "quit"
+    },
+    {
+      "text": "处理与跳过，都说清。",
+      "basis": "result"
+    },
+    {
+      "text": "示例结果",
+      "basis": "result"
+    },
+    {
+      "text": "已处理",
+      "basis": "result"
+    },
+    {
+      "text": "设备备份",
+      "basis": "result"
+    },
+    {
+      "text": "未选 · 保留",
+      "basis": "result"
+    },
+    {
+      "text": "仍在运行 · 跳过",
+      "basis": "result"
+    },
+    {
+      "text": "等待处理",
+      "basis": "result"
+    },
+    {
+      "text": "缓存可能重新生成。",
+      "basis": "result"
+    },
+    {
+      "text": "示例流程已压缩等待时间。",
+      "basis": "result"
+    },
+    {
+      "text": "设备备份留在原位",
+      "basis": "result"
+    },
+    {
+      "text": "逐层看清磁盘占用。",
+      "basis": "analyze"
+    },
+    {
+      "text": "点进文件夹，继续往里看。",
+      "basis": "analyze"
+    },
+    {
+      "text": "分析 · ~/",
+      "basis": "analyze"
+    },
+    {
+      "text": "分析 · ~/Projects",
+      "basis": "analyze"
+    },
+    {
+      "text": "系统心跳，一眼可见。",
+      "basis": "status"
+    },
+    {
+      "text": "CPU",
+      "basis": "status"
+    },
+    {
+      "text": "内存",
+      "basis": "status"
+    },
+    {
+      "text": "网络",
+      "basis": "status"
+    },
+    {
+      "text": "温度",
+      "basis": "status"
+    },
+    {
+      "text": "依机型与系统支持",
+      "basis": "status"
+    },
+    {
+      "text": "本机处理",
+      "basis": "local"
+    },
+    {
+      "text": "明暗之间，依然清晰。",
+      "basis": "theme"
+    },
+    {
+      "text": "Clean · 外观",
+      "basis": "theme"
+    },
+    {
+      "text": "选择外观",
+      "basis": "theme"
+    },
+    {
+      "text": "浅色",
+      "basis": "theme"
+    },
+    {
+      "text": "深色",
+      "basis": "theme"
+    },
+    {
+      "text": "跟随系统",
+      "basis": "theme"
+    },
+    {
+      "text": "bennix.github.io/Clean",
+      "basis": "url"
+    },
+    {
+      "text": "界面重建 · 示例数据 · 演示节奏",
+      "basis": "simulation"
+    },
+    {
+      "text": "01 / 扫描",
+      "basis": "simulation"
+    },
+    {
+      "text": "02 / 选择",
+      "basis": "simulation"
+    },
+    {
+      "text": "03 / 保留",
+      "basis": "simulation"
+    },
+    {
+      "text": "04 / 确认",
+      "basis": "simulation"
+    },
+    {
+      "text": "05 / 结果",
+      "basis": "simulation"
+    },
+    {
+      "text": "06 / 分析",
+      "basis": "simulation"
+    },
+    {
+      "text": "07 / 状态",
+      "basis": "simulation"
+    },
+    {
+      "text": "08 / 明暗主题",
+      "basis": "simulation"
+    },
+    {
+      "text": "概览",
+      "basis": "simulation"
+    },
+    {
+      "text": "清理",
+      "basis": "simulation"
+    },
+    {
+      "text": "卸载",
+      "basis": "simulation"
+    },
+    {
+      "text": "优化",
+      "basis": "simulation"
+    },
+    {
+      "text": "分析",
+      "basis": "simulation"
+    },
+    {
+      "text": "状态",
+      "basis": "simulation"
+    },
+    {
+      "text": "Clean · 清理",
+      "basis": "simulation"
+    },
+    {
+      "text": "Projects",
+      "basis": "simulation"
+    },
+    {
+      "text": "Web",
+      "basis": "simulation"
+    },
+    {
+      "text": "Design",
+      "basis": "simulation"
+    },
+    {
+      "text": "Tools",
+      "basis": "simulation"
+    },
+    {
+      "text": "Downloads",
+      "basis": "simulation"
+    },
+    {
+      "text": "Documents",
+      "basis": "simulation"
+    },
+    {
+      "text": "~/",
+      "basis": "simulation"
+    },
+    {
+      "text": "~/Projects",
+      "basis": "simulation"
+    },
+    {
+      "text": "~/.npm/_cacache",
+      "basis": "simulation"
+    },
+    {
+      "text": "~/Library/Caches",
+      "basis": "simulation"
+    },
+    {
+      "text": "~/Library/Application Support/MobileSync/Backup",
+      "basis": "simulation"
+    },
+    {
+      "text": "12%",
+      "basis": "simulation"
+    },
+    {
+      "text": "18.4 GB",
+      "basis": "simulation"
+    },
+    {
+      "text": "2.3 MB/s",
+      "basis": "simulation"
+    },
+    {
+      "text": "2.4 MB/s",
+      "basis": "simulation"
+    },
+    {
+      "text": "2.5 MB/s",
+      "basis": "simulation"
+    },
+    {
+      "text": "46°C",
+      "basis": "simulation"
+    }
+  ]
+}
