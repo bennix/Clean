@@ -181,3 +181,68 @@ struct DiskAccessRecoveryTests {
         #expect(!access.automaticPromptRequested)
     }
 }
+
+struct ScanSelectionTests {
+    @Test func bulkCleanupExcludesRootAndUnfinishedEntries() {
+        let root = DiskService.home.appendingPathComponent("Library/Caches")
+        let file = root.appendingPathComponent("clean-selection-test")
+        let entries = [DiskEntry(url: root, bytes: 0, category: "缓存", sensitive: false), DiskEntry(url: file, bytes: 1, category: "缓存", sensitive: false), DiskEntry(url: root.appendingPathComponent("pending"), bytes: 0, category: "缓存", sensitive: false, isComplete: false), DiskEntry(url: root.appendingPathComponent("partial"), bytes: 1, category: "缓存", sensitive: false, isPartial: true)]
+        #expect(ScanSelection.eligibleIDs(entries, mode: .clean) == [file.path])
+    }
+    @Test func bulkAnalysisExcludesProtectedPaths() {
+        let file = DiskService.home.appendingPathComponent("Downloads/clean-selection-test")
+        let entries = [DiskEntry(url: file, bytes: 1, category: "文件", sensitive: false), DiskEntry(url: URL(fileURLWithPath: "/System/Library"), bytes: 1, category: "文件", sensitive: false), DiskEntry(url: DiskService.home.appendingPathComponent("Library"), bytes: 1, category: "文件", sensitive: false)]
+        #expect(ScanSelection.eligibleIDs(entries, mode: .analyze) == [file.path])
+    }
+    @Test func selectVisiblePreservesPriorSelectionsWithoutSelectingHiddenRows() {
+        let home = DiskService.home
+        let visible = DiskEntry(url: home.appendingPathComponent("Downloads/visible"), bytes: 1, category: "文件", sensitive: false)
+        var selected: Set<String> = ["previous-selection"]
+        selected.formUnion(ScanSelection.eligibleIDs([visible], mode: .analyze))
+        #expect(selected == ["previous-selection", visible.id])
+    }
+}
+
+struct CleanupCoverageTests {
+    @Test func developerCacheRulesDoNotIncludeModelsOrRepositories() {
+        let home = URL(fileURLWithPath: "/tmp/clean-policy-home")
+        #expect(CleanupCatalog.rule(for: home.appendingPathComponent(".npm/_cacache/content-v2"), home: home) != nil)
+        #expect(CleanupCatalog.rule(for: home.appendingPathComponent(".cache/uv/archive-v0"), home: home) != nil)
+        for path in [".cache/huggingface/model", ".cache/lm-studio/model", ".m2/repository/artifact", "Projects/app/node_modules/package", ".ssh/id_ed25519"] {
+            #expect(CleanupCatalog.rule(for: home.appendingPathComponent(path), home: home) == nil)
+        }
+    }
+    @Test func containerRulesOnlyAllowCacheChildren() {
+        let home = URL(fileURLWithPath: "/tmp/clean-policy-home")
+        #expect(CleanupCatalog.rule(for: home.appendingPathComponent("Library/Containers/com.example.app/Data/Library/Caches/cache"), home: home) != nil)
+        #expect(CleanupCatalog.rule(for: home.appendingPathComponent("Library/Containers/com.example.app/Data/Documents/document"), home: home) == nil)
+        #expect(CleanupCatalog.rule(for: home.appendingPathComponent("Library/Group Containers/group.example/Library/Caches/cache"), home: home)?.sensitive == true)
+        #expect(CleanupCatalog.rule(for: home.appendingPathComponent("Library/Group Containers/group.example/database"), home: home) == nil)
+    }
+    @Test func browserRulesExcludeAccountAndOfflineData() {
+        let home = URL(fileURLWithPath: "/tmp/clean-policy-home")
+        let base = "Library/Application Support/Google/Chrome/Profile 2/"
+        #expect(CleanupCatalog.rule(for: home.appendingPathComponent(base + "Code Cache/js"), home: home) != nil)
+        for path in ["Cookies", "Login Data", "History", "IndexedDB/data", "Service Worker/CacheStorage/data"] {
+            #expect(CleanupCatalog.rule(for: home.appendingPathComponent(base + path), home: home) == nil)
+        }
+        #expect(CleanupCatalog.rule(for: home.appendingPathComponent("Library/Application Support/Google/Chrome/Unknown/Code Cache/js"), home: home) == nil)
+    }
+    @Test func optionalRulesSkipAbsentAppsAndIncludeHiddenCacheFiles() async throws {
+        let fm = FileManager.default
+        let home = fm.temporaryDirectory.appendingPathComponent(UUID().uuidString).resolvingSymlinksInPath()
+        let cache = home.appendingPathComponent("Library/Containers/com.example.test/Data/Library/Caches")
+        try fm.createDirectory(at: cache, withIntermediateDirectories: true)
+        defer { try? fm.removeItem(at: home) }
+        let file = cache.appendingPathComponent(".hidden-cache")
+        try Data(repeating: 1, count: 8192).write(to: file)
+        let result = await Task.detached {
+            let discovery = CleanupCatalog.discover(home: home)
+            return await DiskService.scanConcurrently(discovery.rules.map(\.scanRoot), initialIssues: discovery.issues) { _ in }
+        }.value
+        #expect(result.entries.map { $0.url.resolvingSymlinksInPath() } == [file.resolvingSymlinksInPath()])
+        #expect(result.issues.isEmpty)
+        #expect(result.skipped == 0)
+        #expect(fm.fileExists(atPath: file.path))
+    }
+}

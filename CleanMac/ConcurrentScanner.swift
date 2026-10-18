@@ -5,6 +5,7 @@ nonisolated struct ScanRoot: Sendable {
     let category: String
     var sensitive = false
     var applicationsOnly = false
+    var optional = false
 }
 
 nonisolated struct ScanProgress: Sendable {
@@ -15,9 +16,7 @@ nonisolated struct ScanProgress: Sendable {
 
 extension DiskService {
     nonisolated static var cleanupRoots: [ScanRoot] {
-        [("Library/Caches", "应用缓存", false), ("Library/Logs", "用户日志", false), ("Library/Developer/Xcode/DerivedData", "构建缓存", false), ("Library/Developer/Xcode/Archives", "Xcode 归档", true), ("Library/Developer/CoreSimulator/Caches", "模拟器缓存", false), ("Library/Developer/Xcode/iOS DeviceSupport", "设备支持", true), ("Library/Application Support/MobileSync/Backup", "设备备份", true)].map {
-            ScanRoot(url: home.appendingPathComponent($0.0), category: $0.1, sensitive: $0.2)
-        }
+        CleanupCatalog.discover().rules.map(\.scanRoot)
     }
     nonisolated static var applicationRoots: [ScanRoot] {
         [URL(fileURLWithPath: "/Applications"), home.appendingPathComponent("Applications")].map {
@@ -25,15 +24,21 @@ extension DiskService {
         }
     }
     /// Run from a detached task. At most four filesystem traversals are in flight.
-    nonisolated static func scanConcurrently(_ roots: [ScanRoot], concurrency: Int = 4,
+    nonisolated static func scanConcurrently(_ roots: [ScanRoot], concurrency: Int = 4, initialIssues: [ScanIssue] = [],
                                  onProgress: @Sendable (ScanProgress) async -> Void) async -> ScanResult {
         var seeds: [DiskEntry] = []
-        var skipped = 0
-        var issues: [ScanIssue] = []
+        var skipped = initialIssues.count
+        var issues = initialIssues
+        var seen: Set<String> = []
         for root in roots {
             guard !Task.isCancelled else { return ScanResult() }
             do {
-                let urls = try FileManager.default.contentsOfDirectory(at: root.url, includingPropertiesForKeys: [.isSymbolicLinkKey], options: [.skipsHiddenFiles])
+                guard !root.optional || root.url.resolvingSymlinksInPath().path == root.url.standardizedFileURL.path else {
+                    skipped += 1
+                    issues.append(ScanIssue(url: root.url, kind: .symbolicLink, detail: "扫描根或其上级是符号链接，已跳过以避免越界和重复统计。"))
+                    continue
+                }
+                let urls = try FileManager.default.contentsOfDirectory(at: root.url, includingPropertiesForKeys: [.isSymbolicLinkKey], options: [])
                 for url in urls {
                     guard !Task.isCancelled else { return ScanResult() }
                     if root.applicationsOnly && url.pathExtension.lowercased() != "app" { continue }
@@ -45,9 +50,13 @@ extension DiskService {
                             continue
                         }
                     } catch { skipped += 1; issues.append(.from(error, at: url)); continue }
+                    guard seen.insert(url.standardizedFileURL.path).inserted else { continue }
                     seeds.append(DiskEntry(url: url, bytes: 0, category: root.category, sensitive: root.sensitive, isComplete: false))
                 }
-            } catch { skipped += 1; issues.append(.from(error, at: root.url)) }
+            } catch {
+                let issue = ScanIssue.from(error, at: root.url)
+                if !(root.optional && issue.kind == .missing) { skipped += 1; issues.append(issue) }
+            }
         }
         let pending = seeds.sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
         var result = ScanResult(entries: pending, skipped: skipped, issues: issues)

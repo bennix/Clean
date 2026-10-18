@@ -45,6 +45,8 @@ struct ContentView: View {
     private var surface: Color { dark ? Color.white.opacity(0.045) : .white }
     private var visible: [DiskEntry] { entries.filter { search.isEmpty || $0.name.localizedCaseInsensitiveContains(search) || $0.category.localizedCaseInsensitiveContains(search) } }
     private var total: Int64 { entries.reduce(0) { $0 + $1.bytes } }
+    private var selectionMode: ScanSelection.Mode { page == .analyze ? .analyze : page == .uninstall ? .uninstall : .clean }
+    private var selectableVisibleIDs: Set<String> { ScanSelection.eligibleIDs(visible, mode: selectionMode) }
     private var chosen: [DiskEntry] { entries.filter { $0.isComplete && selected.contains($0.id) } }
 
     var body: some View {
@@ -67,7 +69,7 @@ struct ContentView: View {
                         Label(diskAccess.state.title, systemImage: diskAccess.state == .limited ? "exclamationmark.shield" : "lock.shield")
                             .foregroundStyle(diskAccess.state == .limited ? Color.orange : Color.secondary)
                     }.buttonStyle(.plain).help("查看磁盘权限及授权步骤")
-                    Text("Clean  1.0.1")
+                    Text("Clean  1.1.0")
                 }.font(.system(size: 11)).foregroundStyle(.secondary)
             }.padding(30).frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
@@ -267,7 +269,7 @@ struct ContentView: View {
                     LazyVStack(spacing: 0) {
                         ForEach(visible) { entry in
                             HStack(spacing: 12) {
-                                if page != .analyze { Toggle("", isOn: Binding(get: { selected.contains(entry.id) }, set: { if $0 { selected.insert(entry.id) } else { selected.remove(entry.id) } })).labelsHidden().disabled(busy || !entry.isComplete) }
+                                Toggle("选择 " + entry.name, isOn: Binding(get: { selected.contains(entry.id) }, set: { if $0 { selected.insert(entry.id) } else { selected.remove(entry.id) } })).labelsHidden().disabled(busy || !ScanSelection.canSelect(entry, mode: selectionMode))
                                 Image(nsImage: NSWorkspace.shared.icon(forFile: entry.url.path)).resizable().frame(width: 30, height: 30)
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(entry.name).font(.system(size: 12, weight: .medium)).lineLimit(1)
@@ -294,14 +296,13 @@ struct ContentView: View {
                 HStack {
                     Text(skipped == 0 ? "未发现读取错误" : "\(skipped) 项已跳过 · 详情见上方").font(.caption).foregroundStyle(.secondary)
                     Spacer()
-                    if page != .analyze {
-                        Button("取消全选") { selected = [] }.disabled(busy)
-                        Button("审查 \(chosen.count) 项 · \(formattedBytes(chosen.reduce(0) { $0 + $1.bytes }))") {
-                            if page == .uninstall {
-                                reviewUninstall()
-                            } else { confirm = true }
-                        }.buttonStyle(.borderedProminent).disabled(chosen.isEmpty || busy)
-                    }
+                    Button(search.isEmpty ? "全选" : "全选搜索结果") { selected.formUnion(selectableVisibleIDs) }
+                        .disabled(busy || selectableVisibleIDs.isEmpty || selectableVisibleIDs.isSubset(of: selected))
+                    Button("取消全选") { selected = [] }.disabled(busy || selected.isEmpty)
+                    Button("审查 \(chosen.count) 项 · \(formattedBytes(chosen.reduce(0) { $0 + $1.bytes }))") {
+                        if page == .uninstall { reviewUninstall() }
+                        else { confirm = true }
+                    }.buttonStyle(.borderedProminent).disabled(chosen.isEmpty || busy)
                 }
             }
         }.frame(maxHeight: .infinity)
@@ -332,7 +333,7 @@ struct ContentView: View {
     private var confirmation: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text(page == .uninstall ? "审查应用与关联文件" : "最后确认一下").font(.title2.bold())
-            Text(page == .uninstall ? "所选应用与勾选的关联文件将移入废纸篓。含个人数据的目录默认不勾选；仍被其他应用使用的共享容器和系统服务会保留。" : "普通缓存和日志将永久删除；归档、设备支持和设备备份将移入废纸篓。请先退出相关应用。缓存会重新生成，大小不等于实际释放空间。")
+            Text(page == .uninstall ? "所选应用与勾选的关联文件将移入废纸篓。含个人数据的目录默认不勾选；仍被其他应用使用的共享容器和系统服务会保留。" : page == .analyze ? "所选文件或文件夹将移入系统废纸篓，可从废纸篓恢复。请仔细核对路径和大小；受保护位置、未完成或无法完整统计的项目不会加入全选。" : "普通缓存和日志将永久删除；标记个人数据或共享容器的项目将移入废纸篓。请先退出相关应用。缓存会重新生成，大小不等于实际释放空间。")
                 .font(.callout)
             if page == .uninstall && reviewTask != nil {
                 HStack { ProgressView().controlSize(.small); Text("并行统计关联文件：\(uninstallPlan?.completed ?? 0) / \(uninstallPlan?.files.count ?? 0)").font(.caption) }
@@ -416,16 +417,13 @@ struct ContentView: View {
         busy = true; selected = []; entries = []; skipped = 0; scanIssues = []
         scanned = false; scanCancelled = false; scanCompleted = 0; scanTotal = 0
         let token = UUID(); scanID = token
-        let roots: [ScanRoot]
-        switch page {
-        case .clean: roots = DiskService.cleanupRoots
-        case .uninstall: roots = DiskService.applicationRoots
-        default: roots = [ScanRoot(url: folder, category: "文件")]
-        }
+        let target = page; let location = folder
         scanTask = Task {
             guard !Task.isCancelled else { return }
             let worker = Task.detached(priority: .userInitiated) {
-                await DiskService.scanConcurrently(roots) { progress in
+                let discovery = target == .clean ? CleanupCatalog.discover() : nil
+                let roots = discovery?.rules.map(\.scanRoot) ?? (target == .uninstall ? DiskService.applicationRoots : [ScanRoot(url: location, category: "文件")])
+                return await DiskService.scanConcurrently(roots, initialIssues: discovery?.issues ?? []) { progress in
                     await MainActor.run {
                         guard scanID == token else { return }
                         entries = progress.result.entries; skipped = progress.result.skipped; scanIssues = progress.result.issues
@@ -449,11 +447,12 @@ struct ContentView: View {
     }
     private func performDelete() {
         let targets = chosen; let plan = uninstallPlan; let ids = selectedRelated
-        let authorization = allowSystemAuthorization; let dock = removeDockEntries; let uninstall = page == .uninstall
+        let authorization = allowSystemAuthorization; let dock = removeDockEntries; let uninstall = page == .uninstall; let analysis = page == .analyze
         confirm = false; busy = true
         Task {
             message = await Task.detached {
-                if !uninstall { return DiskService.remove(targets) }
+                if analysis { return DiskService.trashAnalyzed(targets) }
+                if !uninstall { return await DiskService.remove(targets) }
                 guard let plan else { return "未生成卸载审查列表，请重新扫描。" }
                 return await UninstallService.execute(plan, selected: ids, systemAuthorization: authorization, removeDockEntries: dock) { url in
                     await MainActor.run { FinderAuthorization.trash(url) }

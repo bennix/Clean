@@ -2,9 +2,9 @@
 
 # Clean
 
-[简体中文官网](https://bennix.github.io/Clean/) · [下载公证 DMG](https://github.com/bennix/Clean/releases/download/v1.0.1/Clean-1.0.1-AppleSilicon.dmg) · [发行说明](https://github.com/bennix/Clean/releases/tag/v1.0.1)
+[简体中文官网](https://bennix.github.io/Clean/) · [下载公证 DMG](https://github.com/bennix/Clean/releases/download/v1.1.0/Clean-1.1.0-AppleSilicon.dmg) · [发行说明](https://github.com/bennix/Clean/releases/tag/v1.1.0)
 
-> **当前版本：1.0.1 · Apple Silicon · macOS 27+**  
+> **当前版本：1.1.0 · Apple Silicon · macOS 27+**
 > 应用与 DMG 均经 Developer ID 签名、Apple 公证并附加票据。
 
 ![Clean 深色实际运行界面](docs/assets/overview-dark.png)
@@ -45,7 +45,7 @@
 
 `xcodebuild -project CleanMac.xcodeproj -scheme CleanMac -configuration Debug CODE_SIGNING_ALLOWED=NO -only-testing:CleanMacTests test`
 
-19 项测试覆盖路径边界、符号链接逃逸、分析页废纸篓边界、只读扫描、并发统计一致性、取消、应用过滤、读取错误分类、未知卸载目标、Dock 精确匹配及监控数据处理。开发验证不对用户真实缓存执行删除，也不执行管理员维护。
+26 项测试覆盖路径边界、符号链接逃逸、分析页废纸篓边界、只读扫描、并发统计一致性、取消、应用过滤、读取错误分类、未知卸载目标、Dock 精确匹配及监控数据处理。开发验证不对用户真实缓存执行删除，也不执行管理员维护。
 
 ## 安装与权限
 
@@ -62,3 +62,7 @@
 ## 构建与签名
 
 在 Xcode 中选择自己的签名团队后运行。测试可使用 `CODE_SIGNING_ALLOWED=NO`；发行应使用 Developer ID Application 证书并启用 Hardened Runtime。Apple ID 密码、证书私钥及公证凭据均不包含在仓库中。发行二进制和公证记录通过 GitHub Release 提供，不提交到 Git 历史。
+
+## 1.1.0 清理覆盖扩展
+
+缓存与分析列表支持全选、取消全选及确认后处理。新增开发工具、沙盒、浏览器 Profile 和 Electron 缓存扫描，包含隐藏项；运行中的相关程序会保守跳过。详见 [与 Mole 的覆盖差异](docs/cleanup-coverage.md)。
