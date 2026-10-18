@@ -10,6 +10,8 @@ nonisolated struct DiskEntry: Identifiable, Sendable {
     var isComplete = true
     var isPartial = false
     var name: String { url.lastPathComponent }
+    var supplementalKind: SupplementalCleanup.Kind?
+    var originalURL: URL?
 }
 
 nonisolated struct ScanResult: Sendable {
@@ -65,25 +67,44 @@ nonisolated enum DiskService {
         }
         var failed: [String] = []; var skipped: [String] = []; var remaining: [String] = []
         var count = 0
-        var toolStates: [String: Bool] = [:]
+        // Inspect open paths once, rather than treating every Node/Python process as a cache user.
+        let toolUsage = entries.contains { entry in
+            if entry.supplementalKind != nil { return true }
+            guard let rule = CleanupCatalog.rule(for: entry.url, in: rules) else { return false }
+            return CleanupCatalog.requiresToolUsageCheck(rule.root)
+        } ? openToolPaths() : nil
         for entry in entries {
+            if entry.supplementalKind != nil {
+                guard entry.isComplete, !entry.isPartial, SupplementalCleanup.valid(entry, verifyContents: true) else {
+                    failed.append(entry.url.path + L("：候选项目已变化或无法证明可清理，请重新扫描")); continue
+                }
+                guard let usage = toolUsage else { skipped.append(entry.url.path + L("：无法检查缓存占用，请稍后重试")); continue }
+                let blockers = blockingProcesses(for: entry.url, usage: usage)
+                if !blockers.isEmpty {
+                    skipped.append(entry.url.path + L("：缓存正被以下进程使用，请退出后重试：{0}", blockers.joined(separator: ", "))); continue
+                }
+                if entry.supplementalKind == .duplicate && running.keys.contains(where: { $0.hasPrefix("com.tencent.xinWeChat") }) {
+                    skipped.append(entry.url.path + L("：相关应用仍在运行或未完成退出，已跳过")); continue
+                }
+                do { _ = try FileManager.default.trashItem(at: entry.url, resultingItemURL: nil); count += 1 }
+                catch { failed.append(entry.url.path + "：" + error.localizedDescription) }
+                continue
+            }
             guard entry.isComplete, !entry.isPartial, let rule = CleanupCatalog.rule(for: entry.url, in: rules) else { failed.append(entry.url.path + L("：不在清理边界内或统计不完整")); continue }
             let live = running.contains { id, name in matchesRunningApp(entry, rule: rule, id: id, name: name) }
             if live {
                 skipped.append(entry.url.path + L("：相关应用仍在运行或未完成退出，已跳过"))
                 continue
             }
-            if let pattern = CleanupCatalog.toolProcessPattern(rule.root) {
-                let active: Bool
-                if let cached = toolStates[pattern] { active = cached }
-                else {
-                    let process = Process(); process.executableURL = URL(fileURLWithPath: "/usr/bin/pgrep"); process.arguments = ["-x", pattern]
-                    process.standardOutput = FileHandle.nullDevice; process.standardError = FileHandle.nullDevice
-                    do { try process.run(); process.waitUntilExit(); active = process.terminationStatus != 1 }
-                    catch { active = true }
-                    toolStates[pattern] = active
+            if CleanupCatalog.requiresToolUsageCheck(rule.root) {
+                guard let toolUsage else {
+                    skipped.append(entry.url.path + L("：无法检查缓存占用，请稍后重试")); continue
                 }
-                if active { skipped.append(entry.url.path + L("：相关开发工具可能正在运行，请退出后重试")); continue }
+                let blockers = blockingProcesses(for: entry.url, usage: toolUsage)
+                if !blockers.isEmpty {
+                    skipped.append(entry.url.path + L("：缓存正被以下进程使用，请退出后重试：{0}", blockers.joined(separator: ", ")))
+                    continue
+                }
             }
             do {
                 if rule.sensitive { _ = try FileManager.default.trashItem(at: entry.url, resultingItemURL: nil) }
@@ -100,6 +121,44 @@ nonisolated enum DiskService {
         if !skipped.isEmpty { report += L("\n\n运行中跳过：\n") + skipped.joined(separator: "\n") }
         if !failed.isEmpty { report += L("\n\n失败：\n") + failed.joined(separator: "\n") }
         return report + L("\n\nSafari 以外的系统应用、后台服务和命令行任务不会自动退出；缓存可能由后台进程重新生成；移入废纸篓的项目在清空废纸篓前仍占用磁盘空间。")
+    }
+    struct OpenToolPath {
+        let process: String
+        let path: String
+    }
+    static func parseOpenToolPaths(_ output: String) -> [OpenToolPath] {
+        var pid = ""; var name = ""; var result: [OpenToolPath] = []
+        for line in output.split(separator: "\n") {
+            guard let field = line.first else { continue }
+            let value = String(line.dropFirst())
+            switch field {
+            case "p": pid = value; name = ""
+            case "c": name = value
+            case "n":
+                if value.hasPrefix("/"), !pid.isEmpty {
+                    result.append(OpenToolPath(process: "\(name) (PID \(pid))", path: value))
+                }
+            default: break
+            }
+        }
+        return result
+    }
+    static func blockingProcesses(for url: URL, usage: [OpenToolPath]) -> [String] {
+        let path = url.standardizedFileURL.path
+        return Set(usage.filter { $0.path == path || $0.path.hasPrefix(path + "/") }.map(\.process)).sorted()
+    }
+    static func openToolPaths() -> [OpenToolPath]? {
+        let process = Process(); let output = Pipe()
+        process.executableURL = URL(fileURLWithPath: "/usr/sbin/lsof")
+        process.arguments = ["-nP", "-a", "-u", String(getuid()), "-Fpcn"]
+        process.standardOutput = output; process.standardError = FileHandle.nullDevice
+        do {
+            try process.run()
+            let data = output.fileHandleForReading.readDataToEndOfFile()
+            process.waitUntilExit()
+            guard process.terminationStatus == 0, let text = String(data: data, encoding: .utf8) else { return nil }
+            return parseOpenToolPaths(text)
+        } catch { return nil }
     }
     static func trashAnalyzed(_ entries: [DiskEntry]) -> String {
         var count = 0

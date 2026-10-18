@@ -70,7 +70,7 @@ struct ContentView: View {
                         Label(diskAccess.state.title, systemImage: diskAccess.state == .limited ? "exclamationmark.shield" : "lock.shield")
                             .foregroundStyle(diskAccess.state == .limited ? Color.orange : Color.secondary)
                     }.buttonStyle(.plain).help(L("查看磁盘权限及授权步骤"))
-                    Text("Clean  1.2.0")
+                    Text("Clean  1.3.0")
                 }.font(.system(size: 11)).foregroundStyle(.secondary)
             }.padding(30).frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
@@ -281,7 +281,7 @@ struct ContentView: View {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(entry.name).font(.system(size: 12, weight: .medium)).lineLimit(1)
                                     Text(entry.category + (entry.sensitive ? L(" · 个人数据，请仔细确认") : "") + " · " + entry.url.deletingLastPathComponent().path).font(.system(size: 10)).foregroundStyle(.secondary).lineLimit(1).truncationMode(.middle)
-                                    if page == .analyze, let disabledReason {
+                                    if let disabledReason {
                                         Text(disabledReason).font(.system(size: 10)).foregroundStyle(.orange).fixedSize(horizontal: false, vertical: true)
                                     }
                                 }
@@ -303,6 +303,9 @@ struct ContentView: View {
                 }.clipShape(RoundedRectangle(cornerRadius: 9))
                 if entries.isEmpty && !busy { Text(L("没有找到可访问的项目。可在系统设置中检查文件访问权限。")).foregroundStyle(.secondary) }
                 if !scanIssues.isEmpty { scanIssueDetails }
+                if page == .clean {
+                    Text(L("补充检测：仅扫描指定目录中超过 7 天的安装包与工程产物；微信副本按内容校验。可清理的补充项目加入全选，确认后移入废纸篓；疑似应用残留仅提示。")).font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                }
                 HStack {
                     Text(skipped == 0 ? L("未发现读取错误") : L("{0} 项已跳过 · 详情见上方", String(describing: skipped))).font(.caption).foregroundStyle(.secondary)
                     Spacer()
@@ -445,13 +448,20 @@ struct ContentView: View {
             let worker = Task.detached(priority: .userInitiated) {
                 let discovery = target == .clean ? CleanupCatalog.discover() : nil
                 let roots = discovery?.rules.map(\.scanRoot) ?? (target == .uninstall ? DiskService.applicationRoots : [ScanRoot(url: location, category: L("文件"))])
-                return await DiskService.scanConcurrently(roots, initialIssues: discovery?.issues ?? []) { progress in
+                var result = await DiskService.scanConcurrently(roots, initialIssues: discovery?.issues ?? []) { progress in
                     await MainActor.run {
                         guard scanID == token else { return }
                         entries = progress.result.entries; skipped = progress.result.skipped; scanIssues = progress.result.issues
                         scanCompleted = progress.completed; scanTotal = progress.total; scanned = true
                     }
                 }
+                if target == .clean, !Task.isCancelled {
+                    let extra = SupplementalCleanup.scan()
+                    result.entries.append(contentsOf: extra.entries)
+                    result.entries.sort { $0.bytes > $1.bytes }
+                    result.skipped += extra.skipped; result.issues.append(contentsOf: extra.issues)
+                }
+                return result
             }
             let result = await withTaskCancellationHandler {
                 await worker.value

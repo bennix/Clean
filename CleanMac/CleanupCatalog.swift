@@ -131,13 +131,8 @@ nonisolated enum CleanupCatalog {
         }
         return result?.contains(url) == true ? result : nil
     }
-    static func toolProcessPattern(_ root: URL) -> String? {
-        let path = root.path
-        if path.contains("/.npm/") || path.contains("/.bun/") || path.contains("/.yarn/") || path.contains("/.cache/yarn") || path.contains("/.cache/node/corepack") { return "node|npm|pnpm|yarn|bun|corepack" }
-        if path.contains("/.gradle/") { return "java|gradle|gradlew" }
-        if path.contains("/.cargo/") { return "cargo|rustc|rustup" }
-        if path.contains("/.cache/") { return "python[0-9.]*|pip[0-9.]*|uv|ruff|mypy|poetry|pre-commit" }
-        return nil
+    static func requiresToolUsageCheck(_ root: URL) -> Bool {
+        ["/.npm/", "/.bun/", "/.yarn/", "/.gradle/", "/.cargo/", "/.cache/"].contains { root.path.contains($0) }
     }
     static func rule(for url: URL, in rules: [CleanupRule]) -> CleanupRule? { rules.first { $0.contains(url) } }
 }

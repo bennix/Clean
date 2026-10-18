@@ -2,18 +2,25 @@
 
 # Clean
 
-[简体中文官网](https://bennix.github.io/Clean/) · [下载公证 DMG](https://github.com/bennix/Clean/releases/download/v1.2.0/Clean-1.2.0-AppleSilicon.dmg) · [发行说明](https://github.com/bennix/Clean/releases/tag/v1.2.0)
+[简体中文官网](https://bennix.github.io/Clean/) · [下载公证 DMG](https://github.com/bennix/Clean/releases/download/v1.3.0/Clean-1.3.0-AppleSilicon.dmg) · [发行说明](https://github.com/bennix/Clean/releases/tag/v1.3.0)
 
-> **当前版本：1.2.0 · Apple Silicon · macOS 27+**
+> **当前版本：1.3.0 · Apple Silicon · macOS 27+**
 > 应用与 DMG 均经 Developer ID 签名、Apple 公证并附加票据。
 
-![Clean 深色实际运行界面](docs/assets/overview-dark.png)
+![Clean 1.3.0 实际运行界面](docs/assets/overview-1.3.0.png)
 
 原生 SwiftUI macOS 磁盘工具。清理、关联卸载、维护、可视化分析和菜单栏监控，先看清，再动手。当前工程要求支持 macOS 27 SDK 的 Xcode。
 
 ## 运行
 
 打开 `CleanMac.xcodeproj`，选择 `CleanMac` scheme 运行。构建产品、窗口和菜单名称为 **Clean**，内部 Swift module 保留 CleanMac。完整图标位于 Assets.xcassets/AppIcon.appiconset，设计源图位于 Design/Clean-Icon-Source.png。
+
+## 1.3.0 更新
+
+- 补充检测下载和桌面中超过 7 天的安装包；Projects、Developer、GitHub、dev 下最多 8 层内、超过 7 天且有对应项目清单的 node_modules、target、.build、dist。只读扫描，不把同名目录直接认定为垃圾。
+- 微信 xwechat_files 内最多 8 层的数字括号附件副本，仅在同目录无括号原件大小和 SHA-256 一致时列出；处理前再次验证原件，微信运行时跳过。
+- 补充可清理项目加入“全选”，统一经审查后移入废纸篓。疑似未安装应用的旧支持目录仅提示，禁止选择；可在 Finder 核对。
+- 开发缓存改按当前用户进程实际打开的路径判断占用，报告进程名称和 PID；不再因为任意 Node、Python 任务运行就拦截整类缓存。检查失败时保留项目，不强制结束进程。
 
 ## 1.2.0 更新
 
@@ -58,7 +65,7 @@
 
 `xcodebuild -project CleanMac.xcodeproj -scheme CleanMac -configuration Debug CODE_SIGNING_ALLOWED=NO -only-testing:CleanMacTests test`
 
-35 项测试覆盖路径边界、符号链接逃逸、分析页废纸篓边界、只读扫描、并发统计一致性、取消、应用过滤、读取错误分类、未知卸载目标、Dock 精确匹配及监控数据处理。开发验证不对用户真实缓存执行删除，也不执行管理员维护。
+41 项测试覆盖补充候选识别、原件变更复核、全选、实际占用路径匹配，以及路径边界、符号链接逃逸、分析页废纸篓边界、只读扫描、并发统计一致性、取消、应用过滤、读取错误分类、未知卸载目标、Dock 精确匹配及监控数据处理。开发验证不对用户真实缓存执行删除，也不执行管理员维护。
 
 ## 安装与权限
 

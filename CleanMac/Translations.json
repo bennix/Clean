@@ -1958,5 +1958,75 @@
     "de": "Die Oberfläche wechselt sofort; Systemdialoge verwenden die Sprache nach erneutem Öffnen.",
     "fr": "L’interface change immédiatement ; les dialogues système suivent après réouverture.",
     "es": "La interfaz cambia al instante; los diálogos del sistema cambian al volver a abrir la aplicación."
+  },
+  "：无法检查缓存占用，请稍后重试": {
+    "en": ": Cannot check cache usage; retry later",
+    "ja": "：キャッシュの使用状況を確認できません。後で再試行してください",
+    "de": ": Cache-Nutzung konnte nicht geprüft werden; später erneut versuchen",
+    "fr": ": Impossible de vérifier l’utilisation du cache ; réessayez plus tard",
+    "es": ": No se puede comprobar el uso de la caché; reintente más tarde"
+  },
+  "：缓存正被以下进程使用，请退出后重试：{0}": {
+    "en": ": Cache in use by these processes; quit them and retry: {0}",
+    "ja": "：次のプロセスが使用中です。終了して再試行：{0}",
+    "de": ": Cache wird verwendet; Prozesse beenden und erneut versuchen: {0}",
+    "fr": ": Cache utilisé ; quittez ces processus et réessayez : {0}",
+    "es": ": Caché en uso; cierre estos procesos y reintente: {0}"
+  },
+  "旧安装包 · 请确认不再需要": {
+    "en": "Old installers · Confirm no longer needed",
+    "ja": "古いインストーラ · 不要か確認",
+    "de": "Alte Installationsdateien · Bedarf prüfen",
+    "fr": "Anciens installateurs · Vérifiez leur utilité",
+    "es": "Instaladores antiguos · Confirme que no los necesita"
+  },
+  "工程产物 · 删除后可能需要重新构建": {
+    "en": "Project artifacts · May require rebuilding",
+    "ja": "ビルド生成物 · 再ビルドが必要な場合があります",
+    "de": "Build-Dateien · Neubau eventuell erforderlich",
+    "fr": "Fichiers de compilation · Reconstruction possible",
+    "es": "Archivos de compilación · Puede requerir recompilar"
+  },
+  "微信重复附件 · 内容一致": {
+    "en": "WeChat duplicate attachment · Identical content",
+    "ja": "WeChatの重複添付 · 内容一致",
+    "de": "Doppelter WeChat-Anhang · Identischer Inhalt",
+    "fr": "Pièce jointe WeChat en double · Contenu identique",
+    "es": "Adjunto duplicado de WeChat · Contenido idéntico"
+  },
+  "疑似应用残留 · 仅提示，请人工核对": {
+    "en": "Possible app leftovers · Information only; review manually",
+    "ja": "アプリの残存候補 · 手動確認が必要",
+    "de": "Mögliche App-Reste · Nur Hinweis; manuell prüfen",
+    "fr": "Résidus possibles · Information à vérifier manuellement",
+    "es": "Posibles restos de apps · Solo información; revise manualmente"
+  },
+  "仅提示：无法证明没有其他应用使用，请在 Finder 中核对": {
+    "en": "Information only: Other apps may use this data; review in Finder",
+    "ja": "参考情報：他のアプリが使用する可能性があります。Finderで確認",
+    "de": "Nur Hinweis: Andere Apps könnten diese Daten nutzen; im Finder prüfen",
+    "fr": "Information : ces données peuvent servir à d’autres apps ; vérifiez dans le Finder",
+    "es": "Información: otras apps pueden usar estos datos; revise en Finder"
+  },
+  "候选项目已变化，请重新扫描": {
+    "en": "Candidate changed; scan again",
+    "ja": "候補が変更されました。再スキャンしてください",
+    "de": "Kandidat geändert; erneut scannen",
+    "fr": "Élément modifié ; relancez l’analyse",
+    "es": "El elemento cambió; vuelva a analizar"
+  },
+  "：候选项目已变化或无法证明可清理，请重新扫描": {
+    "en": ": Candidate changed or cannot be verified; scan again",
+    "ja": "：候補が変更されたか検証できません。再スキャンしてください",
+    "de": ": Kandidat geändert oder nicht prüfbar; erneut scannen",
+    "fr": ": Élément modifié ou non vérifiable ; relancez l’analyse",
+    "es": ": El elemento cambió o no se pudo verificar; vuelva a analizar"
+  },
+  "补充检测：仅扫描指定目录中超过 7 天的安装包与工程产物；微信副本按内容校验。可清理的补充项目加入全选，确认后移入废纸篓；疑似应用残留仅提示。": {
+    "en": "Extra checks: Installers and build artifacts older than 7 days in designated folders; WeChat copies verified by content. Eligible extra items are included in Select All and go to Trash after review. Possible app leftovers are informational only.",
+    "ja": "追加検出：指定フォルダの7日以上前のインストーラとビルド生成物、内容一致のWeChatコピー。処理可能な追加項目は全選択に含まれ、確認後ゴミ箱へ移動。アプリ残存候補は参考情報のみ。",
+    "de": "Zusatzprüfung: Installations- und Build-Dateien älter als 7 Tage in festgelegten Ordnern; WeChat-Kopien mit Inhaltsprüfung. Geeignete Zusatzfunde sind in Alle auswählen enthalten und kommen nach Prüfung in den Papierkorb. App-Reste sind nur Hinweise.",
+    "fr": "Contrôles supplémentaires : installateurs et fichiers de compilation de plus de 7 jours dans les dossiers prévus ; copies WeChat vérifiées par contenu. Les éléments admissibles sont inclus dans Tout sélectionner, puis placés dans la Corbeille après validation. Résidus possibles à titre informatif.",
+    "es": "Detección adicional: instaladores y archivos de compilación de más de 7 días en carpetas designadas; copias de WeChat verificadas por contenido. Los elementos aptos se incluyen en Seleccionar todo y se envían a la Papelera tras revisión. Los posibles restos son solo informativos."
   }
 }

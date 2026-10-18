@@ -3,6 +3,12 @@ import Testing
 @testable import CleanMac
 
 struct CleanMacTests {
+    @Test func cacheUsageRequiresAnOpenPathInTheSelectedEntry() {
+        let usage = DiskService.parseOpenToolPaths("p42\ncnode\nn/Users/test/project/index.js\np56\ncuv\nn/Users/test/.cache/uv/archive-v0/item\np57\ncpython\nn/Users/test/.cache/uv/archive-v01/item\n")
+        #expect(DiskService.blockingProcesses(for: URL(fileURLWithPath: "/Users/test/.npm/_logs"), usage: usage).isEmpty)
+        #expect(DiskService.blockingProcesses(for: URL(fileURLWithPath: "/Users/test/.cache/uv/archive-v0"), usage: usage) == ["uv (PID 56)"])
+        #expect(DiskService.blockingProcesses(for: URL(fileURLWithPath: "/Users/test/project/index.js"), usage: usage) == ["node (PID 42)"])
+    }
     @Test func deletionBoundary() {
         let home = DiskService.home
         #expect(!DiskService.canDelete(URL(fileURLWithPath: "/System/Library/Caches/test")))
@@ -334,5 +340,95 @@ struct UpdateConfigurationTests {
         #expect(Data(base64Encoded: publicKey)?.count == 32)
         #expect(Bundle.main.object(forInfoDictionaryKey: "SUEnableAutomaticChecks") as? Bool == false)
         #expect(Bundle.main.object(forInfoDictionaryKey: "SUEnableSystemProfiling") as? Bool == false)
+    }
+}
+
+struct SupplementalCleanupTests {
+    private func fixture() throws -> URL {
+        let root = FileManager.default.temporaryDirectory.resolvingSymlinksInPath().appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        return root
+    }
+    private func write(_ path: String, in home: URL, text: String = "payload", old: Bool = true) throws -> URL {
+        let url = home.appendingPathComponent(path)
+        try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try Data(text.utf8).write(to: url)
+        if old { try FileManager.default.setAttributes([.modificationDate: Date(timeIntervalSinceNow: -14 * 86400)], ofItemAtPath: url.path) }
+        return url
+    }
+    @Test func selectAllIncludesEligibleSupplementalItemsButExcludesInformationalOnes() throws {
+        let url = DiskService.home.appendingPathComponent("Downloads/clean-test-" + UUID().uuidString + ".dmg")
+        guard FileManager.default.fileExists(atPath: url.deletingLastPathComponent().path) else { return }
+        try Data("test installer".utf8).write(to: url)
+        defer { try? FileManager.default.removeItem(at: url) }
+        try FileManager.default.setAttributes([.modificationDate: Date(timeIntervalSinceNow: -14 * 86400)], ofItemAtPath: url.path)
+        var entry = DiskEntry(url: url, bytes: 14, category: "test", sensitive: true)
+        entry.supplementalKind = .installer
+        #expect(ScanSelection.eligibleIDs([entry], mode: .clean) == [entry.id])
+        entry.supplementalKind = .residual
+        #expect(ScanSelection.eligibleIDs([entry], mode: .clean).isEmpty)
+    }
+    @Test func installersAreOldRegularFilesInExactRoots() throws {
+        let home = try fixture(); defer { try? FileManager.default.removeItem(at: home) }
+        let old = try write("Downloads/setup.DMG", in: home)
+        let recent = try write("Desktop/new.pkg", in: home, old: false)
+        let unrelated = try write("Documents/Downloads/personal.dmg", in: home)
+        func candidate(_ url: URL) -> DiskEntry {
+            var entry = DiskEntry(url: url, bytes: 0, category: "", sensitive: true)
+            entry.supplementalKind = .installer; return entry
+        }
+        #expect(SupplementalCleanup.valid(candidate(old), home: home))
+        #expect(!SupplementalCleanup.valid(candidate(recent), home: home))
+        #expect(!SupplementalCleanup.valid(candidate(unrelated), home: home))
+        let link = home.appendingPathComponent("Downloads/link.dmg")
+        try FileManager.default.createSymbolicLink(at: link, withDestinationURL: old)
+        #expect(!SupplementalCleanup.valid(candidate(link), home: home))
+    }
+    @Test func artifactsNeedProjectMarkersAgeAndBoundary() throws {
+        let home = try fixture(); defer { try? FileManager.default.removeItem(at: home) }
+        _ = try write("Projects/demo/package.json", in: home)
+        let file = try write("Projects/demo/node_modules/file", in: home)
+        let dir = file.deletingLastPathComponent()
+        #expect(!SupplementalCleanup.artifact(dir, home: home, now: Date()))
+        try FileManager.default.setAttributes([.modificationDate: Date(timeIntervalSinceNow: -14 * 86400)], ofItemAtPath: dir.path)
+        #expect(SupplementalCleanup.artifact(dir, home: home, now: Date()))
+        let unknown = try write("Projects/unknown/target/file", in: home).deletingLastPathComponent()
+        try FileManager.default.setAttributes([.modificationDate: Date(timeIntervalSinceNow: -14 * 86400)], ofItemAtPath: unknown.path)
+        #expect(!SupplementalCleanup.artifact(unknown, home: home, now: Date()))
+        let result = SupplementalCleanup.scan(home: home)
+        #expect(result.entries.contains { $0.url.standardizedFileURL.path == dir.standardizedFileURL.path && $0.supplementalKind == .artifact })
+        #expect(!result.entries.contains { $0.url.standardizedFileURL.path == unknown.standardizedFileURL.path })
+        #expect(FileManager.default.fileExists(atPath: file.path))
+    }
+    @Test func duplicateRequiresMatchingOriginalAndRechecksChanges() throws {
+        let home = try fixture(); defer { try? FileManager.default.removeItem(at: home) }
+        let base = SupplementalCleanup.wechatPath + "/account/files/"
+        let original = try write(base + "report.pdf", in: home)
+        let copy = try write(base + "report(1).pdf", in: home)
+        let different = try write(base + "report(2).pdf", in: home, text: "changed")
+        _ = try write(base + "标题（修订）.pdf", in: home)
+        #expect(SupplementalCleanup.original(for: copy) == original)
+        #expect(SupplementalCleanup.original(for: URL(fileURLWithPath: "/标题（修订）.pdf")) == nil)
+        #expect(SupplementalCleanup.identical(copy, original, home: home))
+        #expect(!SupplementalCleanup.identical(different, original, home: home))
+        let entries = SupplementalCleanup.scan(home: home).entries
+        let candidate = try #require(entries.first { $0.url.standardizedFileURL.path == copy.standardizedFileURL.path })
+        #expect(candidate.supplementalKind == .duplicate)
+        #expect(!entries.contains { $0.url.standardizedFileURL.path == different.standardizedFileURL.path || $0.url.standardizedFileURL.path == original.standardizedFileURL.path })
+        #expect(SupplementalCleanup.valid(candidate, home: home))
+        try Data("edited".utf8).write(to: original)
+        #expect(!SupplementalCleanup.valid(candidate, home: home, verifyContents: true))
+    }
+    @Test func residualsAreInformationalAndProtectedIDsAreExcluded() throws {
+        let home = try fixture(); defer { try? FileManager.default.removeItem(at: home) }
+        for id in ["com.example.clean-test-absent", "com.apple.test", "com.1password.test"] {
+            let dir = try write("Library/Application Support/\(id)/file", in: home).deletingLastPathComponent()
+            try FileManager.default.setAttributes([.modificationDate: Date(timeIntervalSinceNow: -14 * 86400)], ofItemAtPath: dir.path)
+        }
+        let entries = SupplementalCleanup.scan(home: home).entries
+        let item = try #require(entries.first { $0.name == "com.example.clean-test-absent" })
+        #expect(item.supplementalKind == .residual)
+        #expect(!ScanSelection.canSelect(item, mode: .clean))
+        #expect(!entries.contains { $0.name == "com.apple.test" || $0.name == "com.1password.test" })
     }
 }
