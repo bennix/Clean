@@ -204,9 +204,9 @@ struct ScanSelectionTests {
     }
     @Test func analysisReportsProtectionAndIncompleteScanReasons() {
         let url = DiskService.home.appendingPathComponent(".ssh/key")
-        #expect(ScanSelection.disabledReason(DiskEntry(url: url, bytes: 0, category: "文件", sensitive: false), mode: .analyze)?.contains("受保护") == true)
-        #expect(ScanSelection.disabledReason(DiskEntry(url: url, bytes: 0, category: "文件", sensitive: false, isComplete: false), mode: .analyze)?.contains("等待统计") == true)
-        #expect(ScanSelection.disabledReason(DiskEntry(url: url, bytes: 0, category: "文件", sensitive: false, isPartial: true), mode: .analyze)?.contains("统计不完整") == true)
+        #expect(ScanSelection.disabledReason(DiskEntry(url: url, bytes: 0, category: "文件", sensitive: false), mode: .analyze) != nil)
+        #expect(ScanSelection.disabledReason(DiskEntry(url: url, bytes: 0, category: "文件", sensitive: false, isComplete: false), mode: .analyze) == L("等待统计完成后可选择"))
+        #expect(ScanSelection.disabledReason(DiskEntry(url: url, bytes: 0, category: "文件", sensitive: false, isPartial: true), mode: .analyze) == L("统计不完整：请检查读取错误与访问权限后重新扫描"))
     }
     @Test func analysisRejectsSymlinksAndSymlinkAncestors() throws {
         let fm = FileManager.default
@@ -215,8 +215,8 @@ struct ScanSelectionTests {
         defer { try? fm.removeItem(at: home) }
         let link = home.appendingPathComponent(".cache/escape")
         try fm.createSymbolicLink(at: link, withDestinationURL: URL(fileURLWithPath: "/System"))
-        #expect(DiskService.analyzedProtectionReason(link, home: home)?.contains("符号链接") == true)
-        #expect(DiskService.analyzedProtectionReason(link.appendingPathComponent("Library"), home: home)?.contains("符号链接") == true)
+        #expect(DiskService.analyzedProtectionReason(link, home: home) == L("受保护：符号链接或路径经过符号链接"))
+        #expect(DiskService.analyzedProtectionReason(link.appendingPathComponent("Library"), home: home) == L("受保护：符号链接或路径经过符号链接"))
         #expect(DiskService.analyzedProtectionReason(home.appendingPathComponent(".cache/../.ssh/key"), home: home) != nil)
         #expect(DiskService.analyzedProtectionReason(URL(fileURLWithPath: home.path + "-other/.cache/file"), home: home) != nil)
     }
@@ -293,5 +293,46 @@ struct CleanupRunningAppTests {
         #expect(!DiskService.matchesRunningApp(entry, rule: rule, id: "com.example.Other", name: "Other"))
         let owned = CleanupRule(root: root, category: "缓存", ownerIDs: ["com.example.Editor.helper"])
         #expect(DiskService.matchesRunningApp(entry, rule: owned, id: "com.example.Editor", name: "Editor"))
+    }
+}
+
+struct LocalizationTests {
+    @Test func languageResolutionHandlesRegionalAndUnsupportedPreferences() {
+        #expect(AppLanguage.resolve("system", preferred: ["de-DE", "en-US"]) == "de")
+        #expect(AppLanguage.resolve("system", preferred: ["zh-Hant-TW"]) == "zh-Hans")
+        #expect(AppLanguage.resolve("system", preferred: ["pt-BR", "es-MX"]) == "es")
+        #expect(AppLanguage.resolve("system", preferred: ["ar-SA"]) == "en")
+        #expect(AppLanguage.resolve("ja", preferred: ["en-US"]) == "ja")
+    }
+    @Test func everyTranslationPreservesPlaceholdersAndFormatSpecifiers() throws {
+        let translations = Localization.translations
+        #expect(translations.count >= 280)
+        let tokens = try NSRegularExpression(pattern: #"\{\d+\}|%\.?\d*[a-zA-Z]"#)
+        func placeholders(_ value: String) -> [String] {
+            tokens.matches(in: value, range: NSRange(value.startIndex..., in: value)).map { (value as NSString).substring(with: $0.range) }.sorted()
+        }
+        for (key, languages) in translations {
+            #expect(Set(languages.keys) == ["en", "ja", "de", "fr", "es"])
+            for value in languages.values {
+                #expect(!value.isEmpty)
+                #expect(placeholders(value) == placeholders(key), "Placeholders differ for \(key)")
+            }
+        }
+    }
+    @Test func substitutionsPreservePathsAndDoNotReinterpretArguments() {
+        #expect(Localization.text("{0} 项 · {1}{2}", language: "en", arguments: ["2", "file {2}", "!"]) == "2 items · file {2}!")
+        #expect(Localization.text("清理", language: "ja") == "クリーンアップ")
+        #expect(Localization.text("清理", language: "fr") == "Nettoyer")
+        #expect(Localization.text("清理", language: "zh-Hans") == "清理")
+    }
+}
+
+struct UpdateConfigurationTests {
+    @Test func releaseUsesHttpsAndPinnedUpdateKeyWithoutProfiling() throws {
+        #expect(Bundle.main.object(forInfoDictionaryKey: "SUFeedURL") as? String == "https://bennix.github.io/Clean/appcast.xml")
+        let publicKey = try #require(Bundle.main.object(forInfoDictionaryKey: "SUPublicEDKey") as? String)
+        #expect(Data(base64Encoded: publicKey)?.count == 32)
+        #expect(Bundle.main.object(forInfoDictionaryKey: "SUEnableAutomaticChecks") as? Bool == false)
+        #expect(Bundle.main.object(forInfoDictionaryKey: "SUEnableSystemProfiling") as? Bool == false)
     }
 }

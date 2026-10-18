@@ -7,10 +7,10 @@ nonisolated enum DiskAccessState: Equatable {
     case checking, accessible, limited, unknown
     var title: String {
         switch self {
-        case .checking: "磁盘权限：检查中"
-        case .accessible: "磁盘权限：可读（实测）"
-        case .limited: "磁盘访问：部分位置受限"
-        case .unknown: "磁盘权限：未确认"
+        case .checking: L("磁盘权限：检查中")
+        case .accessible: L("磁盘权限：可读（实测）")
+        case .limited: L("磁盘访问：部分位置受限")
+        case .unknown: L("磁盘权限：未确认")
         }
     }
 }
@@ -93,40 +93,42 @@ final class DiskAccessManager: ObservableObject {
 }
 
 struct DiskAccessGuide: View {
+    @AppStorage(AppLanguage.preferenceKey) private var language = "system"
     @ObservedObject var access: DiskAccessManager
     @Environment(\.dismiss) private var dismiss
     var body: some View {
+        let _ = language
         VStack(alignment: .leading, spacing: 18) {
-            Label(access.state == .accessible ? "磁盘访问已就绪" : "检查磁盘访问状态", systemImage: "internaldrive.badge.checkmark").font(.title2.bold())
+            Label(access.state == .accessible ? L("磁盘访问已就绪") : L("检查磁盘访问状态"), systemImage: "internaldrive.badge.checkmark").font(.title2.bold())
             Text(access.state.title).foregroundStyle(access.state == .limited ? .orange : .secondary)
             Text(access.state == .accessible
-                 ? "受保护位置已可读取，无需重复添加授权。个别文件仍可能受所有者权限、ACL、SIP 或应用数据保护限制，它们会在扫描详情中单独列出。"
-                 : "探测到部分位置读取受限，这不等于完全磁盘访问未开启。若已在设置中允许，请退出所有 Clean 进程后重新打开；个别系统或应用专属位置仍可能不可读取。")
+                 ? L("受保护位置已可读取，无需重复添加授权。个别文件仍可能受所有者权限、ACL、SIP 或应用数据保护限制，它们会在扫描详情中单独列出。")
+                 : L("探测到部分位置读取受限，这不等于完全磁盘访问未开启。若已在设置中允许，请退出所有 Clean 进程后重新打开；个别系统或应用专属位置仍可能不可读取。"))
                 .font(.callout)
             if access.state != .accessible {
-                DisclosureGroup("确实需要授权时，查看添加步骤") {
+                DisclosureGroup(L("确实需要授权时，查看添加步骤")) {
                     VStack(alignment: .leading, spacing: 10) {
-                Text("1. 打开系统设置 → 隐私与安全性 → 完全磁盘访问权限。")
-                Text("2. 点击“+”，添加下方路径的 Clean.app，并开启开关。也可以将 Finder 中的应用拖入列表。")
-                Text("3. 按系统提示退出并重新打开 Clean，然后重新扫描。")
+                Text(L("1. 打开系统设置 → 隐私与安全性 → 完全磁盘访问权限。"))
+                Text(L("2. 点击“+”，添加下方路径的 Clean.app，并开启开关。也可以将 Finder 中的应用拖入列表。"))
+                Text(L("3. 按系统提示退出并重新打开 Clean，然后重新扫描。"))
                     }.font(.callout).padding(.top, 8)
                 }.font(.callout)
             }
             Text(Bundle.main.bundleURL.path).font(.caption).textSelection(.enabled).padding(12).frame(maxWidth: .infinity, alignment: .leading).background(.primary.opacity(0.05), in: RoundedRectangle(cornerRadius: 8))
             let paths = Array(Set(access.denied + access.fileDenials)).sorted { $0.path < $1.path }
             if !paths.isEmpty {
-                DisclosureGroup("单独受限的位置（\(paths.count) 项）") {
+                DisclosureGroup(L("单独受限的位置（{0} 项）", String(describing: paths.count))) {
                     ScrollView { VStack(alignment: .leading, spacing: 6) { ForEach(paths, id: \.path) { Text($0.path).font(.caption).textSelection(.enabled) } } }.frame(maxHeight: 100)
                 }.font(.caption)
             }
-            Text("状态通过实际读取检测；macOS 没有公开接口直接查询完全磁盘访问授权。权限不足也可能来自文件所有者或系统保护。检测可读不代表所有系统目录都可访问。").font(.caption).foregroundStyle(.secondary)
+            Text(L("状态通过实际读取检测；macOS 没有公开接口直接查询完全磁盘访问授权。权限不足也可能来自文件所有者或系统保护。检测可读不代表所有系统目录都可访问。")).font(.caption).foregroundStyle(.secondary)
             HStack {
-                Button(access.state == .accessible ? "完成" : "关闭") { dismiss() }
-                Button("重新检测") { access.refresh() }.disabled(access.checking)
+                Button(access.state == .accessible ? L("完成") : L("关闭")) { dismiss() }
+                Button(L("重新检测")) { access.refresh() }.disabled(access.checking)
                 Spacer()
                 if access.state != .accessible {
-                    Button("在 Finder 中显示 Clean") { access.revealApp() }
-                    Button("打开授权设置") { access.openSettings() }.buttonStyle(.borderedProminent)
+                    Button(L("在 Finder 中显示 Clean")) { access.revealApp() }
+                    Button(L("打开授权设置")) { access.openSettings() }.buttonStyle(.borderedProminent)
                 }
             }
         }.padding(28).frame(width: 680)

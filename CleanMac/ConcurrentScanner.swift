@@ -20,7 +20,7 @@ extension DiskService {
     }
     nonisolated static var applicationRoots: [ScanRoot] {
         [URL(fileURLWithPath: "/Applications"), home.appendingPathComponent("Applications")].map {
-            ScanRoot(url: $0, category: "应用", sensitive: true, applicationsOnly: true)
+            ScanRoot(url: $0, category: L("应用"), sensitive: true, applicationsOnly: true)
         }
     }
     /// Run from a detached task. At most four filesystem traversals are in flight.
@@ -35,7 +35,7 @@ extension DiskService {
             do {
                 guard !root.optional || root.url.resolvingSymlinksInPath().path == root.url.standardizedFileURL.path else {
                     skipped += 1
-                    issues.append(ScanIssue(url: root.url, kind: .symbolicLink, detail: "扫描根或其上级是符号链接，已跳过以避免越界和重复统计。"))
+                    issues.append(ScanIssue(url: root.url, kind: .symbolicLink, detail: L("扫描根或其上级是符号链接，已跳过以避免越界和重复统计。")))
                     continue
                 }
                 let urls = try FileManager.default.contentsOfDirectory(at: root.url, includingPropertiesForKeys: [.isSymbolicLinkKey], options: [])
@@ -46,7 +46,7 @@ extension DiskService {
                         let values = try url.resourceValues(forKeys: [.isSymbolicLinkKey])
                         if values.isSymbolicLink == true {
                             skipped += 1
-                            issues.append(ScanIssue(url: url, kind: .symbolicLink, detail: "不跟随链接，避免重复计数和跨越扫描边界。"))
+                            issues.append(ScanIssue(url: url, kind: .symbolicLink, detail: L("不跟随链接，避免重复计数和跨越扫描边界。")))
                             continue
                         }
                     } catch { skipped += 1; issues.append(.from(error, at: url)); continue }
@@ -103,7 +103,7 @@ extension DiskService {
         let keys: Set<URLResourceKey> = [.isRegularFileKey, .isSymbolicLinkKey, .fileAllocatedSizeKey]
         do {
             let values = try url.resourceValues(forKeys: keys)
-            if values.isSymbolicLink == true { return (0, 1, [ScanIssue(url: url, kind: .symbolicLink, detail: "不跟随符号链接。")]) }
+            if values.isSymbolicLink == true { return (0, 1, [ScanIssue(url: url, kind: .symbolicLink, detail: L("不跟随符号链接。"))]) }
             if values.isRegularFile == true { return (Int64(values.fileAllocatedSize ?? 0), 0, []) }
         } catch { return (0, 1, [.from(error, at: url)]) }
         var skipped = 0
@@ -112,7 +112,7 @@ extension DiskService {
             skipped += 1
             if issues.count < 100 { issues.append(.from(error, at: path)) }
             return true
-        }) else { return (0, 1, [ScanIssue(url: url, kind: .unreadable, detail: "无法遍历目录。")]) }
+        }) else { return (0, 1, [ScanIssue(url: url, kind: .unreadable, detail: L("无法遍历目录。"))]) }
         var total: Int64 = 0
         for case let file as URL in iterator {
             if Task.isCancelled { break }

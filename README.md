@@ -2,9 +2,9 @@
 
 # Clean
 
-[简体中文官网](https://bennix.github.io/Clean/) · [下载公证 DMG](https://github.com/bennix/Clean/releases/download/v1.1.2/Clean-1.1.2-AppleSilicon.dmg) · [发行说明](https://github.com/bennix/Clean/releases/tag/v1.1.2)
+[简体中文官网](https://bennix.github.io/Clean/) · [下载公证 DMG](https://github.com/bennix/Clean/releases/download/v1.2.0/Clean-1.2.0-AppleSilicon.dmg) · [发行说明](https://github.com/bennix/Clean/releases/tag/v1.2.0)
 
-> **当前版本：1.1.2 · Apple Silicon · macOS 27+**
+> **当前版本：1.2.0 · Apple Silicon · macOS 27+**
 > 应用与 DMG 均经 Developer ID 签名、Apple 公证并附加票据。
 
 ![Clean 深色实际运行界面](docs/assets/overview-dark.png)
@@ -14,6 +14,12 @@
 ## 运行
 
 打开 `CleanMac.xcodeproj`，选择 `CleanMac` scheme 运行。构建产品、窗口和菜单名称为 **Clean**，内部 Swift module 保留 CleanMac。完整图标位于 Assets.xcassets/AppIcon.appiconset，设计源图位于 Design/Clean-Icon-Source.png。
+
+## 1.2.0 更新
+
+- 简体中文、英语、日语、德语、法语、西班牙语，支持自动跟随系统和手动选择。主窗口即时刷新，系统对话框在重新打开应用后应用语言设置。
+- 内置 Sparkle 2.10.0，支持手动检查更新和可选自动检查。更新包需通过 Ed25519 签名验证；不启用系统信息分析。1.1.2 及更早版本需先手动安装此版。
+- 更新服务使用 GitHub Pages 的 `appcast.xml` 和 GitHub Release 安装包；文件路径和扫描内容不上传。后续发布流程见 [发布指南](docs/releasing.md)。
 
 ## 1.1.2 更新
 
@@ -46,13 +52,13 @@
 - 系统数据不是单一目录，也不代表全部可删除。容量条显示磁盘已用与可用总量，不伪造分类容量。APFS 共享块和本地快照会导致扫描大小与最终回收空间不同。
 - 无法访问、缺失的根路径会计入跳过数；受限子目录可能使大小低估。macOS 隐私控制仍然生效，可能需要用户在系统设置授予磁盘访问权限。
 - 为实现独立 macOS 清理工具的文件操作，当前关闭 App Sandbox；这不会自动获得完全磁盘访问权限。源码自行构建的版本需要使用自己的签名；仓库 Release 提供已签名和公证的发行版。
-- 无任何联网逻辑；未配置许可证或更新服务。
+- 仅更新功能访问 GitHub Pages / GitHub Releases；不上传扫描数据，未配置许可证服务。
 
 ## 验证
 
 `xcodebuild -project CleanMac.xcodeproj -scheme CleanMac -configuration Debug CODE_SIGNING_ALLOWED=NO -only-testing:CleanMacTests test`
 
-31 项测试覆盖路径边界、符号链接逃逸、分析页废纸篓边界、只读扫描、并发统计一致性、取消、应用过滤、读取错误分类、未知卸载目标、Dock 精确匹配及监控数据处理。开发验证不对用户真实缓存执行删除，也不执行管理员维护。
+35 项测试覆盖路径边界、符号链接逃逸、分析页废纸篓边界、只读扫描、并发统计一致性、取消、应用过滤、读取错误分类、未知卸载目标、Dock 精确匹配及监控数据处理。开发验证不对用户真实缓存执行删除，也不执行管理员维护。
 
 ## 安装与权限
 
@@ -81,3 +87,7 @@
 [观看30秒产品介绍](https://bennix.github.io/Clean/#film) · [视频源代码与制作资料](film/README.md)
 
 短片以可动组件重建真实功能，示例数据和压缩演示节奏有明确标注；含原创代码合成音乐与音效，支持静音和中文文字版。
+
+## 第三方组件
+
+在线更新使用 [Sparkle](https://github.com/sparkle-project/Sparkle) 2.10.0，许可说明见 [Sparkle-LICENSE.txt](ThirdPartyNotices/Sparkle-LICENSE.txt)，DMG 内附相同许可。

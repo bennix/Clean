@@ -26,14 +26,14 @@ final class SystemMonitor: ObservableObject {
     @Published var diskTotal: Int64 = 0
     @Published var diskFree: Int64 = 0
     @Published var battery: Double?
-    @Published var power = "读取中"
+    @Published var power = L("读取中")
     @Published var temperatures: [TemperatureReading] = []
     @Published var temperature: Double?
     @Published var gpu: Double?
-    @Published var thermal = "读取中"
+    @Published var thermal = L("读取中")
     @Published var uptime: TimeInterval = 0
     @Published var load: [Double] = []
-    @Published var networkInterfaces = "未连接"
+    @Published var networkInterfaces = L("未连接")
     @Published var sampleDate: Date?
     @Published var cpuAvailable = false
     @Published var memoryAvailable = false
@@ -58,11 +58,11 @@ final class SystemMonitor: ObservableObject {
         var averages = [Double](repeating: 0, count: 3)
         if getloadavg(&averages, 3) == 3 { load = averages }
         switch ProcessInfo.processInfo.thermalState {
-        case .nominal: thermal = "正常"
-        case .fair: thermal = "温热"
-        case .serious: thermal = "较高 · 系统降频"
-        case .critical: thermal = "过热 · 系统保护"
-        @unknown default: thermal = "未知"
+        case .nominal: thermal = L("正常")
+        case .fair: thermal = L("温热")
+        case .serious: thermal = L("较高 · 系统降频")
+        case .critical: thermal = L("过热 · 系统保护")
+        @unknown default: thermal = L("未知")
         }
         // Slower sensors and filesystem metadata need not be queried every second.
         if sampleNumber % 5 == 0 {
@@ -136,20 +136,20 @@ final class SystemMonitor: ObservableObject {
             append(down, to: &download); append(up, to: &upload)
             networkAvailable = true
         } else { networkAvailable = false }
-        networkInterfaces = counters.isEmpty ? "未连接" : counters.keys.sorted().joined(separator: "、")
+        networkInterfaces = counters.isEmpty ? L("未连接") : counters.keys.sorted().joined(separator: "、")
         lastNetwork = counters; lastTime = now
     }
     private func sampleBattery() {
-        guard let blob = IOPSCopyPowerSourcesInfo()?.takeRetainedValue(), let sources = IOPSCopyPowerSourcesList(blob)?.takeRetainedValue() as? [CFTypeRef] else { battery = nil; power = "无法读取电源"; return }
+        guard let blob = IOPSCopyPowerSourcesInfo()?.takeRetainedValue(), let sources = IOPSCopyPowerSourcesList(blob)?.takeRetainedValue() as? [CFTypeRef] else { battery = nil; power = L("无法读取电源"); return }
         for source in sources {
             guard let info = IOPSGetPowerSourceDescription(blob, source)?.takeUnretainedValue() as? [String: Any],
                   let current = info[kIOPSCurrentCapacityKey] as? Int,
                   let maximum = info[kIOPSMaxCapacityKey] as? Int, maximum > 0 else { continue }
             battery = min(100, max(0, 100 * Double(current) / Double(maximum)))
-            power = info[kIOPSIsChargingKey] as? Bool == true ? "正在充电" : (info[kIOPSPowerSourceStateKey] as? String == kIOPSACPowerValue ? "电源适配器" : "电池供电")
+            power = info[kIOPSIsChargingKey] as? Bool == true ? L("正在充电") : (info[kIOPSPowerSourceStateKey] as? String == kIOPSACPowerValue ? L("电源适配器") : L("电池供电"))
             return
         }
-        battery = nil; power = "无内置电池 / 外接电源"
+        battery = nil; power = L("无内置电池 / 外接电源")
     }
     private func sampleSensors() {
         temperatures = TemperatureSensors.shared.read()

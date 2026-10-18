@@ -18,16 +18,17 @@ final class CleanAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate 
     func applicationDidFinishLaunching(_ notification: Notification) {
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         if let button = item.button {
-            let image = NSImage(systemSymbolName: "sparkle.magnifyingglass", accessibilityDescription: "Clean 系统状态")
+            let image = NSImage(systemSymbolName: "sparkle.magnifyingglass", accessibilityDescription: L("Clean 系统状态"))
             image?.isTemplate = true
             button.image = image
-            button.toolTip = "Clean · 点击查看系统状态"
+            button.toolTip = L("Clean · 点击查看系统状态")
             button.target = self; button.action = #selector(toggleStatus)
         }
         statusItem = item
         popover.behavior = .transient
         popover.contentSize = NSSize(width: 440, height: 700)
         popover.contentViewController = NSHostingController(rootView: StatusDashboard(monitor: .shared, compact: true).frame(width: 440, height: 700))
+        _ = UpdateService.shared
         SystemMonitor.shared.start()
         AppUsageStore.shared.start()
         observers.append(NotificationCenter.default.addObserver(forName: .cleanShowStatus, object: nil, queue: .main) { [weak self] _ in MainActor.assumeIsolated { self?.showStatusAndHideWindow() } })
@@ -65,6 +66,7 @@ final class CleanAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate 
     }
     private func showStatus() {
         guard let button = statusItem?.button else { return }
+        button.toolTip = L("Clean · 点击查看系统状态")
         NSApplication.shared.activate(ignoringOtherApps: true)
         popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         popover.contentViewController?.view.window?.makeKey()

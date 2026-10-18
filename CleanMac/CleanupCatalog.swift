@@ -33,21 +33,21 @@ nonisolated enum CleanupCatalog {
             rules.append(CleanupRule(root: home.appendingPathComponent(path), category: category, sensitive: sensitive, ownerIDs: owners))
         }
         for (path, label, sensitive) in [
-            ("Library/Caches", "应用缓存", false), ("Library/Logs", "用户日志", false),
-            ("Library/Developer/Xcode/DerivedData", "Xcode 构建缓存", false),
-            ("Library/Developer/Xcode/Archives", "Xcode 归档 · 个人数据", true),
-            ("Library/Developer/CoreSimulator/Caches", "模拟器缓存", false),
-            ("Library/Developer/Xcode/iOS DeviceSupport", "设备支持", true),
-            ("Library/Developer/Xcode/DocumentationCache", "Xcode 文档缓存", false),
-            ("Library/Application Support/MobileSync/Backup", "设备备份 · 个人数据", true),
-            (".npm/_cacache", "npm 下载缓存", false), (".npm/_logs", "npm 日志", false),
-            (".npm/_prebuilds", "npm 构建下载缓存", false), (".bun/install/cache", "Bun 下载缓存", false),
-            (".yarn/berry/cache", "Yarn 下载缓存", false), (".cache/yarn", "Yarn 缓存", false),
-            (".cache/pip", "pip 下载缓存", false), (".cache/uv", "uv 下载缓存", false),
-            (".cache/pypoetry", "Poetry 缓存", false), (".cache/pre-commit", "pre-commit 环境缓存", false),
-            (".cache/ruff", "Ruff 缓存", false), (".cache/mypy", "mypy 缓存", false),
-            (".cache/node/corepack", "Corepack 下载缓存", false),
-            (".gradle/caches", "Gradle 缓存", false), (".cargo/registry/cache", "Cargo 下载缓存", false)
+            ("Library/Caches", L("应用缓存"), false), ("Library/Logs", L("用户日志"), false),
+            ("Library/Developer/Xcode/DerivedData", L("Xcode 构建缓存"), false),
+            ("Library/Developer/Xcode/Archives", L("Xcode 归档 · 个人数据"), true),
+            ("Library/Developer/CoreSimulator/Caches", L("模拟器缓存"), false),
+            ("Library/Developer/Xcode/iOS DeviceSupport", L("设备支持"), true),
+            ("Library/Developer/Xcode/DocumentationCache", L("Xcode 文档缓存"), false),
+            ("Library/Application Support/MobileSync/Backup", L("设备备份 · 个人数据"), true),
+            (".npm/_cacache", L("npm 下载缓存"), false), (".npm/_logs", L("npm 日志"), false),
+            (".npm/_prebuilds", L("npm 构建下载缓存"), false), (".bun/install/cache", L("Bun 下载缓存"), false),
+            (".yarn/berry/cache", L("Yarn 下载缓存"), false), (".cache/yarn", L("Yarn 缓存"), false),
+            (".cache/pip", L("pip 下载缓存"), false), (".cache/uv", L("uv 下载缓存"), false),
+            (".cache/pypoetry", L("Poetry 缓存"), false), (".cache/pre-commit", L("pre-commit 环境缓存"), false),
+            (".cache/ruff", L("Ruff 缓存"), false), (".cache/mypy", L("mypy 缓存"), false),
+            (".cache/node/corepack", L("Corepack 下载缓存"), false),
+            (".gradle/caches", L("Gradle 缓存"), false), (".cargo/registry/cache", L("Cargo 下载缓存"), false)
         ] { add(path, label, sensitive: sensitive) }
         let electronApps: [(String, [String])] = [
             ("Code", ["com.microsoft.VSCode"]), ("Code - Insiders", ["com.microsoft.VSCodeInsiders"]),
@@ -63,8 +63,8 @@ nonisolated enum CleanupCatalog {
         }
         return rules
     }
-    static let defaultBaseRules = baseRules(home: DiskService.home)
-    static let defaultRulesByPath = Dictionary(uniqueKeysWithValues: defaultBaseRules.map { ($0.root.standardizedFileURL.path, $0) })
+    static var defaultBaseRules: [CleanupRule] { baseRules(home: DiskService.home) }
+    static var defaultRulesByPath: [String: CleanupRule] { Dictionary(uniqueKeysWithValues: defaultBaseRules.map { ($0.root.standardizedFileURL.path, $0) }) }
     static func discover(home: URL = DiskService.home) -> CleanupDiscovery {
         var rules = home == DiskService.home ? defaultBaseRules : baseRules(home: home)
         var issues: [ScanIssue] = []
@@ -82,13 +82,13 @@ nonisolated enum CleanupCatalog {
         }
         for container in children("Library/Containers") {
             guard (try? container.resourceValues(forKeys: [.isSymbolicLinkKey]).isSymbolicLink) == false else { continue }
-            add("Library/Containers/\(container.lastPathComponent)/Data/Library/Caches", "沙盒应用缓存 · \(container.lastPathComponent)", owners: [container.lastPathComponent])
+            add("Library/Containers/\(container.lastPathComponent)/Data/Library/Caches", L("沙盒应用缓存 · {0}", String(describing: container.lastPathComponent)), owners: [container.lastPathComponent])
         }
         // Group data itself, tmp, Documents and databases are never added.
         for container in children("Library/Group Containers") {
             guard (try? container.resourceValues(forKeys: [.isSymbolicLinkKey]).isSymbolicLink) == false else { continue }
-            add("Library/Group Containers/\(container.lastPathComponent)/Library/Caches", "共享容器缓存 · \(container.lastPathComponent)", sensitive: true)
-            add("Library/Group Containers/\(container.lastPathComponent)/Data/Library/Caches", "共享容器缓存 · \(container.lastPathComponent)", sensitive: true)
+            add("Library/Group Containers/\(container.lastPathComponent)/Library/Caches", L("共享容器缓存 · {0}", String(describing: container.lastPathComponent)), sensitive: true)
+            add("Library/Group Containers/\(container.lastPathComponent)/Data/Library/Caches", L("共享容器缓存 · {0}", String(describing: container.lastPathComponent)), sensitive: true)
         }
         for (browser, owners) in browsers {
             for profile in children("Library/Application Support/" + browser) {
@@ -96,7 +96,7 @@ nonisolated enum CleanupCatalog {
                 guard name == "Default" || (name.hasPrefix("Profile ") && Int(name.dropFirst(8)) != nil),
                       (try? profile.resourceValues(forKeys: [.isSymbolicLinkKey]).isSymbolicLink) == false else { continue }
                 for cache in ["Cache", "Code Cache", "GPUCache", "DawnCache", "DawnGraphiteCache", "DawnWebGPUCache"] {
-                    add("Library/Application Support/\(browser)/\(name)/\(cache)", "浏览器缓存 · \(browser) / \(name)", owners: owners)
+                    add("Library/Application Support/\(browser)/\(name)/\(cache)", L("浏览器缓存 · {0} / {1}", String(describing: browser), String(describing: name)), owners: owners)
                 }
             }
         }
@@ -113,10 +113,10 @@ nonisolated enum CleanupCatalog {
         let components = relative.split(separator: "/").map(String.init)
         var result: CleanupRule?
         if components.count == 6, Array(components.prefix(2)) == ["Library", "Containers"], Array(components.suffix(3)) == ["Data", "Library", "Caches"] {
-            result = CleanupRule(root: root, category: "沙盒应用缓存", ownerIDs: [components[2]])
+            result = CleanupRule(root: root, category: L("沙盒应用缓存"), ownerIDs: [components[2]])
         } else if components.count >= 5, Array(components.prefix(2)) == ["Library", "Group Containers"],
                   Array(components.dropFirst(3)) == ["Library", "Caches"] || Array(components.dropFirst(3)) == ["Data", "Library", "Caches"] {
-            result = CleanupRule(root: root, category: "共享容器缓存", sensitive: true)
+            result = CleanupRule(root: root, category: L("共享容器缓存"), sensitive: true)
         } else {
             for (browser, owners) in browsers {
                 let base = "Library/Application Support/" + browser + "/"
@@ -125,7 +125,7 @@ nonisolated enum CleanupCatalog {
                 guard parts.count == 2,
                       parts[0] == "Default" || (parts[0].hasPrefix("Profile ") && Int(parts[0].dropFirst(8)) != nil),
                       ["Cache", "Code Cache", "GPUCache", "DawnCache", "DawnGraphiteCache", "DawnWebGPUCache"].contains(parts[1]) else { continue }
-                result = CleanupRule(root: root, category: "浏览器缓存", ownerIDs: owners)
+                result = CleanupRule(root: root, category: L("浏览器缓存"), ownerIDs: owners)
                 break
             }
         }

@@ -33,33 +33,35 @@ final class AppUsageStore: ObservableObject {
 }
 
 struct AppUsageColumns: View {
+    @AppStorage(AppLanguage.preferenceKey) private var language = "system"
     let url: URL
     @ObservedObject private var store = AppUsageStore.shared
     @State private var historical: Date?
     var body: some View {
+        let _ = language
         TimelineView(.periodic(from: .now, by: 60)) { timeline in
             let launch = store.launches[url.path]
             let date = launch ?? historical
             HStack(alignment: .top, spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(launch != nil ? "上次启动" : "最近使用 · Spotlight").foregroundStyle(.tertiary)
-                    if let date { Text(date.formatted(.dateTime.year().month().day().hour().minute())) }
-                    else { Text("暂无记录") }
+                    Text(launch != nil ? L("上次启动") : L("最近使用 · Spotlight")).foregroundStyle(.tertiary)
+                    if let date { Text(date.formatted(.dateTime.locale(AppLanguage.locale).year().month().day().hour().minute())) }
+                    else { Text(L("暂无记录")) }
                 }.frame(width: 140, alignment: .leading)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("距今").foregroundStyle(.tertiary)
+                    Text(L("距今")).foregroundStyle(.tertiary)
                     Text(date.map { Self.relative($0, now: timeline.date) } ?? "—")
                 }.frame(width: 65, alignment: .leading)
             }.font(.system(size: 10)).foregroundStyle(.secondary)
         }
-        .help("上次启动来自运行中的应用或 Clean 观察到的启动记录；历史缺失时显示 Spotlight 最近使用时间，它不一定等于启动时间。")
+        .help(L("上次启动来自运行中的应用或 Clean 观察到的启动记录；历史缺失时显示 Spotlight 最近使用时间，它不一定等于启动时间。"))
         .task(id: url.path) {
             AppUsageStore.shared.start()
             historical = await Task.detached(priority: .utility) { AppUsageStore.lastUsed(url) }.value
         }
     }
     private static func relative(_ date: Date, now: Date) -> String {
-        let formatter = RelativeDateTimeFormatter(); formatter.locale = Locale(identifier: "zh_Hans_CN"); formatter.unitsStyle = .short
+        let formatter = RelativeDateTimeFormatter(); formatter.locale = AppLanguage.locale; formatter.unitsStyle = .short
         return formatter.localizedString(for: date, relativeTo: now)
     }
 }

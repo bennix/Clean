@@ -6,6 +6,10 @@
 	objectVersion = 110;
 	objects = {
 
+/* Begin PBXBuildFile section */
+        A12000000000000000000001 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = A12000000000000000000002 /* Sparkle */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		938EE35930843041005F4804 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -29,9 +33,14 @@
 		938EE36230843041005F4804 /* CleanMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleanMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+        A12000000000000000000004 = {isa = PBXFileSystemSynchronizedBuildFileExceptionSet; membershipExceptions = (Info.plist,); target = 938EE34830843041005F4804; };
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		938EE34B30843041005F4804 /* CleanMac */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+            exceptions = (A12000000000000000000004,);
 			path = CleanMac;
 			sourceTree = "<group>";
 		};
@@ -51,6 +60,7 @@
 		938EE34630843041005F4804 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
+                A12000000000000000000001 /* Sparkle in Frameworks */,
 			);
 		};
 		938EE35530843041005F4804 /* Frameworks */ = {
@@ -102,7 +112,8 @@
 			fileSystemSynchronizedGroups = (
 				938EE34B30843041005F4804 /* CleanMac */,
 			);
-			name = CleanMac;
+			packageProductDependencies = (A12000000000000000000002 /* Sparkle */);
+            name = CleanMac;
 			productName = CleanMac;
 			productReference = 938EE34930843041005F4804 /* CleanMac.app */;
 			productType = "com.apple.product-type.application";
@@ -176,6 +187,7 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+                "zh-Hans", ja, de, fr, es,
 				en,
 				Base,
 			);
@@ -183,7 +195,8 @@
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 938EE34A30843041005F4804 /* Products */;
-			projectDirPath = "";
+			packageReferences = (A12000000000000000000003 /* Sparkle */);
+            projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				938EE34830843041005F4804 /* CleanMac */,
@@ -241,6 +254,13 @@
 			targetProxy = 938EE36330843041005F4804 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+        A12000000000000000000003 /* Sparkle */ = {isa = XCRemoteSwiftPackageReference; repositoryURL = "https://github.com/sparkle-project/Sparkle"; requirement = {kind = exactVersion; version = 2.10.0; }; };
+/* End XCRemoteSwiftPackageReference section */
+/* Begin XCSwiftPackageProductDependency section */
+        A12000000000000000000002 /* Sparkle */ = {isa = XCSwiftPackageProductDependency; package = A12000000000000000000003 /* Sparkle */; productName = Sparkle; };
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCBuildConfiguration section */
 		938EE36830843041005F4804 /* Debug configuration for PBXProject "CleanMac" */ = {
@@ -371,7 +391,7 @@
 				CODE_SIGN_ENTITLEMENTS = CleanMac/Clean.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 5N66S29EK2;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -379,13 +399,15 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Clean;
+                INFOPLIST_FILE = CleanMac/Info.plist;
+
 				INFOPLIST_KEY_NSAppleEventsUsageDescription = "Clean 在你确认卸载后请求 Finder 将权限受限的应用及关联文件移入废纸篓。";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = fudan.miniS.CleanMac;
 				PRODUCT_MODULE_NAME = CleanMac;
 				PRODUCT_NAME = Clean;
@@ -408,7 +430,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 5N66S29EK2;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -416,13 +438,15 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Clean;
+                INFOPLIST_FILE = CleanMac/Info.plist;
+
 				INFOPLIST_KEY_NSAppleEventsUsageDescription = "Clean 在你确认卸载后请求 Finder 将权限受限的应用及关联文件移入废纸篓。";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = fudan.miniS.CleanMac;
 				PRODUCT_MODULE_NAME = CleanMac;
 				PRODUCT_NAME = Clean;
@@ -441,11 +465,11 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 5N66S29EK2;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 27.0;
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = fudan.miniS.CleanMacTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
@@ -462,11 +486,11 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 5N66S29EK2;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 27.0;
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = fudan.miniS.CleanMacTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
@@ -482,10 +506,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 5N66S29EK2;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = fudan.miniS.CleanMacUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
@@ -501,10 +525,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 5N66S29EK2;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = fudan.miniS.CleanMacUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;

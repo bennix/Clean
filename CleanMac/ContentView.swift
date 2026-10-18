@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var showDiskAccessGuide = false
     @State private var diskAccessGuideWasAutomatic = false
     @AppStorage("appearance") private var appearance = "dark"
+    @AppStorage(AppLanguage.preferenceKey) private var language = "system"
     @State private var page: Planet = .overview
     @State private var entries: [DiskEntry] = []
     @State private var selected: Set<String> = []
@@ -55,25 +56,31 @@ struct ContentView: View {
             Rectangle().fill(.primary.opacity(0.06)).frame(width: 1)
             VStack(alignment: .leading, spacing: 24) {
                 header
-                if page == .overview { overview }
+                if page == .overview { ScrollView { overview } }
                 else if page == .optimize { optimization }
                 else if page == .status { status }
                 else { filePage }
                 Spacer(minLength: 0)
                 HStack(spacing: 6) {
                     Image(systemName: "lock.shield").foregroundStyle(.green)
-                    Text("本机处理").foregroundStyle(.primary)
-                    Text("·  先看清，再动手。所有删除均需确认。")
+                    Text(L("本机处理")).foregroundStyle(.primary)
+                    Text(L("·  先看清，再动手。所有删除均需确认。"))
                     Spacer()
                     Button { diskAccess.automaticPromptRequested = false; diskAccessGuideWasAutomatic = false; showDiskAccessGuide = true } label: {
                         Label(diskAccess.state.title, systemImage: diskAccess.state == .limited ? "exclamationmark.shield" : "lock.shield")
                             .foregroundStyle(diskAccess.state == .limited ? Color.orange : Color.secondary)
-                    }.buttonStyle(.plain).help("查看磁盘权限及授权步骤")
-                    Text("Clean  1.1.2")
+                    }.buttonStyle(.plain).help(L("查看磁盘权限及授权步骤"))
+                    Text("Clean  1.2.0")
                 }.font(.system(size: 11)).foregroundStyle(.secondary)
             }.padding(30).frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
         .background(background)
+        .environment(\.locale, AppLanguage.locale)
+        .onChange(of: language) { _, value in
+            if value == "system" { UserDefaults.standard.removeObject(forKey: "AppleLanguages") }
+            else { UserDefaults.standard.set([AppLanguage.resolve(value)], forKey: "AppleLanguages") }
+            if scanned { scan() }
+        }
         .preferredColorScheme(appearance == "system" ? nil : appearance == "dark" ? .dark : .light)
         .task { refreshDisk(); diskAccess.refresh(); presentDiskAccessIfNeeded() }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in diskAccess.refresh() }
@@ -90,9 +97,9 @@ struct ContentView: View {
         .sheet(isPresented: $showDiskAccessGuide) { DiskAccessGuide(access: diskAccess) }
         .sheet(isPresented: Binding(get: { !message.isEmpty }, set: { if !$0 { message = "" } }), onDismiss: presentDiskAccessIfNeeded) {
             VStack(alignment: .leading, spacing: 18) {
-                Text("操作结果").font(.title2.bold())
+                Text(L("操作结果")).font(.title2.bold())
                 ScrollView { Text(message).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading) }.frame(height: 300)
-                HStack { Button("复制结果") { NSPasteboard.general.clearContents(); NSPasteboard.general.setString(message, forType: .string) }; Spacer(); Button("好") { message = "" }.keyboardShortcut(.defaultAction) }
+                HStack { Button(L("复制结果")) { NSPasteboard.general.clearContents(); NSPasteboard.general.setString(message, forType: .string) }; Spacer(); Button(L("好")) { message = "" }.keyboardShortcut(.defaultAction) }
             }.padding(26).frame(width: 650)
         }
         .sheet(isPresented: $confirm, onDismiss: { cancelReview(); presentDiskAccessIfNeeded() }) { confirmation }
@@ -125,7 +132,7 @@ struct ContentView: View {
                     Button { cancelScan(); page = item; entries = []; selected = []; scanned = false; scanCancelled = false; scanIssues = []; skipped = 0; search = ""; if item == .status { NotificationCenter.default.post(name: .cleanShowStatus, object: nil) } } label: {
                         HStack(spacing: 12) {
                             Image(systemName: item.icon).font(.system(size: 19)).foregroundStyle(item == .overview && !dark ? .primary : item.color).frame(width: 23)
-                            Text(item.rawValue).font(.system(size: 13, weight: page == item ? .semibold : .regular))
+                            Text(L(item.rawValue)).font(.system(size: 13, weight: page == item ? .semibold : .regular)).lineLimit(1).minimumScaleFactor(0.8)
                             Spacer()
                             if page == item { Image(systemName: "chevron.right").font(.system(size: 9)) }
                         }.padding(.horizontal, 12).padding(.vertical, 12)
@@ -137,38 +144,45 @@ struct ContentView: View {
             Spacer()
             HStack(spacing: 7) {
                 ForEach([("light", "sun.max"), ("dark", "moon"), ("system", "desktopcomputer")], id: \.0) { value, icon in
-                    Button { appearance = value } label: { Image(systemName: icon).frame(width: 32, height: 28).background(appearance == value ? Color.primary.opacity(0.12) : .clear, in: RoundedRectangle(cornerRadius: 6)) }.buttonStyle(.plain).help(value == "light" ? "浅色" : value == "dark" ? "深色" : "跟随系统")
+                    Button { appearance = value } label: { Image(systemName: icon).frame(width: 32, height: 28).background(appearance == value ? Color.primary.opacity(0.12) : .clear, in: RoundedRectangle(cornerRadius: 6)) }.buttonStyle(.plain).help(value == "light" ? L("浅色") : value == "dark" ? L("深色") : L("跟随系统"))
                 }
             }.padding(4).background(surface, in: RoundedRectangle(cornerRadius: 9))
-            Text("五颗星球，各循其轨").font(.system(size: 10)).foregroundStyle(.tertiary)
-        }.padding(.horizontal, 18).padding(.bottom, 20).frame(width: 186).background(dark ? Color.black.opacity(0.15) : Color.white.opacity(0.5))
+            Picker(selection: $language) {
+                ForEach(AppLanguage.choices, id: \.0) { code, name in
+                    Text(code == "system" ? L("自动（跟随系统）") : name).tag(code)
+                }
+            } label: { Label(L("语言"), systemImage: "globe") }
+                .id(language).labelsHidden().accessibilityLabel(L("语言")).help(L("应用界面立即切换；系统对话框的语言在重新打开应用后生效。")).disabled(busy).frame(maxWidth: .infinity)
+            UpdateControls()
+            Text(L("五颗星球，各循其轨")).font(.system(size: 10)).foregroundStyle(.tertiary)
+        }.padding(.horizontal, 18).padding(.bottom, 20).frame(width: 220).background(dark ? Color.black.opacity(0.15) : Color.white.opacity(0.5))
     }
 
     private var header: some View {
         HStack {
             VStack(alignment: .leading, spacing: 7) {
-                Text(page == .overview ? "Storage Overview" : page.rawValue).font(.system(size: 28, weight: .medium))
+                Text(page == .overview ? L("Storage Overview") : L(page.rawValue)).font(.system(size: 28, weight: .medium))
                 Text(subtitle).font(.system(size: 12)).foregroundStyle(.secondary)
             }
             Spacer()
             if scanTask != nil {
                 ProgressView().controlSize(.small)
-                Text("已统计 \(scanCompleted) / \(scanTotal) 项").font(.caption).foregroundStyle(.secondary)
-                Button("取消扫描") { cancelScan() }
-            } else if busy { ProgressView().controlSize(.small); Text("正在处理…").font(.caption).foregroundStyle(.secondary) }
+                Text(L("已统计 {0} / {1} 项", String(describing: scanCompleted), String(describing: scanTotal))).font(.caption).foregroundStyle(.secondary)
+                Button(L("取消扫描")) { cancelScan() }
+            } else if busy { ProgressView().controlSize(.small); Text(L("正在处理…")).font(.caption).foregroundStyle(.secondary) }
             else if page != .status && page != .optimize {
-                Button { if page == .overview { page = .analyze }; scan() } label: { Label(page == .overview ? "分析磁盘" : "重新扫描", systemImage: "waveform.path.ecg").padding(.horizontal, 10).padding(.vertical, 6) }.buttonStyle(.plain).background(dark ? Color.white : Color.black, in: RoundedRectangle(cornerRadius: 8)).foregroundStyle(dark ? Color.black : Color.white)
+                Button { if page == .overview { page = .analyze }; scan() } label: { Label(page == .overview ? L("分析磁盘") : L("重新扫描"), systemImage: "waveform.path.ecg").padding(.horizontal, 10).padding(.vertical, 6) }.buttonStyle(.plain).background(dark ? Color.white : Color.black, in: RoundedRectangle(cornerRadius: 8)).foregroundStyle(dark ? Color.black : Color.white)
             }
         }
     }
     private var subtitle: String {
         switch page {
-        case .overview: "\(formattedBytes(used)) 已使用，共 \(formattedBytes(capacity)) · 你的 Mac，井然有序。"
-        case .clean: "雨洗旧土，尘随潮去。扫描可识别的用户缓存与系统数据来源。"
-        case .uninstall: "红尘覆旧，轻装再行。审查应用，移入系统废纸篓。"
-        case .optimize: "近轨疾行，小修有声。明确每一步，再运行。"
-        case .analyze: "远目成图，微处可见。选择文件夹，查看真实磁盘占用。"
-        case .status: "光华不寐，心跳长明。每秒更新，保留最近 60 秒。"
+        case .overview: L("{0} 已使用，共 {1} · 你的 Mac，井然有序。", String(describing: formattedBytes(used)), String(describing: formattedBytes(capacity)))
+        case .clean: L("雨洗旧土，尘随潮去。扫描可识别的用户缓存与系统数据来源。")
+        case .uninstall: L("红尘覆旧，轻装再行。审查应用，移入系统废纸篓。")
+        case .optimize: L("近轨疾行，小修有声。明确每一步，再运行。")
+        case .analyze: L("远目成图，微处可见。选择文件夹，查看真实磁盘占用。")
+        case .status: L("光华不寐，心跳长明。每秒更新，保留最近 60 秒。")
         }
     }
     private var overview: some View {
@@ -180,23 +194,23 @@ struct ContentView: View {
                 }.clipShape(RoundedRectangle(cornerRadius: 7))
             }.frame(height: 23)
             HStack {
-                Label("已使用 \(formattedBytes(used))", systemImage: "circle.fill").foregroundStyle(.orange)
+                Label(L("已使用 {0}", String(describing: formattedBytes(used))), systemImage: "circle.fill").foregroundStyle(.orange)
                 Spacer()
-                Text("可用 \(formattedBytes(max(0, capacity - used)))").foregroundStyle(.secondary)
+                Text(L("可用 {0}", String(describing: formattedBytes(max(0, capacity - used))))).foregroundStyle(.secondary)
             }.font(.system(size: 11))
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 14) {
-                storageCard("Applications", "应用程序", "App 与关联文件", "a.square.fill", .orange, .uninstall)
-                storageCard("Downloads", "下载文件", "查看下载文件夹", "arrow.down.square.fill", .blue, .analyze, "Downloads")
-                storageCard("Large Files", "大型文件", "逐层查看磁盘占用", "doc.fill", .yellow, .analyze)
-                storageCard("Caches", "缓存", "扫描后显示可清理大小", "externaldrive.fill", .green, .clean)
-                storageCard("System Data", "系统数据", "缓存、日志、开发文件与备份", "gearshape.fill", .purple, .clean)
-                storageCard("Live Status", "运行状态", "网速、温度、内存与系统心跳", "waveform.path.ecg", .gray, .status)
+                storageCard("Applications", L("应用程序"), L("App 与关联文件"), "a.square.fill", .orange, .uninstall)
+                storageCard("Downloads", L("下载文件"), L("查看下载文件夹"), "arrow.down.square.fill", .blue, .analyze, "Downloads")
+                storageCard("Large Files", L("大型文件"), L("逐层查看磁盘占用"), "doc.fill", .yellow, .analyze)
+                storageCard("Caches", L("缓存"), L("扫描后显示可清理大小"), "externaldrive.fill", .green, .clean)
+                storageCard("System Data", L("系统数据"), L("缓存、日志、开发文件与备份"), "gearshape.fill", .purple, .clean)
+                storageCard("Live Status", L("运行状态"), L("网速、温度、内存与系统心跳"), "waveform.path.ecg", .gray, .status)
             }
             HStack(alignment: .top, spacing: 14) {
                 Image(systemName: "shield.lefthalf.filled").font(.system(size: 25)).foregroundStyle(.green)
                 VStack(alignment: .leading, spacing: 7) {
-                    Text("先看清，再动手").font(.system(size: 14, weight: .semibold))
-                    Text("系统数据包含多种文件，不能整体删除。Clean 仅处理明确识别的位置，系统目录和未知路径会被拦下。扫描数据不会上传。").font(.system(size: 12)).foregroundStyle(.secondary).lineSpacing(5)
+                    Text(L("先看清，再动手")).font(.system(size: 14, weight: .semibold))
+                    Text(L("系统数据包含多种文件，不能整体删除。Clean 仅处理明确识别的位置，系统目录和未知路径会被拦下。扫描数据不会上传。")).font(.system(size: 12)).foregroundStyle(.secondary).lineSpacing(5).fixedSize(horizontal: false, vertical: true)
                 }
             }.padding(20).frame(maxWidth: .infinity, alignment: .leading).background(surface, in: RoundedRectangle(cornerRadius: 10))
         }
@@ -215,7 +229,7 @@ struct ContentView: View {
                     Image(systemName: icon).font(.system(size: 28, weight: .medium)).frame(width: 58, height: 61).background(.white.opacity(0.16), in: RoundedRectangle(cornerRadius: 10))
                     VStack(alignment: .leading, spacing: 5) {
                         Text(title).font(.system(size: 12)).foregroundStyle(.white.opacity(0.85))
-                        Text(name).font(.system(size: 23, weight: .medium))
+                        Text(name).font(.system(size: 23, weight: .medium)).lineLimit(1).minimumScaleFactor(0.7)
                         Text(detail).font(.system(size: 10)).foregroundStyle(.white.opacity(0.8))
                     }
                     Spacer(minLength: 0)
@@ -229,28 +243,28 @@ struct ContentView: View {
         VStack(alignment: .leading, spacing: 16) {
             if page == .analyze {
                 HStack {
-                    Button("选择文件夹…") { let panel = NSOpenPanel(); panel.canChooseDirectories = true; panel.canChooseFiles = false; if panel.runModal() == .OK, let url = panel.url { folder = url; scan() } }
+                    Button(L("选择文件夹…")) { let panel = NSOpenPanel(); panel.canChooseDirectories = true; panel.canChooseFiles = false; if panel.runModal() == .OK, let url = panel.url { folder = url; scan() } }
                     Button { folder.deleteLastPathComponent(); scan() } label: { Image(systemName: "arrow.up") }
                     Text(folder.path).font(.caption).foregroundStyle(.secondary).lineLimit(1).truncationMode(.middle)
                 }.disabled(busy && scanTask == nil)
             }
             if scanTask != nil {
                 ProgressView(value: Double(scanCompleted), total: Double(max(1, scanTotal))).tint(page.color)
-                Text("后台并行扫描，结果持续更新。目录大小需遍历文件；最多同时统计 4 项。").font(.caption).foregroundStyle(.secondary)
+                Text(L("后台并行扫描，结果持续更新。目录大小需遍历文件；最多同时统计 4 项。")).font(.caption).foregroundStyle(.secondary)
             } else if scanCancelled {
-                Text("扫描已取消，以下仅为已完成部分；可点击重新扫描。").font(.caption).foregroundStyle(.secondary)
+                Text(L("扫描已取消，以下仅为已完成部分；可点击重新扫描。")).font(.caption).foregroundStyle(.secondary)
             }
             HStack {
-                Text(scanned ? "\(entries.count) 项 · \(formattedBytes(total))\(scanTask != nil || scanCancelled ? "（已统计）" : "")" : (scanTask != nil ? "正在列出项目…" : "等待扫描")).font(.system(size: 17, weight: .medium))
+                Text(scanned ? L("{0} 项 · {1}{2}", String(describing: entries.count), String(describing: formattedBytes(total)), String(describing: scanTask != nil || scanCancelled ? L("（已统计）") : "")) : (scanTask != nil ? L("正在列出项目…") : L("等待扫描"))).font(.system(size: 17, weight: .medium))
                 Spacer()
-                TextField("搜索名称或类别", text: $search).textFieldStyle(.roundedBorder).frame(width: 210)
+                TextField(L("搜索名称或类别"), text: $search).textFieldStyle(.roundedBorder).frame(width: 210)
             }
             if !scanned && !busy {
                 VStack(spacing: 18) {
                     Image(systemName: page.icon).font(.system(size: 56, weight: .ultraLight)).foregroundStyle(page.color)
-                    Text(page == .clean ? "给 Mac 腾出一点空间" : page == .uninstall ? "与不再使用的应用告别" : "让每一层大小清晰可见").font(.title2)
-                    Text("扫描只读取文件信息，不会删除任何文件。").foregroundStyle(.secondary)
-                    Button("开始扫描") { scan() }.buttonStyle(.borderedProminent)
+                    Text(page == .clean ? L("给 Mac 腾出一点空间") : page == .uninstall ? L("与不再使用的应用告别") : L("让每一层大小清晰可见")).font(.title2)
+                    Text(L("扫描只读取文件信息，不会删除任何文件。")).foregroundStyle(.secondary)
+                    Button(L("开始扫描")) { scan() }.buttonStyle(.borderedProminent)
                 }.frame(maxWidth: .infinity, maxHeight: .infinity).padding(45)
             } else {
                 if page == .analyze && !entries.isEmpty {
@@ -262,40 +276,40 @@ struct ContentView: View {
                         ForEach(visible) { entry in
                             let disabledReason = ScanSelection.disabledReason(entry, mode: selectionMode)
                             HStack(spacing: 12) {
-                                Toggle("选择 " + entry.name, isOn: Binding(get: { selected.contains(entry.id) }, set: { if $0 { selected.insert(entry.id) } else { selected.remove(entry.id) } })).labelsHidden().disabled(busy || disabledReason != nil).help(busy ? "扫描或处理进行中，请稍候" : disabledReason ?? "选择此项目进行审查")
+                                Toggle(L("选择 ") + entry.name, isOn: Binding(get: { selected.contains(entry.id) }, set: { if $0 { selected.insert(entry.id) } else { selected.remove(entry.id) } })).labelsHidden().disabled(busy || disabledReason != nil).help(busy ? L("扫描或处理进行中，请稍候") : disabledReason ?? L("选择此项目进行审查"))
                                 Image(nsImage: NSWorkspace.shared.icon(forFile: entry.url.path)).resizable().frame(width: 30, height: 30)
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(entry.name).font(.system(size: 12, weight: .medium)).lineLimit(1)
-                                    Text(entry.category + (entry.sensitive ? " · 个人数据，请仔细确认" : "") + " · " + entry.url.deletingLastPathComponent().path).font(.system(size: 10)).foregroundStyle(.secondary).lineLimit(1).truncationMode(.middle)
+                                    Text(entry.category + (entry.sensitive ? L(" · 个人数据，请仔细确认") : "") + " · " + entry.url.deletingLastPathComponent().path).font(.system(size: 10)).foregroundStyle(.secondary).lineLimit(1).truncationMode(.middle)
                                     if page == .analyze, let disabledReason {
                                         Text(disabledReason).font(.system(size: 10)).foregroundStyle(.orange).fixedSize(horizontal: false, vertical: true)
                                     }
                                 }
                                 Spacer()
                                 if page == .uninstall { AppUsageColumns(url: entry.url) }
-                                Text(entry.isComplete ? formattedBytes(entry.bytes) + (entry.isPartial ? "（不完整）" : "") : "等待统计…").font(.system(size: 12, design: .monospaced)).foregroundStyle(.secondary)
+                                Text(entry.isComplete ? formattedBytes(entry.bytes) + (entry.isPartial ? L("（不完整）") : "") : L("等待统计…")).font(.system(size: 12, design: .monospaced)).foregroundStyle(.secondary)
                                 if page == .analyze { Button { enter(entry) } label: { Image(systemName: "chevron.right") }.buttonStyle(.plain) }
                             }.padding(12).background(surface.opacity(0.7))
                             .contextMenu {
-                                Button("在 Finder 中显示") { NSWorkspace.shared.activateFileViewerSelecting([entry.url]) }
+                                Button(L("在 Finder 中显示")) { NSWorkspace.shared.activateFileViewerSelecting([entry.url]) }
                                 if page == .analyze {
-                                    Button("打开") { enter(entry) }
-                                    Button("审查并移入废纸篓…", role: .destructive) { selected = [entry.id]; confirm = true }.disabled(busy || disabledReason != nil)
+                                    Button(L("打开")) { enter(entry) }
+                                    Button(L("审查并移入废纸篓…"), role: .destructive) { selected = [entry.id]; confirm = true }.disabled(busy || disabledReason != nil)
                                 }
                             }
                             Divider().opacity(0.35)
                         }
                     }
                 }.clipShape(RoundedRectangle(cornerRadius: 9))
-                if entries.isEmpty && !busy { Text("没有找到可访问的项目。可在系统设置中检查文件访问权限。").foregroundStyle(.secondary) }
+                if entries.isEmpty && !busy { Text(L("没有找到可访问的项目。可在系统设置中检查文件访问权限。")).foregroundStyle(.secondary) }
                 if !scanIssues.isEmpty { scanIssueDetails }
                 HStack {
-                    Text(skipped == 0 ? "未发现读取错误" : "\(skipped) 项已跳过 · 详情见上方").font(.caption).foregroundStyle(.secondary)
+                    Text(skipped == 0 ? L("未发现读取错误") : L("{0} 项已跳过 · 详情见上方", String(describing: skipped))).font(.caption).foregroundStyle(.secondary)
                     Spacer()
-                    Button(search.isEmpty ? "全选" : "全选搜索结果") { selected.formUnion(selectableVisibleIDs) }
+                    Button(search.isEmpty ? L("全选") : L("全选搜索结果")) { selected.formUnion(selectableVisibleIDs) }
                         .disabled(busy || selectableVisibleIDs.isEmpty || selectableVisibleIDs.isSubset(of: selected))
-                    Button("取消全选") { selected = [] }.disabled(busy || selected.isEmpty)
-                    Button("审查 \(chosen.count) 项 · \(formattedBytes(chosen.reduce(0) { $0 + $1.bytes }))") {
+                    Button(L("取消全选")) { selected = [] }.disabled(busy || selected.isEmpty)
+                    Button(L("审查 {0} 项 · {1}", String(describing: chosen.count), String(describing: formattedBytes(chosen.reduce(0) { $0 + $1.bytes })))) {
                         if page == .uninstall { reviewUninstall() }
                         else { confirm = true }
                     }.buttonStyle(.borderedProminent).disabled(chosen.isEmpty || busy)
@@ -304,39 +318,39 @@ struct ContentView: View {
         }.frame(maxHeight: .infinity)
     }
     private var scanIssueDetails: some View {
-        DisclosureGroup("查看扫描详情（\(skipped) 项）") {
+        DisclosureGroup(L("查看扫描详情（{0} 项）", String(describing: skipped))) {
             VStack(alignment: .leading, spacing: 8) {
-                Text("不存在的目录通常表示未安装对应软件；权限不足会导致统计大小偏低。扫描会继续处理其余目录。").font(.caption).foregroundStyle(.secondary)
+                Text(L("不存在的目录通常表示未安装对应软件；权限不足会导致统计大小偏低。扫描会继续处理其余目录。")).font(.caption).foregroundStyle(.secondary)
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 10) {
                         ForEach(Array(Dictionary(scanIssues.map { ($0.id, $0) }, uniquingKeysWith: { a, _ in a }).values).sorted { $0.id < $1.id }) { issue in
                             VStack(alignment: .leading, spacing: 3) {
-                                Text(issue.kind.rawValue + " · " + issue.url.path).font(.caption).textSelection(.enabled)
+                                Text(L(issue.kind.rawValue) + " · " + issue.url.path).font(.caption).textSelection(.enabled)
                                 Text(issue.detail).font(.caption2).foregroundStyle(.secondary)
                             }
                         }
                     }
                 }.frame(maxHeight: 110)
                 if scanIssues.contains(where: { $0.kind == .permission }) {
-                    Button("打开完全磁盘访问权限设置…") {
+                    Button(L("打开完全磁盘访问权限设置…")) {
                         diskAccess.openSettings()
                     }
-                    Text("将当前 Clean.app 添加到列表并开启权限，然后退出、重新打开 Clean 再扫描。部分系统保护位置仍不可访问。").font(.caption2).foregroundStyle(.secondary)
+                    Text(L("将当前 Clean.app 添加到列表并开启权限，然后退出、重新打开 Clean 再扫描。部分系统保护位置仍不可访问。")).font(.caption2).foregroundStyle(.secondary)
                 }
             }.padding(.top, 8)
         }.font(.caption)
     }
     private var confirmation: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(page == .uninstall ? "审查应用与关联文件" : "最后确认一下").font(.title2.bold())
-            Text(page == .uninstall ? "所选应用与勾选的关联文件将移入废纸篓。含个人数据的目录默认不勾选；仍被其他应用使用的共享容器和系统服务会保留。" : page == .analyze ? "所选文件或文件夹将移入系统废纸篓，可从废纸篓恢复。请仔细核对路径和大小；受保护位置、未完成或无法完整统计的项目不会加入全选。" : "普通缓存和日志将永久删除；标记个人数据或共享容器的项目将移入废纸篓。请先退出相关应用。缓存会重新生成，大小不等于实际释放空间。")
+            Text(page == .uninstall ? L("审查应用与关联文件") : L("最后确认一下")).font(.title2.bold())
+            Text(page == .uninstall ? L("所选应用与勾选的关联文件将移入废纸篓。含个人数据的目录默认不勾选；仍被其他应用使用的共享容器和系统服务会保留。") : page == .analyze ? L("所选文件或文件夹将移入系统废纸篓，可从废纸篓恢复。请仔细核对路径和大小；受保护位置、未完成或无法完整统计的项目不会加入全选。") : L("普通缓存和日志将永久删除；标记个人数据或共享容器的项目将移入废纸篓。请先退出相关应用。缓存会重新生成，大小不等于实际释放空间。"))
                 .font(.callout)
             if page == .analyze {
-                Text("虚拟机、模型、备份及开发文件可能包含重要数据。请先停止相关应用或虚拟机；移除数据可能导致容器、镜像、卷或离线模型不可用。清空废纸篓后才会释放空间。")
+                Text(L("虚拟机、模型、备份及开发文件可能包含重要数据。请先停止相关应用或虚拟机；移除数据可能导致容器、镜像、卷或离线模型不可用。清空废纸篓后才会释放空间。"))
                     .font(.callout).foregroundStyle(.orange)
             }
             if page == .uninstall && reviewTask != nil {
-                HStack { ProgressView().controlSize(.small); Text("并行统计关联文件：\(uninstallPlan?.completed ?? 0) / \(uninstallPlan?.files.count ?? 0)").font(.caption) }
+                HStack { ProgressView().controlSize(.small); Text(L("并行统计关联文件：{0} / {1}", String(describing: uninstallPlan?.completed ?? 0), String(describing: uninstallPlan?.files.count ?? 0))).font(.caption) }
             }
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
@@ -351,39 +365,39 @@ struct ContentView: View {
                                 Toggle("", isOn: Binding(get: { selectedRelated.contains(file.id) }, set: { if $0 { selectedRelated.insert(file.id) } else { selectedRelated.remove(file.id) } })).labelsHidden().disabled(!file.allowed)
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(file.category + " · " + file.url.path).font(.caption).textSelection(.enabled)
-                                    Text(file.note + (file.containsData ? " · 含个人数据，默认保留" : "")).font(.caption2).foregroundStyle(.secondary)
+                                    Text(file.note + (file.containsData ? L(" · 含个人数据，默认保留") : "")).font(.caption2).foregroundStyle(.secondary)
                                     if let issue = file.issue { Text(issue).font(.caption2).foregroundStyle(.orange) }
                                 }
                                 Spacer()
-                                Text(file.isComplete ? formattedBytes(file.bytes) : "统计中…").font(.caption)
+                                Text(file.isComplete ? formattedBytes(file.bytes) : L("统计中…")).font(.caption)
                             }
                         }
-                        if plan.files.isEmpty { Text("未找到明确关联的文件；不会猜测或删除未知目录。").font(.caption).foregroundStyle(.secondary) }
+                        if plan.files.isEmpty { Text(L("未找到明确关联的文件；不会猜测或删除未知目录。")).font(.caption).foregroundStyle(.secondary) }
                     }
                 }.frame(maxWidth: .infinity, alignment: .leading)
             }.frame(height: 300)
             if page == .uninstall {
                 if !(uninstallPlan?.dockApps.isEmpty ?? true) {
-                    Toggle("移除所选应用的 Dock 图标（会刷新 Dock）", isOn: $removeDockEntries).font(.caption)
+                    Toggle(L("移除所选应用的 Dock 图标（会刷新 Dock）"), isOn: $removeDockEntries).font(.caption)
                 }
-                Toggle("权限不足时请求 Finder 系统授权", isOn: $allowSystemAuthorization).font(.caption)
-                Text("可能弹出“允许 Clean 控制 Finder”或管理员验证。隐私目录仍需完全磁盘访问权限；拒绝授权的项目会列出失败原因。密码由 macOS 处理。").font(.caption2).foregroundStyle(.secondary)
-                Button("打开完全磁盘访问权限设置…") {
+                Toggle(L("权限不足时请求 Finder 系统授权"), isOn: $allowSystemAuthorization).font(.caption)
+                Text(L("可能弹出“允许 Clean 控制 Finder”或管理员验证。隐私目录仍需完全磁盘访问权限；拒绝授权的项目会列出失败原因。密码由 macOS 处理。")).font(.caption2).foregroundStyle(.secondary)
+                Button(L("打开完全磁盘访问权限设置…")) {
                     diskAccess.openSettings()
                 }.font(.caption)
             }
             if page == .clean {
-                Picker("遇到运行中的应用", selection: $quitCleanupApplications) {
-                    Text("跳过运行中项目").tag(false)
-                    Text("退出相关应用后清理").tag(true)
+                Picker(L("遇到运行中的应用"), selection: $quitCleanupApplications) {
+                    Text(L("跳过运行中项目")).tag(false)
+                    Text(L("退出相关应用后清理")).tag(true)
                 }
-                Text("仅正常退出相关第三方桌面应用与 Safari，最多等待 8 秒；请先保存工作。其他系统应用、后台服务、命令行任务以及未退出的应用会跳过，不会强制结束进程。")
+                Text(L("仅正常退出相关第三方桌面应用与 Safari，最多等待 8 秒；请先保存工作。其他系统应用、后台服务、命令行任务以及未退出的应用会跳过，不会强制结束进程。"))
                     .font(.caption2).foregroundStyle(.secondary)
             }
             HStack {
-                Button("取消") { cancelReview(); confirm = false }
+                Button(L("取消")) { cancelReview(); confirm = false }
                 Spacer()
-                Button("确认处理 \(chosen.count + (page == .uninstall ? selectedRelated.count : 0)) 项", role: .destructive) { performDelete() }
+                Button(L("确认处理 {0} 项", String(describing: chosen.count + (page == .uninstall ? selectedRelated.count : 0))), role: .destructive) { performDelete() }
                     .buttonStyle(.borderedProminent).tint(.red).disabled(reviewTask != nil)
             }
         }.padding(28).frame(width: 760)
@@ -430,7 +444,7 @@ struct ContentView: View {
             guard !Task.isCancelled else { return }
             let worker = Task.detached(priority: .userInitiated) {
                 let discovery = target == .clean ? CleanupCatalog.discover() : nil
-                let roots = discovery?.rules.map(\.scanRoot) ?? (target == .uninstall ? DiskService.applicationRoots : [ScanRoot(url: location, category: "文件")])
+                let roots = discovery?.rules.map(\.scanRoot) ?? (target == .uninstall ? DiskService.applicationRoots : [ScanRoot(url: location, category: L("文件"))])
                 return await DiskService.scanConcurrently(roots, initialIssues: discovery?.issues ?? []) { progress in
                     await MainActor.run {
                         guard scanID == token else { return }
@@ -462,7 +476,7 @@ struct ContentView: View {
             message = await Task.detached {
                 if analysis { return DiskService.trashAnalyzed(targets) }
                 if !uninstall { return await DiskService.remove(targets, quitApplications: quitApps) }
-                guard let plan else { return "未生成卸载审查列表，请重新扫描。" }
+                guard let plan else { return L("未生成卸载审查列表，请重新扫描。") }
                 return await UninstallService.execute(plan, selected: ids, systemAuthorization: authorization, removeDockEntries: dock) { url in
                     await MainActor.run { FinderAuthorization.trash(url) }
                 }
@@ -475,17 +489,17 @@ struct ContentView: View {
     }
     private var optimization: some View {
         VStack(alignment: .leading, spacing: 18) {
-            Text("系统维护").font(.title2)
-            Text("管理员维护由 macOS 弹出授权。不会保存密码。索引重建可能暂时增加 CPU 使用率。").font(.callout).foregroundStyle(.secondary)
-            ForEach([("dns", "刷新 DNS", "清除 DNS 缓存，并通知系统重新加载。", "network"), ("index", "重建 Spotlight 索引", "重新索引启动磁盘，完成时间由系统决定。", "magnifyingglass"), ("snapshots", "查看本地快照", "只列出 Time Machine 快照，不删除备份。", "clock.arrow.circlepath")], id: \.0) { id, title, detail, icon in
+            Text(L("系统维护")).font(.title2)
+            Text(L("管理员维护由 macOS 弹出授权。不会保存密码。索引重建可能暂时增加 CPU 使用率。")).font(.callout).foregroundStyle(.secondary)
+            ForEach([("dns", L("刷新 DNS"), L("清除 DNS 缓存，并通知系统重新加载。"), "network"), ("index", L("重建 Spotlight 索引"), L("重新索引启动磁盘，完成时间由系统决定。"), "magnifyingglass"), ("snapshots", L("查看本地快照"), L("只列出 Time Machine 快照，不删除备份。"), "clock.arrow.circlepath")], id: \.0) { id, title, detail, icon in
                 HStack(spacing: 16) {
                     Image(systemName: icon).font(.title2).foregroundStyle(.purple).frame(width: 34)
                     VStack(alignment: .leading, spacing: 7) { Text(title); Text(detail).font(.caption).foregroundStyle(.secondary) }
                     Spacer()
-                    Button("运行") { maintenance(id) }.disabled(busy)
+                    Button(L("运行")) { maintenance(id) }.disabled(busy)
                 }.padding(20).background(surface, in: RoundedRectangle(cornerRadius: 10))
             }
-            Text("仅提供已实现且可核实的维护任务。系统缓存、交换文件和受保护系统目录不会直接删除。").font(.caption).foregroundStyle(.secondary)
+            Text(L("仅提供已实现且可核实的维护任务。系统缓存、交换文件和受保护系统目录不会直接删除。")).font(.caption).foregroundStyle(.secondary)
         }
     }
     private func maintenance(_ id: String) {
@@ -496,8 +510,8 @@ struct ContentView: View {
                 let script = NSAppleScript(source: "do shell script \"\(command)\"" + (id == "snapshots" ? "" : " with administrator privileges"))
                 var error: NSDictionary?
                 let output = script?.executeAndReturnError(&error).stringValue ?? ""
-                if let error { return "操作未完成：\(error)" }
-                return output.isEmpty ? "任务已提交给 macOS。" : output
+                if let error { return L("操作未完成：{0}", String(describing: error)) }
+                return output.isEmpty ? L("任务已提交给 macOS。") : output
             }.value
             busy = false
         }

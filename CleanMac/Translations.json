@@ -1,0 +1,1962 @@
+{
+  "应用缓存": {
+    "en": "App caches",
+    "ja": "アプリキャッシュ",
+    "de": "App-Caches",
+    "fr": "Caches d’applications",
+    "es": "Cachés de aplicaciones"
+  },
+  "用户日志": {
+    "en": "User logs",
+    "ja": "ユーザーログ",
+    "de": "Benutzerprotokolle",
+    "fr": "Journaux utilisateur",
+    "es": "Registros del usuario"
+  },
+  "Xcode 构建缓存": {
+    "en": "Xcode build cache",
+    "ja": "Xcode ビルドキャッシュ",
+    "de": "Xcode-Build-Cache",
+    "fr": "Cache de compilation Xcode",
+    "es": "Caché de compilación Xcode"
+  },
+  "Xcode 归档 · 个人数据": {
+    "en": "Xcode archives · Personal data",
+    "ja": "Xcode アーカイブ · 個人データ",
+    "de": "Xcode-Archive · Persönliche Daten",
+    "fr": "Archives Xcode · Données personnelles",
+    "es": "Archivos Xcode · Datos personales"
+  },
+  "模拟器缓存": {
+    "en": "Simulator cache",
+    "ja": "シミュレータキャッシュ",
+    "de": "Simulator-Cache",
+    "fr": "Cache du simulateur",
+    "es": "Caché del simulador"
+  },
+  "设备支持": {
+    "en": "Device support",
+    "ja": "デバイスサポート",
+    "de": "Geräteunterstützung",
+    "fr": "Prise en charge des appareils",
+    "es": "Soporte de dispositivos"
+  },
+  "Xcode 文档缓存": {
+    "en": "Xcode documentation cache",
+    "ja": "Xcode ドキュメントキャッシュ",
+    "de": "Xcode-Dokumentationscache",
+    "fr": "Cache de documentation Xcode",
+    "es": "Caché de documentación Xcode"
+  },
+  "设备备份 · 个人数据": {
+    "en": "Device backups · Personal data",
+    "ja": "デバイスバックアップ · 個人データ",
+    "de": "Gerätebackups · Persönliche Daten",
+    "fr": "Sauvegardes d’appareils · Données personnelles",
+    "es": "Copias de dispositivos · Datos personales"
+  },
+  "npm 下载缓存": {
+    "en": "npm download cache",
+    "ja": "npm ダウンロードキャッシュ",
+    "de": "npm-Download-Cache",
+    "fr": "Cache de téléchargement npm",
+    "es": "Caché de descargas npm"
+  },
+  "npm 日志": {
+    "en": "npm logs",
+    "ja": "npm ログ",
+    "de": "npm-Protokolle",
+    "fr": "Journaux npm",
+    "es": "Registros npm"
+  },
+  "npm 构建下载缓存": {
+    "en": "npm prebuild cache",
+    "ja": "npm ビルド取得キャッシュ",
+    "de": "npm-Prebuild-Cache",
+    "fr": "Cache des binaires npm",
+    "es": "Caché de binarios npm"
+  },
+  "Bun 下载缓存": {
+    "en": "Bun download cache",
+    "ja": "Bun ダウンロードキャッシュ",
+    "de": "Bun-Download-Cache",
+    "fr": "Cache de téléchargement Bun",
+    "es": "Caché de descargas Bun"
+  },
+  "Yarn 下载缓存": {
+    "en": "Yarn download cache",
+    "ja": "Yarn ダウンロードキャッシュ",
+    "de": "Yarn-Download-Cache",
+    "fr": "Cache de téléchargement Yarn",
+    "es": "Caché de descargas Yarn"
+  },
+  "Yarn 缓存": {
+    "en": "Yarn cache",
+    "ja": "Yarn キャッシュ",
+    "de": "Yarn-Cache",
+    "fr": "Cache Yarn",
+    "es": "Caché de Yarn"
+  },
+  "pip 下载缓存": {
+    "en": "pip download cache",
+    "ja": "pip ダウンロードキャッシュ",
+    "de": "pip-Download-Cache",
+    "fr": "Cache de téléchargement pip",
+    "es": "Caché de descargas pip"
+  },
+  "uv 下载缓存": {
+    "en": "uv download cache",
+    "ja": "uv ダウンロードキャッシュ",
+    "de": "uv-Download-Cache",
+    "fr": "Cache de téléchargement uv",
+    "es": "Caché de descargas uv"
+  },
+  "Poetry 缓存": {
+    "en": "Poetry cache",
+    "ja": "Poetry キャッシュ",
+    "de": "Poetry-Cache",
+    "fr": "Cache Poetry",
+    "es": "Caché de Poetry"
+  },
+  "pre-commit 环境缓存": {
+    "en": "pre-commit environment cache",
+    "ja": "pre-commit 環境キャッシュ",
+    "de": "pre-commit-Umgebungscache",
+    "fr": "Cache des environnements pre-commit",
+    "es": "Caché de entornos pre-commit"
+  },
+  "Ruff 缓存": {
+    "en": "Ruff cache",
+    "ja": "Ruff キャッシュ",
+    "de": "Ruff-Cache",
+    "fr": "Cache Ruff",
+    "es": "Caché de Ruff"
+  },
+  "mypy 缓存": {
+    "en": "mypy cache",
+    "ja": "mypy キャッシュ",
+    "de": "mypy-Cache",
+    "fr": "Cache mypy",
+    "es": "Caché de mypy"
+  },
+  "Corepack 下载缓存": {
+    "en": "Corepack download cache",
+    "ja": "Corepack ダウンロードキャッシュ",
+    "de": "Corepack-Download-Cache",
+    "fr": "Cache de téléchargement Corepack",
+    "es": "Caché de descargas Corepack"
+  },
+  "Gradle 缓存": {
+    "en": "Gradle cache",
+    "ja": "Gradle キャッシュ",
+    "de": "Gradle-Cache",
+    "fr": "Cache Gradle",
+    "es": "Caché de Gradle"
+  },
+  "Cargo 下载缓存": {
+    "en": "Cargo download cache",
+    "ja": "Cargo ダウンロードキャッシュ",
+    "de": "Cargo-Download-Cache",
+    "fr": "Cache de téléchargement Cargo",
+    "es": "Caché de descargas Cargo"
+  },
+  "沙盒应用缓存 · {0}": {
+    "en": "Sandbox app cache · {0}",
+    "ja": "サンドボックスアプリのキャッシュ · {0}",
+    "de": "Sandbox-App-Cache · {0}",
+    "fr": "Cache d’application isolée · {0}",
+    "es": "Caché de aplicación aislada · {0}"
+  },
+  "共享容器缓存 · {0}": {
+    "en": "Shared container cache · {0}",
+    "ja": "共有コンテナのキャッシュ · {0}",
+    "de": "Cache geteilter Container · {0}",
+    "fr": "Cache de conteneur partagé · {0}",
+    "es": "Caché de contenedor compartido · {0}"
+  },
+  "浏览器缓存 · {0} / {1}": {
+    "en": "Browser cache · {0} / {1}",
+    "ja": "ブラウザキャッシュ · {0} / {1}",
+    "de": "Browser-Cache · {0} / {1}",
+    "fr": "Cache du navigateur · {0} / {1}",
+    "es": "Caché del navegador · {0} / {1}"
+  },
+  "沙盒应用缓存": {
+    "en": "Sandbox app cache",
+    "ja": "サンドボックスアプリのキャッシュ",
+    "de": "Sandbox-App-Cache",
+    "fr": "Cache d’application isolée",
+    "es": "Caché de aplicación aislada"
+  },
+  "共享容器缓存": {
+    "en": "Shared container cache",
+    "ja": "共有コンテナのキャッシュ",
+    "de": "Cache geteilter Container",
+    "fr": "Cache de conteneur partagé",
+    "es": "Caché de contenedor compartido"
+  },
+  "浏览器缓存": {
+    "en": "Browser cache",
+    "ja": "ブラウザキャッシュ",
+    "de": "Browser-Cache",
+    "fr": "Cache du navigateur",
+    "es": "Caché del navegador"
+  },
+  "应用": {
+    "en": "App",
+    "ja": "アプリ",
+    "de": "App",
+    "fr": "Application",
+    "es": "Aplicación"
+  },
+  "扫描根或其上级是符号链接，已跳过以避免越界和重复统计。": {
+    "en": "Scan root or an ancestor is a symbolic link; skipped to avoid crossing boundaries or double counting.",
+    "ja": "スキャン元または親がシンボリックリンクのため、範囲外の参照と重複集計を防ぐためにスキップしました。",
+    "de": "Scan-Ordner oder übergeordneter Pfad ist ein symbolischer Link; zum Schutz der Grenzen und gegen Doppelzählung übersprungen.",
+    "fr": "Dossier analysé ou parent symbolique : ignoré pour éviter les dépassements et doubles comptages.",
+    "es": "La carpeta analizada o un padre es un enlace simbólico; se omitió para evitar salir del ámbito o contar dos veces."
+  },
+  "不跟随链接，避免重复计数和跨越扫描边界。": {
+    "en": "Links are not followed, to avoid double counting and crossing scan boundaries.",
+    "ja": "重複集計やスキャン範囲外への参照を防ぐため、リンクはたどりません。",
+    "de": "Links werden nicht verfolgt, um Doppelzählungen und Grenzüberschreitungen zu vermeiden.",
+    "fr": "Les liens ne sont pas suivis afin d’éviter les doubles comptages et les dépassements.",
+    "es": "No se siguen enlaces para evitar duplicados y salir del ámbito del análisis."
+  },
+  "不跟随符号链接。": {
+    "en": "Symbolic links are not followed.",
+    "ja": "シンボリックリンクはたどりません。",
+    "de": "Symbolischen Links wird nicht gefolgt.",
+    "fr": "Les liens symboliques ne sont pas suivis.",
+    "es": "No se siguen enlaces simbólicos."
+  },
+  "无法遍历目录。": {
+    "en": "Unable to enumerate directory.",
+    "ja": "ディレクトリを列挙できません。",
+    "de": "Ordner kann nicht aufgelistet werden.",
+    "fr": "Impossible de parcourir le dossier.",
+    "es": "No se puede recorrer la carpeta."
+  },
+  "符号链接，已阻止": {
+    "en": "Symbolic link blocked",
+    "ja": "シンボリックリンクをブロック",
+    "de": "Symbolischer Link blockiert",
+    "fr": "Lien symbolique bloqué",
+    "es": "Enlace simbólico bloqueado"
+  },
+  "无法检查此路径，可能需要完全磁盘访问权限": {
+    "en": "Unable to inspect this path; Full Disk Access may be required",
+    "ja": "このパスを確認できません。「フルディスクアクセス」が必要な場合があります",
+    "de": "Pfad kann nicht geprüft werden; Festplattenvollzugriff eventuell erforderlich",
+    "fr": "Impossible d’examiner ce chemin ; l’accès complet au disque peut être requis",
+    "es": "No se puede examinar esta ruta; puede requerir acceso total al disco"
+  },
+  "：无法读取有效应用标识符，关联扫描不完整。请检查权限或使用厂商卸载器。": {
+    "en": ": Unable to read a valid app identifier; related-file scan is incomplete. Check permissions or use the vendor’s uninstaller.",
+    "ja": "：有効なアプリ識別子を読み取れず、関連ファイルのスキャンが不完全です。権限を確認するか、提供元のアンインストーラを使用してください。",
+    "de": ": Keine gültige App-ID lesbar; zugehörige Dateien unvollständig erfasst. Rechte prüfen oder Hersteller-Deinstallation nutzen.",
+    "fr": " : Identifiant d’application illisible ; analyse des fichiers associés incomplète. Vérifiez les autorisations ou utilisez le désinstalleur de l’éditeur.",
+    "es": ": No se pudo leer un identificador válido; el análisis de archivos asociados está incompleto. Revise los permisos o use el desinstalador del proveedor."
+  },
+  "匹配应用标识符 ": {
+    "en": "Matches app identifier ",
+    "ja": "アプリ識別子に一致 ",
+    "de": "Passende App-ID ",
+    "fr": "Correspond à l’identifiant ",
+    "es": "Coincide con el identificador "
+  },
+  "偏好设置": {
+    "en": "Preferences",
+    "ja": "環境設定",
+    "de": "Einstellungen",
+    "fr": "Préférences",
+    "es": "Preferencias"
+  },
+  "缓存": {
+    "en": "Cache",
+    "ja": "キャッシュ",
+    "de": "Cache",
+    "fr": "Cache",
+    "es": "Caché"
+  },
+  "支持文件": {
+    "en": "Support files",
+    "ja": "サポートファイル",
+    "de": "Support-Dateien",
+    "fr": "Fichiers de support",
+    "es": "Archivos de soporte"
+  },
+  "窗口保存状态": {
+    "en": "Saved window state",
+    "ja": "ウインドウ保存状態",
+    "de": "Gespeicherter Fensterzustand",
+    "fr": "État des fenêtres",
+    "es": "Estado guardado de ventanas"
+  },
+  "应用容器": {
+    "en": "App container",
+    "ja": "アプリコンテナ",
+    "de": "App-Container",
+    "fr": "Conteneur d’application",
+    "es": "Contenedor de aplicación"
+  },
+  "网络存储": {
+    "en": "Network storage",
+    "ja": "ネットワークストレージ",
+    "de": "Netzwerkspeicher",
+    "fr": "Stockage réseau",
+    "es": "Almacenamiento de red"
+  },
+  "WebKit 数据": {
+    "en": "WebKit data",
+    "ja": "WebKit データ",
+    "de": "WebKit-Daten",
+    "fr": "Données WebKit",
+    "es": "Datos de WebKit"
+  },
+  "日志": {
+    "en": "Logs",
+    "ja": "ログ",
+    "de": "Protokolle",
+    "fr": "Journaux",
+    "es": "Registros"
+  },
+  "全局支持文件": {
+    "en": "System-wide support files",
+    "ja": "システム共通サポートファイル",
+    "de": "Systemweite Support-Dateien",
+    "fr": "Fichiers de support système",
+    "es": "Archivos de soporte del sistema"
+  },
+  "全局偏好设置": {
+    "en": "System-wide preferences",
+    "ja": "システム共通設定",
+    "de": "Systemweite Einstellungen",
+    "fr": "Préférences système",
+    "es": "Preferencias del sistema"
+  },
+  "全局缓存": {
+    "en": "System-wide cache",
+    "ja": "システム共通キャッシュ",
+    "de": "Systemweiter Cache",
+    "fr": "Cache système",
+    "es": "Caché del sistema"
+  },
+  "全局日志": {
+    "en": "System-wide logs",
+    "ja": "システム共通ログ",
+    "de": "Systemweite Protokolle",
+    "fr": "Journaux système",
+    "es": "Registros del sistema"
+  },
+  "匹配应用标识符；移动时可能需要系统授权。": {
+    "en": "Matches app identifier; moving may require system authorization.",
+    "ja": "アプリ識別子に一致。移動にはシステム認証が必要な場合があります。",
+    "de": "App-ID stimmt überein; Verschieben erfordert eventuell Systemfreigabe.",
+    "fr": "Identifiant correspondant ; le déplacement peut nécessiter une autorisation système.",
+    "es": "Coincide con el identificador; moverlo puede requerir autorización del sistema."
+  },
+  "特权辅助工具": {
+    "en": "Privileged helper",
+    "ja": "特権ヘルパー",
+    "de": "Privilegiertes Hilfsprogramm",
+    "fr": "Utilitaire privilégié",
+    "es": "Herramienta auxiliar privilegiada"
+  },
+  "涉及系统服务，请用厂商卸载器注销。": {
+    "en": "System service: unregister with the vendor’s uninstaller.",
+    "ja": "システムサービスです。提供元のアンインストーラで登録解除してください。",
+    "de": "Systemdienst: mit der Hersteller-Deinstallation abmelden.",
+    "fr": "Service système : utilisez le désinstalleur de l’éditeur pour le désenregistrer.",
+    "es": "Servicio del sistema: anúlelo con el desinstalador del proveedor."
+  },
+  "同名支持文件": {
+    "en": "Same-name support files",
+    "ja": "同名サポートファイル",
+    "de": "Namensgleiche Support-Dateien",
+    "fr": "Support portant le même nom",
+    "es": "Soporte con el mismo nombre"
+  },
+  "按名称匹配，可能包含个人数据或同名软件数据，请核对。": {
+    "en": "Matched by name; may contain personal data or another app’s data. Review carefully.",
+    "ja": "名前による一致です。個人データや同名アプリのデータを含む可能性があります。確認してください。",
+    "de": "Namensabgleich: kann persönliche Daten oder Daten einer anderen App enthalten. Sorgfältig prüfen.",
+    "fr": "Correspondance par nom : peut contenir des données personnelles ou d’une autre application. Vérifiez.",
+    "es": "Coincidencia por nombre: puede contener datos personales o de otra aplicación. Revíselo."
+  },
+  "同名日志": {
+    "en": "Same-name logs",
+    "ja": "同名ログ",
+    "de": "Namensgleiche Protokolle",
+    "fr": "Journaux portant le même nom",
+    "es": "Registros con el mismo nombre"
+  },
+  "按应用名称匹配，请核对。": {
+    "en": "Matched by app name. Please review.",
+    "ja": "アプリ名による一致です。確認してください。",
+    "de": "Nach App-Namen gefunden. Bitte prüfen.",
+    "fr": "Trouvé par nom d’application. Vérifiez.",
+    "es": "Coincidencia por nombre de aplicación. Revíselo."
+  },
+  "设备偏好设置": {
+    "en": "Device preferences",
+    "ja": "デバイス設定",
+    "de": "Geräteeinstellungen",
+    "fr": "Préférences de l’appareil",
+    "es": "Preferencias del dispositivo"
+  },
+  "共享容器": {
+    "en": "Shared container",
+    "ja": "共有コンテナ",
+    "de": "Geteilter Container",
+    "fr": "Conteneur partagé",
+    "es": "Contenedor compartido"
+  },
+  "签名声明的共享容器；仍可能被扩展或其他应用使用，请确认。": {
+    "en": "Shared container declared by the app signature; extensions or other apps may still use it. Please verify.",
+    "ja": "署名で宣言された共有コンテナです。拡張機能や他のアプリが使用している場合があります。確認してください。",
+    "de": "Durch die Signatur deklarierter geteilter Container; Erweiterungen oder andere Apps können ihn noch nutzen. Prüfen.",
+    "fr": "Conteneur partagé déclaré par la signature ; des extensions ou d’autres applications peuvent encore l’utiliser. Vérifiez.",
+    "es": "Contenedor compartido declarado por la firma; otras aplicaciones o extensiones pueden seguir usándolo. Verifique."
+  },
+  "仍被以下应用使用，已保留：": {
+    "en": "Kept; still used by: ",
+    "ja": "保持しました。引き続き使用中：",
+    "de": "Behalten; weiterhin verwendet von: ",
+    "fr": "Conservé, encore utilisé par : ",
+    "es": "Conservado; todavía lo usa: "
+  },
+  "系统启动服务": {
+    "en": "System launch service",
+    "ja": "システム起動サービス",
+    "de": "Systemstartdienst",
+    "fr": "Service de démarrage système",
+    "es": "Servicio de inicio del sistema"
+  },
+  "用户启动项": {
+    "en": "User launch agent",
+    "ja": "ユーザー起動項目",
+    "de": "Benutzer-Startobjekt",
+    "fr": "Agent de démarrage utilisateur",
+    "es": "Agente de inicio del usuario"
+  },
+  "系统级服务，请使用厂商卸载器注销，避免残留后台进程。": {
+    "en": "System service: use the vendor’s uninstaller to unregister it and avoid leftover processes.",
+    "ja": "システムサービスです。バックグラウンドプロセスを残さないよう、提供元のアンインストーラを使用してください。",
+    "de": "Systemdienst: mit dem Hersteller-Deinstallationsprogramm abmelden, um Hintergrundprozesse zu vermeiden.",
+    "fr": "Service système : utilisez le désinstalleur de l’éditeur pour éviter les processus résiduels.",
+    "es": "Servicio del sistema: use el desinstalador del proveedor para evitar procesos residuales."
+  },
+  "卸载前会先尝试注销此用户启动项。": {
+    "en": "This user launch agent will be unloaded before uninstalling.",
+    "ja": "アンインストール前に、このユーザー起動項目の登録解除を試みます。",
+    "de": "Dieses Benutzer-Startobjekt wird vor der Deinstallation entladen.",
+    "fr": "Cet agent utilisateur sera déchargé avant la désinstallation.",
+    "es": "Se intentará desactivar este agente antes de desinstalar."
+  },
+  "无法注销启动项：": {
+    "en": "Unable to unload launch agent: ",
+    "ja": "起動項目を解除できません：",
+    "de": "Startobjekt kann nicht entladen werden: ",
+    "fr": "Impossible de décharger l’agent : ",
+    "es": "No se puede desactivar el agente: "
+  },
+  "已拒绝：包含受保护、无效或当前正在运行的 Clean 应用路径。": {
+    "en": "Refused: includes protected or invalid paths, or the currently running Clean app.",
+    "ja": "拒否しました。保護対象、無効なパス、または実行中の Clean を含みます。",
+    "de": "Abgelehnt: geschützte oder ungültige Pfade oder die laufende Clean-App enthalten.",
+    "fr": "Refusé : chemins protégés, invalides ou application Clean en cours d’exécution.",
+    "es": "Rechazado: contiene rutas protegidas, no válidas o la aplicación Clean en ejecución."
+  },
+  "请先退出所选应用，再重试卸载。未删除任何文件。": {
+    "en": "Quit the selected apps before uninstalling. No files were deleted.",
+    "ja": "選択したアプリを終了してから再試行してください。ファイルは削除されていません。",
+    "de": "Ausgewählte Apps vor der Deinstallation beenden. Keine Dateien gelöscht.",
+    "fr": "Quittez les applications sélectionnées avant de réessayer. Aucun fichier supprimé.",
+    "es": "Cierre las aplicaciones seleccionadas y vuelva a intentarlo. No se eliminó ningún archivo."
+  },
+  "：关联验证失败或为共享/保护项目": {
+    "en": ": Association could not be verified, or item is shared/protected",
+    "ja": "：関連性を確認できないか、共有・保護対象です",
+    "de": ": Zuordnung nicht bestätigt oder geteilt/geschützt",
+    "fr": " : Association non vérifiée, élément partagé ou protégé",
+    "es": ": Asociación no verificada o elemento compartido/protegido"
+  },
+  "已移入废纸篓 {0} 项。": {
+    "en": "Moved {0} item(s) to Trash.",
+    "ja": "{0} 項目をゴミ箱に移動しました。",
+    "de": "{0} Objekt(e) in den Papierkorb verschoben.",
+    "fr": "{0} élément(s) placé(s) dans la corbeille.",
+    "es": "Se movieron {0} elementos a la papelera."
+  },
+  "\n\n未完成（可复制路径后重试）：\n": {
+    "en": "\n\nNot completed (copy paths to retry):\n",
+    "ja": "\n\n未完了（パスをコピーして再試行）：\n",
+    "de": "\n\nNicht abgeschlossen (Pfade zum Wiederholen kopieren):\n",
+    "fr": "\n\nNon terminé (copiez les chemins pour réessayer) :\n",
+    "es": "\n\nSin completar (copie las rutas para reintentar):\n"
+  },
+  "；请检查完全磁盘访问权限，或开启系统授权重试。": {
+    "en": "; check Full Disk Access or retry with system authorization.",
+    "ja": "。「フルディスクアクセス」を確認するか、システム認証を有効にして再試行してください。",
+    "de": "; Festplattenvollzugriff prüfen oder mit Systemfreigabe wiederholen.",
+    "fr": " ; vérifiez l’accès complet au disque ou réessayez avec l’autorisation système.",
+    "es": "; revise el acceso total al disco o reintente con autorización del sistema."
+  },
+  "无法创建系统授权请求。": {
+    "en": "Unable to create system authorization request.",
+    "ja": "システム認証リクエストを作成できません。",
+    "de": "Systemfreigabe kann nicht angefordert werden.",
+    "fr": "Impossible de demander l’autorisation système.",
+    "es": "No se puede crear la solicitud de autorización del sistema."
+  },
+  "Finder 授权未完成：{0}。请检查自动化和完全磁盘访问权限。": {
+    "en": "Finder authorization failed: {0}. Check Automation and Full Disk Access.",
+    "ja": "Finder の認証が未完了です：{0}。「オートメーション」と「フルディスクアクセス」を確認してください。",
+    "de": "Finder-Freigabe fehlgeschlagen: {0}. Automation und Festplattenvollzugriff prüfen.",
+    "fr": "Autorisation Finder incomplète : {0}. Vérifiez Automatisation et l’accès complet au disque.",
+    "es": "La autorización de Finder no se completó: {0}. Revise Automatización y el acceso total al disco."
+  },
+  "系统操作未完成，文件仍存在。": {
+    "en": "System operation incomplete; file still exists.",
+    "ja": "システム操作が未完了で、ファイルが残っています。",
+    "de": "Systemvorgang unvollständig; Datei besteht noch.",
+    "fr": "Opération système incomplète ; le fichier existe encore.",
+    "es": "Operación del sistema incompleta; el archivo sigue existiendo."
+  },
+  "权限不足，无法核实系统是否完成移动；请在 Finder 中检查。": {
+    "en": "Insufficient permission to verify the move; check in Finder.",
+    "ja": "権限不足で移動を確認できません。Finder で確認してください。",
+    "de": "Keine Berechtigung zur Prüfung des Verschiebens; im Finder prüfen.",
+    "fr": "Autorisations insuffisantes pour vérifier le déplacement ; vérifiez dans Finder.",
+    "es": "Permisos insuficientes para verificar el movimiento; compruébelo en Finder."
+  },
+  "Dock 图标移除失败：无法保存偏好设置。": {
+    "en": "Could not remove Dock icon: unable to save preferences.",
+    "ja": "Dock アイコンを削除できません。設定を保存できませんでした。",
+    "de": "Dock-Symbol nicht entfernt: Einstellungen nicht gespeichert.",
+    "fr": "Icône du Dock non supprimée : préférences non enregistrées.",
+    "es": "No se pudo quitar el icono del Dock: no se guardaron las preferencias."
+  },
+  "Dock 偏好已更新，但需要手动重新登录以刷新图标。": {
+    "en": "Dock preferences updated; log out and back in to refresh icons.",
+    "ja": "Dock 設定を更新しました。アイコンの更新にはログインし直してください。",
+    "de": "Dock-Einstellungen aktualisiert; zum Aktualisieren der Symbole neu anmelden.",
+    "fr": "Préférences du Dock mises à jour ; reconnectez-vous pour actualiser les icônes.",
+    "es": "Preferencias del Dock actualizadas; vuelva a iniciar sesión para actualizar los iconos."
+  },
+  "Clean 系统状态": {
+    "en": "Clean System Status",
+    "ja": "Clean システム状態",
+    "de": "Clean-Systemstatus",
+    "fr": "État du système Clean",
+    "es": "Estado del sistema Clean"
+  },
+  "Clean · 点击查看系统状态": {
+    "en": "Clean · Click for system status",
+    "ja": "Clean · クリックしてシステム状態を表示",
+    "de": "Clean · Klicken für Systemstatus",
+    "fr": "Clean · Cliquez pour voir l’état du système",
+    "es": "Clean · Pulse para ver el estado del sistema"
+  },
+  "：不在清理边界内或统计不完整": {
+    "en": ": Outside cleanup scope or scan incomplete",
+    "ja": "：クリーンアップ対象外、または統計が不完全です",
+    "de": ": Außerhalb des Bereinigungsumfangs oder Scan unvollständig",
+    "fr": " : Hors du périmètre ou analyse incomplète",
+    "es": ": Fuera del ámbito de limpieza o análisis incompleto"
+  },
+  "：相关应用仍在运行或未完成退出，已跳过": {
+    "en": ": App is still running or has not finished quitting; skipped",
+    "ja": "：関連アプリが実行中または終了処理中のためスキップしました",
+    "de": ": App läuft noch oder wird beendet; übersprungen",
+    "fr": " : Application encore active ou en cours de fermeture ; ignorée",
+    "es": ": La aplicación sigue activa o cerrándose; se omitió"
+  },
+  "：相关开发工具可能正在运行，请退出后重试": {
+    "en": ": Related developer tools may be running; quit them and retry",
+    "ja": "：関連する開発ツールが実行中の可能性があります。終了して再試行してください",
+    "de": ": Entwicklungstools möglicherweise aktiv; beenden und wiederholen",
+    "fr": " : Des outils de développement sont peut-être actifs ; quittez-les et réessayez",
+    "es": ": Puede haber herramientas de desarrollo activas; ciérrelas y reintente"
+  },
+  "：仍存在或已重新生成，约 ": {
+    "en": ": Still present or regenerated, approximately ",
+    "ja": "：残存または再生成されています。約 ",
+    "de": ": Noch vorhanden oder neu erstellt, etwa ",
+    "fr": " : Encore présent ou régénéré, environ ",
+    "es": ": Sigue existiendo o se regeneró, aproximadamente "
+  },
+  "：无法确认删除后的状态": {
+    "en": ": Unable to verify status after deletion",
+    "ja": "：削除後の状態を確認できません",
+    "de": ": Zustand nach dem Löschen nicht überprüfbar",
+    "fr": " : État après suppression non vérifiable",
+    "es": ": No se puede verificar el estado tras eliminar"
+  },
+  "已处理 {0} 项；运行中跳过 {1} 项；失败 {2} 项。": {
+    "en": "Processed {0}; skipped while running {1}; failed {2}.",
+    "ja": "処理 {0} 項目、実行中のためスキップ {1} 項目、失敗 {2} 項目。",
+    "de": "Bearbeitet: {0}; laufend übersprungen: {1}; fehlgeschlagen: {2}.",
+    "fr": "Traités : {0} ; ignorés car actifs : {1} ; échecs : {2}.",
+    "es": "Procesados: {0}; omitidos por estar activos: {1}; fallidos: {2}."
+  },
+  "\n\n仍存在 / 已重新生成：\n": {
+    "en": "\n\nStill present / regenerated:\n",
+    "ja": "\n\n残存・再生成：\n",
+    "de": "\n\nNoch vorhanden / neu erstellt:\n",
+    "fr": "\n\nEncore présents / régénérés :\n",
+    "es": "\n\nTodavía presentes / regenerados:\n"
+  },
+  "\n\n运行中跳过：\n": {
+    "en": "\n\nSkipped while running:\n",
+    "ja": "\n\n実行中のためスキップ：\n",
+    "de": "\n\nWegen Ausführung übersprungen:\n",
+    "fr": "\n\nIgnorés car actifs :\n",
+    "es": "\n\nOmitidos por estar activos:\n"
+  },
+  "\n\n失败：\n": {
+    "en": "\n\nFailed:\n",
+    "ja": "\n\n失敗：\n",
+    "de": "\n\nFehlgeschlagen:\n",
+    "fr": "\n\nÉchecs :\n",
+    "es": "\n\nFallidos:\n"
+  },
+  "\n\nSafari 以外的系统应用、后台服务和命令行任务不会自动退出；缓存可能由后台进程重新生成；移入废纸篓的项目在清空废纸篓前仍占用磁盘空间。": {
+    "en": "\n\nSystem apps other than Safari, background services and command-line tasks are not quit automatically. Caches may regenerate. Trashed items still occupy space until Trash is emptied.",
+    "ja": "\n\nSafari 以外のシステムアプリ、バックグラウンドサービス、コマンドラインタスクは自動終了しません。キャッシュは再生成される場合があります。ゴミ箱を空にするまで容量は解放されません。",
+    "de": "\n\nSystem-Apps außer Safari, Hintergrunddienste und Befehlszeilenaufgaben werden nicht automatisch beendet. Caches können neu entstehen. Objekte im Papierkorb belegen bis zum Leeren weiterhin Speicher.",
+    "fr": "\n\nLes applications système sauf Safari, services et tâches en ligne de commande ne sont pas fermés automatiquement. Les caches peuvent se régénérer. Les éléments dans la corbeille occupent de l’espace jusqu’à son vidage.",
+    "es": "\n\nNo se cierran automáticamente aplicaciones del sistema excepto Safari, servicios ni tareas de terminal. Los cachés pueden regenerarse. La papelera ocupa espacio hasta vaciarla."
+  },
+  "：已跳过受保护或不完整项目": {
+    "en": ": Protected or incomplete item skipped",
+    "ja": "：保護対象または不完全な項目をスキップしました",
+    "de": ": Geschütztes oder unvollständiges Objekt übersprungen",
+    "fr": " : Élément protégé ou incomplet ignoré",
+    "es": ": Elemento protegido o incompleto omitido"
+  },
+  "\n未完成：\n": {
+    "en": "\nNot completed:\n",
+    "ja": "\n未完了：\n",
+    "de": "\nNicht abgeschlossen:\n",
+    "fr": "\nNon terminé :\n",
+    "es": "\nSin completar:\n"
+  },
+  "受保护：仅支持处理当前用户目录内的项目": {
+    "en": "Protected: only items inside the current user’s home folder can be processed",
+    "ja": "保護対象：現在のユーザーフォルダ内のみ処理できます",
+    "de": "Geschützt: nur Objekte im Benutzerordner können bearbeitet werden",
+    "fr": "Protégé : seuls les éléments du dossier utilisateur peuvent être traités",
+    "es": "Protegido: solo se pueden procesar elementos de la carpeta del usuario actual"
+  },
+  "受保护：符号链接或路径经过符号链接": {
+    "en": "Protected: symbolic link or path through a symbolic link",
+    "ja": "保護対象：シンボリックリンク、またはリンク経由のパスです",
+    "de": "Geschützt: symbolischer Link oder Pfad über einen Link",
+    "fr": "Protégé : lien symbolique ou chemin traversant un lien",
+    "es": "Protegido: enlace simbólico o ruta que pasa por uno"
+  },
+  "受保护：Library 仅开放已识别的缓存、日志、构建文件和备份的子项，请进入相应目录": {
+    "en": "Protected: only children of recognized Library caches, logs, builds and backups are available; open the relevant folder",
+    "ja": "保護対象：Library 内の既知のキャッシュ、ログ、ビルド、バックアップの子項目のみ選択できます。該当フォルダを開いてください",
+    "de": "Geschützt: in Library nur Unterobjekte bekannter Caches, Protokolle, Builds und Backups. Entsprechenden Ordner öffnen",
+    "fr": "Protégé : dans Library, seuls les sous-éléments des caches, journaux, compilations et sauvegardes reconnus sont disponibles ; ouvrez le dossier",
+    "es": "Protegido: en Library solo se permiten elementos de cachés, registros, compilaciones y copias reconocidos; abra la carpeta"
+  },
+  "受保护：仅开放已识别的数据目录子项，密钥、配置及其他隐藏项目保留": {
+    "en": "Protected: only children of recognized data folders are available; keys, settings and other hidden items are kept",
+    "ja": "保護対象：既知のデータフォルダの子項目のみ選択できます。鍵、設定、その他の隠し項目は保持します",
+    "de": "Geschützt: nur Unterobjekte bekannter Datenordner. Schlüssel, Einstellungen und andere versteckte Objekte bleiben erhalten",
+    "fr": "Protégé : seuls les sous-éléments des dossiers de données reconnus sont disponibles ; clés, réglages et autres éléments masqués conservés",
+    "es": "Protegido: solo se permiten subelementos de carpetas de datos reconocidas; se conservan claves, ajustes y otros elementos ocultos"
+  },
+  "受保护：保留常用文件夹本身，请进入后选择子项": {
+    "en": "Protected: keep the standard folder itself; open it to select its contents",
+    "ja": "保護対象：標準フォルダ自体は保持します。開いて内容を選択してください",
+    "de": "Geschützt: Standardordner selbst behalten; zum Auswählen der Inhalte öffnen",
+    "fr": "Protégé : le dossier standard est conservé ; ouvrez-le pour sélectionner son contenu",
+    "es": "Protegido: se conserva la carpeta estándar; ábrala para seleccionar su contenido"
+  },
+  "上次启动": {
+    "en": "Last launch",
+    "ja": "前回の起動",
+    "de": "Letzter Start",
+    "fr": "Dernier lancement",
+    "es": "Último inicio"
+  },
+  "最近使用 · Spotlight": {
+    "en": "Last used · Spotlight",
+    "ja": "最近の使用 · Spotlight",
+    "de": "Zuletzt genutzt · Spotlight",
+    "fr": "Dernière utilisation · Spotlight",
+    "es": "Último uso · Spotlight"
+  },
+  "暂无记录": {
+    "en": "No record",
+    "ja": "記録なし",
+    "de": "Kein Eintrag",
+    "fr": "Aucun historique",
+    "es": "Sin registros"
+  },
+  "距今": {
+    "en": "Time ago",
+    "ja": "経過時間",
+    "de": "Vergangen",
+    "fr": "Écoulé",
+    "es": "Hace"
+  },
+  "上次启动来自运行中的应用或 Clean 观察到的启动记录；历史缺失时显示 Spotlight 最近使用时间，它不一定等于启动时间。": {
+    "en": "Last launch comes from running apps or launches observed by Clean. Otherwise Spotlight’s last-used time is shown; it may differ from launch time.",
+    "ja": "前回の起動は実行中のアプリや Clean が記録した情報に基づきます。記録がない場合は Spotlight の最終使用時刻を表示し、起動時刻とは限りません。",
+    "de": "Letzter Start stammt aus laufenden Apps oder Clean-Beobachtungen. Sonst wird Spotlights letzte Nutzung angezeigt; diese kann vom Start abweichen.",
+    "fr": "Le dernier lancement vient des applications actives ou observées par Clean. À défaut, l’heure de dernière utilisation de Spotlight est affichée ; elle peut différer du lancement.",
+    "es": "El último inicio procede de aplicaciones activas o detectadas por Clean. Si no hay historial, se muestra el último uso de Spotlight, que puede no coincidir con el inicio."
+  },
+  "等待统计完成后可选择": {
+    "en": "Wait for measurement to finish before selecting",
+    "ja": "統計完了後に選択できます",
+    "de": "Auswahl nach Abschluss der Erfassung möglich",
+    "fr": "Attendez la fin du calcul pour sélectionner",
+    "es": "Espere a que termine el cálculo para seleccionar"
+  },
+  "统计不完整：请检查读取错误与访问权限后重新扫描": {
+    "en": "Incomplete scan: check read errors and permissions, then rescan",
+    "ja": "統計が不完全です。読み取りエラーと権限を確認して再スキャンしてください",
+    "de": "Scan unvollständig: Lesefehler und Rechte prüfen, dann neu scannen",
+    "fr": "Analyse incomplète : vérifiez les erreurs de lecture et les autorisations, puis relancez",
+    "es": "Análisis incompleto: revise los errores de lectura y los permisos y vuelva a analizar"
+  },
+  "受保护：不在已识别的清理范围内": {
+    "en": "Protected: outside recognized cleanup locations",
+    "ja": "保護対象：既知のクリーンアップ範囲外です",
+    "de": "Geschützt: außerhalb bekannter Bereinigungsorte",
+    "fr": "Protégé : hors des emplacements de nettoyage reconnus",
+    "es": "Protegido: fuera de las ubicaciones de limpieza reconocidas"
+  },
+  "受保护：不是可卸载的应用": {
+    "en": "Protected: not an uninstallable app",
+    "ja": "保護対象：アンインストール対象のアプリではありません",
+    "de": "Geschützt: keine deinstallierbare App",
+    "fr": "Protégé : application non désinstallable",
+    "es": "Protegido: no es una aplicación desinstalable"
+  },
+  "磁盘权限：检查中": {
+    "en": "Disk access: checking",
+    "ja": "ディスク権限：確認中",
+    "de": "Festplattenzugriff: Prüfung",
+    "fr": "Accès au disque : vérification",
+    "es": "Acceso al disco: comprobando"
+  },
+  "磁盘权限：可读（实测）": {
+    "en": "Disk access: readable (tested)",
+    "ja": "ディスク権限：読み取り可能（検証済み）",
+    "de": "Festplattenzugriff: lesbar (geprüft)",
+    "fr": "Accès au disque : lecture possible (testée)",
+    "es": "Acceso al disco: lectura posible (verificada)"
+  },
+  "磁盘访问：部分位置受限": {
+    "en": "Disk access: some locations restricted",
+    "ja": "ディスクアクセス：一部制限あり",
+    "de": "Festplattenzugriff: teils eingeschränkt",
+    "fr": "Accès au disque : emplacements restreints",
+    "es": "Acceso al disco: algunas ubicaciones restringidas"
+  },
+  "磁盘权限：未确认": {
+    "en": "Disk access: unconfirmed",
+    "ja": "ディスク権限：未確認",
+    "de": "Festplattenzugriff: unbestätigt",
+    "fr": "Accès au disque : non confirmé",
+    "es": "Acceso al disco: sin confirmar"
+  },
+  "磁盘访问已就绪": {
+    "en": "Disk access is ready",
+    "ja": "ディスクアクセスの準備完了",
+    "de": "Festplattenzugriff bereit",
+    "fr": "Accès au disque prêt",
+    "es": "Acceso al disco listo"
+  },
+  "检查磁盘访问状态": {
+    "en": "Check disk access",
+    "ja": "ディスクアクセスを確認",
+    "de": "Festplattenzugriff prüfen",
+    "fr": "Vérifier l’accès au disque",
+    "es": "Comprobar acceso al disco"
+  },
+  "受保护位置已可读取，无需重复添加授权。个别文件仍可能受所有者权限、ACL、SIP 或应用数据保护限制，它们会在扫描详情中单独列出。": {
+    "en": "Protected locations are readable; no need to grant access again. Individual files may still be restricted by ownership, ACLs, SIP or app data protection, and are listed in scan details.",
+    "ja": "保護された場所を読み取れます。再度の許可は不要です。所有者、ACL、SIP、アプリのデータ保護により一部ファイルが制限される場合は、スキャン詳細に表示します。",
+    "de": "Geschützte Orte sind lesbar; keine erneute Freigabe nötig. Einzeldateien können durch Eigentümerrechte, ACLs, SIP oder App-Datenschutz gesperrt sein und werden im Scanbericht aufgeführt.",
+    "fr": "Les emplacements protégés sont lisibles, sans nouvelle autorisation. Certains fichiers peuvent rester limités par le propriétaire, les ACL, SIP ou la protection des données ; ils figurent dans les détails.",
+    "es": "Las ubicaciones protegidas se pueden leer; no hace falta volver a autorizarlas. Algunos archivos pueden seguir restringidos por propietario, ACL, SIP o protección de datos; aparecen en los detalles."
+  },
+  "探测到部分位置读取受限，这不等于完全磁盘访问未开启。若已在设置中允许，请退出所有 Clean 进程后重新打开；个别系统或应用专属位置仍可能不可读取。": {
+    "en": "Some locations cannot be read; this does not necessarily mean Full Disk Access is disabled. If already allowed, quit all Clean processes and reopen. Some system or app locations may remain restricted.",
+    "ja": "一部の場所を読み取れませんが、フルディスクアクセスが無効とは限りません。許可済みの場合は Clean の全プロセスを終了して再起動してください。システムやアプリ独自の制限が残る場合があります。",
+    "de": "Einige Orte sind nicht lesbar; Festplattenvollzugriff ist deshalb nicht unbedingt deaktiviert. Bei erteilter Freigabe alle Clean-Prozesse beenden und neu öffnen. System- oder App-Sperren können bleiben.",
+    "fr": "Certains emplacements sont illisibles ; cela ne signifie pas forcément que l’accès complet est désactivé. S’il est autorisé, quittez tous les processus Clean et relancez. Des restrictions système ou applicatives peuvent subsister.",
+    "es": "Algunas ubicaciones no se pueden leer; esto no implica que el acceso total esté desactivado. Si ya está permitido, cierre todos los procesos de Clean y vuelva a abrirlo. Pueden persistir restricciones del sistema o de aplicaciones."
+  },
+  "确实需要授权时，查看添加步骤": {
+    "en": "Show steps if authorization is needed",
+    "ja": "許可が必要な場合の手順を表示",
+    "de": "Schritte bei benötigter Freigabe anzeigen",
+    "fr": "Voir les étapes si une autorisation est nécessaire",
+    "es": "Ver pasos si necesita autorización"
+  },
+  "1. 打开系统设置 → 隐私与安全性 → 完全磁盘访问权限。": {
+    "en": "1. Open System Settings → Privacy & Security → Full Disk Access.",
+    "ja": "1. システム設定 → プライバシーとセキュリティ → フルディスクアクセスを開きます。",
+    "de": "1. Systemeinstellungen → Datenschutz & Sicherheit → Festplattenvollzugriff öffnen.",
+    "fr": "1. Ouvrez Réglages Système → Confidentialité et sécurité → Accès complet au disque.",
+    "es": "1. Abra Ajustes del Sistema → Privacidad y seguridad → Acceso total al disco."
+  },
+  "2. 点击“+”，添加下方路径的 Clean.app，并开启开关。也可以将 Finder 中的应用拖入列表。": {
+    "en": "2. Click “+”, add Clean.app at the path below, and enable it. You can also drag the app from Finder into the list.",
+    "ja": "2.「+」から下記の Clean.app を追加し、有効にします。Finder からアプリをドラッグして追加することもできます。",
+    "de": "2. Auf „+“ klicken, Clean.app am folgenden Pfad hinzufügen und aktivieren. Alternativ aus dem Finder in die Liste ziehen.",
+    "fr": "2. Cliquez sur « + », ajoutez Clean.app au chemin ci-dessous et activez-le. Vous pouvez aussi le faire glisser depuis Finder.",
+    "es": "2. Pulse «+», añada Clean.app desde la ruta indicada y actívelo. También puede arrastrarlo desde Finder."
+  },
+  "3. 按系统提示退出并重新打开 Clean，然后重新扫描。": {
+    "en": "3. Quit and reopen Clean as requested by macOS, then rescan.",
+    "ja": "3. macOS の指示に従って Clean を終了し、再起動してスキャンします。",
+    "de": "3. Clean wie von macOS verlangt beenden und neu öffnen, dann neu scannen.",
+    "fr": "3. Quittez et rouvrez Clean comme demandé par macOS, puis relancez l’analyse.",
+    "es": "3. Cierre y vuelva a abrir Clean según indique macOS y repita el análisis."
+  },
+  "单独受限的位置（{0} 项）": {
+    "en": "Restricted locations ({0})",
+    "ja": "個別に制限された場所（{0} 件）",
+    "de": "Eingeschränkte Orte ({0})",
+    "fr": "Emplacements restreints ({0})",
+    "es": "Ubicaciones restringidas ({0})"
+  },
+  "状态通过实际读取检测；macOS 没有公开接口直接查询完全磁盘访问授权。权限不足也可能来自文件所有者或系统保护。检测可读不代表所有系统目录都可访问。": {
+    "en": "Status is tested by reading files; macOS has no public API to query Full Disk Access directly. Ownership or system protection may also deny access. Readable probes do not imply every system folder is accessible.",
+    "ja": "実際の読み取りで状態を確認します。macOS にはフルディスクアクセスを直接確認する公開 API がありません。所有者やシステム保護もアクセスを制限するため、検証成功でも全システムフォルダへのアクセスは保証されません。",
+    "de": "Der Status wird durch Lesen geprüft; macOS bietet keine öffentliche API für den direkten Vollzugriffsstatus. Eigentümerrechte oder Systemschutz können sperren. Erfolgreiche Tests garantieren nicht alle Systemordner.",
+    "fr": "L’état est testé par lecture ; macOS ne propose pas d’API publique pour vérifier directement l’accès complet. Propriété et protection système peuvent bloquer l’accès. Les tests réussis ne garantissent pas tous les dossiers.",
+    "es": "El estado se comprueba mediante lectura; macOS no ofrece una API pública para consultar directamente el acceso total. El propietario o la protección del sistema también pueden denegarlo. Las pruebas no garantizan acceso a todas las carpetas."
+  },
+  "完成": {
+    "en": "Done",
+    "ja": "完了",
+    "de": "Fertig",
+    "fr": "Terminé",
+    "es": "Listo"
+  },
+  "关闭": {
+    "en": "Close",
+    "ja": "閉じる",
+    "de": "Schließen",
+    "fr": "Fermer",
+    "es": "Cerrar"
+  },
+  "重新检测": {
+    "en": "Check again",
+    "ja": "再確認",
+    "de": "Erneut prüfen",
+    "fr": "Revérifier",
+    "es": "Comprobar de nuevo"
+  },
+  "在 Finder 中显示 Clean": {
+    "en": "Show Clean in Finder",
+    "ja": "Finder で Clean を表示",
+    "de": "Clean im Finder zeigen",
+    "fr": "Afficher Clean dans Finder",
+    "es": "Mostrar Clean en Finder"
+  },
+  "打开授权设置": {
+    "en": "Open access settings",
+    "ja": "アクセス設定を開く",
+    "de": "Zugriffseinstellungen öffnen",
+    "fr": "Ouvrir les réglages d’accès",
+    "es": "Abrir ajustes de acceso"
+  },
+  "读取中": {
+    "en": "Reading",
+    "ja": "読み取り中",
+    "de": "Wird gelesen",
+    "fr": "Lecture en cours",
+    "es": "Leyendo"
+  },
+  "未连接": {
+    "en": "Disconnected",
+    "ja": "未接続",
+    "de": "Nicht verbunden",
+    "fr": "Déconnecté",
+    "es": "Desconectado"
+  },
+  "正常": {
+    "en": "Normal",
+    "ja": "正常",
+    "de": "Normal",
+    "fr": "Normal",
+    "es": "Normal"
+  },
+  "温热": {
+    "en": "Warm",
+    "ja": "やや高温",
+    "de": "Warm",
+    "fr": "Chaud",
+    "es": "Templado"
+  },
+  "较高 · 系统降频": {
+    "en": "High · Thermal throttling",
+    "ja": "高温 · 性能を制限中",
+    "de": "Hoch · Leistung gedrosselt",
+    "fr": "Élevé · Performances réduites",
+    "es": "Alta · Rendimiento limitado"
+  },
+  "过热 · 系统保护": {
+    "en": "Overheating · System protection",
+    "ja": "過熱 · システム保護中",
+    "de": "Überhitzung · Systemschutz",
+    "fr": "Surchauffe · Protection système",
+    "es": "Sobrecalentamiento · Protección del sistema"
+  },
+  "未知": {
+    "en": "Unknown",
+    "ja": "不明",
+    "de": "Unbekannt",
+    "fr": "Inconnu",
+    "es": "Desconocido"
+  },
+  "无法读取电源": {
+    "en": "Power information unavailable",
+    "ja": "電源情報を取得できません",
+    "de": "Energieinformationen nicht verfügbar",
+    "fr": "Informations d’alimentation indisponibles",
+    "es": "Información de alimentación no disponible"
+  },
+  "正在充电": {
+    "en": "Charging",
+    "ja": "充電中",
+    "de": "Wird geladen",
+    "fr": "En charge",
+    "es": "Cargando"
+  },
+  "电源适配器": {
+    "en": "Power adapter",
+    "ja": "電源アダプタ",
+    "de": "Netzteil",
+    "fr": "Adaptateur secteur",
+    "es": "Adaptador de corriente"
+  },
+  "电池供电": {
+    "en": "On battery",
+    "ja": "バッテリー駆動",
+    "de": "Batteriebetrieb",
+    "fr": "Sur batterie",
+    "es": "Con batería"
+  },
+  "无内置电池 / 外接电源": {
+    "en": "No internal battery / External power",
+    "ja": "内蔵バッテリーなし / 外部電源",
+    "de": "Keine interne Batterie / Netzbetrieb",
+    "fr": "Sans batterie interne / Alimentation externe",
+    "es": "Sin batería interna / Alimentación externa"
+  },
+  "目录不存在": {
+    "en": "Directory missing",
+    "ja": "ディレクトリが存在しません",
+    "de": "Ordner fehlt",
+    "fr": "Dossier absent",
+    "es": "Carpeta inexistente"
+  },
+  "权限不足": {
+    "en": "Permission denied",
+    "ja": "権限がありません",
+    "de": "Zugriff verweigert",
+    "fr": "Autorisation refusée",
+    "es": "Permiso denegado"
+  },
+  "已跳过符号链接": {
+    "en": "Symbolic link skipped",
+    "ja": "シンボリックリンクをスキップ",
+    "de": "Symbolischer Link übersprungen",
+    "fr": "Lien symbolique ignoré",
+    "es": "Enlace simbólico omitido"
+  },
+  "无法读取": {
+    "en": "Unable to read",
+    "ja": "読み取り不可",
+    "de": "Nicht lesbar",
+    "fr": "Lecture impossible",
+    "es": "No se puede leer"
+  },
+  "概览": {
+    "en": "Overview",
+    "ja": "概要",
+    "de": "Übersicht",
+    "fr": "Vue d’ensemble",
+    "es": "Resumen"
+  },
+  "清理": {
+    "en": "Clean",
+    "ja": "クリーンアップ",
+    "de": "Bereinigen",
+    "fr": "Nettoyer",
+    "es": "Limpiar"
+  },
+  "卸载": {
+    "en": "Uninstall",
+    "ja": "アンインストール",
+    "de": "Deinstallieren",
+    "fr": "Désinstaller",
+    "es": "Desinstalar"
+  },
+  "优化": {
+    "en": "Optimize",
+    "ja": "最適化",
+    "de": "Optimieren",
+    "fr": "Optimiser",
+    "es": "Optimizar"
+  },
+  "分析": {
+    "en": "Analyze",
+    "ja": "分析",
+    "de": "Analysieren",
+    "fr": "Analyser",
+    "es": "Analizar"
+  },
+  "状态": {
+    "en": "Status",
+    "ja": "状態",
+    "de": "Status",
+    "fr": "État",
+    "es": "Estado"
+  },
+  "本机处理": {
+    "en": "Processed locally",
+    "ja": "ローカル処理",
+    "de": "Lokale Verarbeitung",
+    "fr": "Traitement local",
+    "es": "Procesamiento local"
+  },
+  "·  先看清，再动手。所有删除均需确认。": {
+    "en": "· Review first. Every deletion requires confirmation.",
+    "ja": "· まず確認。削除はすべて確認が必要です。",
+    "de": "· Erst prüfen. Jede Löschung erfordert Bestätigung.",
+    "fr": "· Vérifiez d’abord. Toute suppression demande confirmation.",
+    "es": "· Revise primero. Toda eliminación requiere confirmación."
+  },
+  "查看磁盘权限及授权步骤": {
+    "en": "View disk permissions and authorization steps",
+    "ja": "ディスク権限と許可手順を表示",
+    "de": "Festplattenrechte und Freigabeschritte ansehen",
+    "fr": "Voir les autorisations du disque et les étapes",
+    "es": "Ver permisos del disco y pasos de autorización"
+  },
+  "操作结果": {
+    "en": "Results",
+    "ja": "操作結果",
+    "de": "Ergebnis",
+    "fr": "Résultats",
+    "es": "Resultados"
+  },
+  "复制结果": {
+    "en": "Copy results",
+    "ja": "結果をコピー",
+    "de": "Ergebnis kopieren",
+    "fr": "Copier les résultats",
+    "es": "Copiar resultados"
+  },
+  "好": {
+    "en": "OK",
+    "ja": "OK",
+    "de": "OK",
+    "fr": "OK",
+    "es": "Aceptar"
+  },
+  "浅色": {
+    "en": "Light",
+    "ja": "ライト",
+    "de": "Hell",
+    "fr": "Clair",
+    "es": "Claro"
+  },
+  "深色": {
+    "en": "Dark",
+    "ja": "ダーク",
+    "de": "Dunkel",
+    "fr": "Sombre",
+    "es": "Oscuro"
+  },
+  "跟随系统": {
+    "en": "Follow system",
+    "ja": "システムに従う",
+    "de": "System folgen",
+    "fr": "Suivre le système",
+    "es": "Seguir el sistema"
+  },
+  "五颗星球，各循其轨": {
+    "en": "Five worlds, one orderly Mac",
+    "ja": "5つの機能で、Mac を整える",
+    "de": "Fünf Bereiche, ein aufgeräumter Mac",
+    "fr": "Cinq fonctions, un Mac organisé",
+    "es": "Cinco funciones, un Mac organizado"
+  },
+  "已统计 {0} / {1} 项": {
+    "en": "Measured {0} / {1} items",
+    "ja": "{0} / {1} 項目を集計済み",
+    "de": "{0} / {1} Objekte erfasst",
+    "fr": "{0} / {1} éléments calculés",
+    "es": "Calculados {0} / {1} elementos"
+  },
+  "取消扫描": {
+    "en": "Cancel scan",
+    "ja": "スキャンを中止",
+    "de": "Scan abbrechen",
+    "fr": "Annuler l’analyse",
+    "es": "Cancelar análisis"
+  },
+  "正在处理…": {
+    "en": "Processing…",
+    "ja": "処理中…",
+    "de": "Wird bearbeitet…",
+    "fr": "Traitement…",
+    "es": "Procesando…"
+  },
+  "分析磁盘": {
+    "en": "Analyze disk",
+    "ja": "ディスクを分析",
+    "de": "Festplatte analysieren",
+    "fr": "Analyser le disque",
+    "es": "Analizar disco"
+  },
+  "重新扫描": {
+    "en": "Rescan",
+    "ja": "再スキャン",
+    "de": "Erneut scannen",
+    "fr": "Relancer l’analyse",
+    "es": "Volver a analizar"
+  },
+  "{0} 已使用，共 {1} · 你的 Mac，井然有序。": {
+    "en": "{0} used of {1} · Your Mac, organized.",
+    "ja": "{1} 中 {0} 使用 · Mac をすっきり整理。",
+    "de": "{0} von {1} belegt · Dein Mac, aufgeräumt.",
+    "fr": "{0} utilisés sur {1} · Votre Mac, organisé.",
+    "es": "{0} usados de {1} · Su Mac, organizado."
+  },
+  "雨洗旧土，尘随潮去。扫描可识别的用户缓存与系统数据来源。": {
+    "en": "Make room for what matters. Scan recognized caches and system data locations.",
+    "ja": "大切なものに空き容量を。既知のキャッシュとシステムデータの場所をスキャンします。",
+    "de": "Platz für Wichtiges. Bekannte Caches und Systemdatenorte scannen.",
+    "fr": "Faites place à l’essentiel. Analysez les caches et données système reconnus.",
+    "es": "Haga sitio para lo importante. Analice cachés y ubicaciones de datos del sistema reconocidos."
+  },
+  "红尘覆旧，轻装再行。审查应用，移入系统废纸篓。": {
+    "en": "Review apps and their related files before moving them to Trash.",
+    "ja": "アプリと関連ファイルを確認してから、ゴミ箱に移動します。",
+    "de": "Apps und zugehörige Dateien vor dem Verschieben in den Papierkorb prüfen.",
+    "fr": "Vérifiez les applications et leurs fichiers avant de les mettre à la corbeille.",
+    "es": "Revise las aplicaciones y sus archivos antes de moverlos a la papelera."
+  },
+  "近轨疾行，小修有声。明确每一步，再运行。": {
+    "en": "Small maintenance tasks, with a clear explanation before each action.",
+    "ja": "実行内容を確認してから、小さなメンテナンスを行います。",
+    "de": "Kleine Wartungsaufgaben, vor jeder Aktion klar erklärt.",
+    "fr": "De petites tâches de maintenance, expliquées avant chaque action.",
+    "es": "Pequeñas tareas de mantenimiento, explicadas antes de cada acción."
+  },
+  "远目成图，微处可见。选择文件夹，查看真实磁盘占用。": {
+    "en": "See the big picture and every detail. Choose a folder to inspect its disk usage.",
+    "ja": "全体から細部まで。フォルダを選び、実際のディスク使用量を確認します。",
+    "de": "Vom Überblick ins Detail. Ordner wählen und Speicherbelegung prüfen.",
+    "fr": "De la vue d’ensemble au détail. Choisissez un dossier pour examiner son occupation.",
+    "es": "Vea el conjunto y cada detalle. Elija una carpeta para examinar su uso del disco."
+  },
+  "光华不寐，心跳长明。每秒更新，保留最近 60 秒。": {
+    "en": "Keep an eye on your Mac. Updated every second, with 60 seconds of history.",
+    "ja": "Mac の今を見守る。毎秒更新し、直近60秒を表示します。",
+    "de": "Dein Mac im Blick. Jede Sekunde aktualisiert, mit 60 Sekunden Verlauf.",
+    "fr": "Gardez un œil sur votre Mac. Mise à jour chaque seconde, historique de 60 secondes.",
+    "es": "Su Mac a la vista. Actualización cada segundo e historial de 60 segundos."
+  },
+  "已使用 {0}": {
+    "en": "Used {0}",
+    "ja": "使用済み {0}",
+    "de": "Belegt {0}",
+    "fr": "Utilisés {0}",
+    "es": "Usados {0}"
+  },
+  "可用 {0}": {
+    "en": "Available {0}",
+    "ja": "空き {0}",
+    "de": "Verfügbar {0}",
+    "fr": "Disponibles {0}",
+    "es": "Disponibles {0}"
+  },
+  "应用程序": {
+    "en": "Applications",
+    "ja": "アプリケーション",
+    "de": "Programme",
+    "fr": "Applications",
+    "es": "Aplicaciones"
+  },
+  "App 与关联文件": {
+    "en": "Apps and related files",
+    "ja": "アプリと関連ファイル",
+    "de": "Apps und zugehörige Dateien",
+    "fr": "Applications et fichiers associés",
+    "es": "Aplicaciones y archivos asociados"
+  },
+  "下载文件": {
+    "en": "Downloads",
+    "ja": "ダウンロード",
+    "de": "Downloads",
+    "fr": "Téléchargements",
+    "es": "Descargas"
+  },
+  "查看下载文件夹": {
+    "en": "Inspect the Downloads folder",
+    "ja": "ダウンロードフォルダを確認",
+    "de": "Downloads-Ordner prüfen",
+    "fr": "Examiner le dossier Téléchargements",
+    "es": "Examinar la carpeta Descargas"
+  },
+  "大型文件": {
+    "en": "Large files",
+    "ja": "大きなファイル",
+    "de": "Große Dateien",
+    "fr": "Fichiers volumineux",
+    "es": "Archivos grandes"
+  },
+  "逐层查看磁盘占用": {
+    "en": "Explore disk usage, folder by folder",
+    "ja": "フォルダごとに容量を確認",
+    "de": "Speicherbelegung Ordner für Ordner",
+    "fr": "Explorer l’occupation dossier par dossier",
+    "es": "Explorar el uso carpeta por carpeta"
+  },
+  "扫描后显示可清理大小": {
+    "en": "Scan to find cleanup candidates",
+    "ja": "スキャンしてクリーンアップ対象を確認",
+    "de": "Bereinigungskandidaten per Scan finden",
+    "fr": "Analyser pour trouver les éléments à nettoyer",
+    "es": "Analizar para encontrar elementos que limpiar"
+  },
+  "系统数据": {
+    "en": "System data",
+    "ja": "システムデータ",
+    "de": "Systemdaten",
+    "fr": "Données système",
+    "es": "Datos del sistema"
+  },
+  "缓存、日志、开发文件与备份": {
+    "en": "Caches, logs, developer files and backups",
+    "ja": "キャッシュ、ログ、開発ファイル、バックアップ",
+    "de": "Caches, Protokolle, Entwicklerdateien und Backups",
+    "fr": "Caches, journaux, fichiers de développement et sauvegardes",
+    "es": "Cachés, registros, archivos de desarrollo y copias"
+  },
+  "运行状态": {
+    "en": "Live status",
+    "ja": "リアルタイム状態",
+    "de": "Live-Status",
+    "fr": "État en direct",
+    "es": "Estado en directo"
+  },
+  "网速、温度、内存与系统心跳": {
+    "en": "Network, temperature, memory and system activity",
+    "ja": "通信速度、温度、メモリとシステムの動き",
+    "de": "Netzwerk, Temperatur, Speicher und Systemaktivität",
+    "fr": "Réseau, température, mémoire et activité système",
+    "es": "Red, temperatura, memoria y actividad del sistema"
+  },
+  "先看清，再动手": {
+    "en": "Review first, then act",
+    "ja": "まず確認、それから実行",
+    "de": "Erst prüfen, dann handeln",
+    "fr": "Vérifiez avant d’agir",
+    "es": "Revise antes de actuar"
+  },
+  "系统数据包含多种文件，不能整体删除。Clean 仅处理明确识别的位置，系统目录和未知路径会被拦下。扫描数据不会上传。": {
+    "en": "System data includes many file types and cannot be deleted as a whole. Clean only processes recognized locations, blocks system folders and unknown paths, and never uploads scan data.",
+    "ja": "システムデータは多種のファイルを含み、まとめて削除できません。Clean は既知の場所のみを処理し、システムフォルダや不明なパスを保護します。スキャンデータはアップロードしません。",
+    "de": "Systemdaten umfassen viele Dateitypen und dürfen nicht insgesamt gelöscht werden. Clean bearbeitet nur bekannte Orte, schützt Systemordner und unbekannte Pfade und lädt keine Scandaten hoch.",
+    "fr": "Les données système regroupent de nombreux types de fichiers et ne peuvent pas être supprimées en bloc. Clean ne traite que les emplacements reconnus, bloque les dossiers système et chemins inconnus, et ne téléverse pas les analyses.",
+    "es": "Los datos del sistema contienen muchos tipos de archivos y no se pueden eliminar en bloque. Clean solo procesa ubicaciones reconocidas, protege carpetas del sistema y rutas desconocidas y no sube datos del análisis."
+  },
+  "选择文件夹…": {
+    "en": "Choose folder…",
+    "ja": "フォルダを選択…",
+    "de": "Ordner wählen…",
+    "fr": "Choisir un dossier…",
+    "es": "Elegir carpeta…"
+  },
+  "后台并行扫描，结果持续更新。目录大小需遍历文件；最多同时统计 4 项。": {
+    "en": "Scanning in the background; results update as they arrive. Folder sizes require traversal, with up to 4 items measured at once.",
+    "ja": "バックグラウンドで並行スキャンし、結果を順次表示します。フォルダ内をたどり、最大4項目を同時に集計します。",
+    "de": "Scan im Hintergrund mit laufenden Ergebnissen. Ordner werden durchlaufen; bis zu 4 Objekte gleichzeitig erfasst.",
+    "fr": "Analyse en arrière-plan, résultats progressifs. Le calcul parcourt les dossiers, jusqu’à 4 éléments à la fois.",
+    "es": "Análisis en segundo plano con resultados progresivos. El cálculo recorre carpetas, hasta 4 elementos a la vez."
+  },
+  "扫描已取消，以下仅为已完成部分；可点击重新扫描。": {
+    "en": "Scan canceled. Only completed results are shown; rescan to continue.",
+    "ja": "スキャンを中止しました。完了した結果のみ表示しています。再スキャンできます。",
+    "de": "Scan abgebrochen. Nur abgeschlossene Ergebnisse; zum Fortfahren neu scannen.",
+    "fr": "Analyse annulée. Seuls les résultats terminés sont affichés ; relancez pour continuer.",
+    "es": "Análisis cancelado. Solo se muestran resultados terminados; vuelva a analizar para continuar."
+  },
+  "{0} 项 · {1}{2}": {
+    "en": "{0} items · {1}{2}",
+    "ja": "{0} 項目 · {1}{2}",
+    "de": "{0} Objekte · {1}{2}",
+    "fr": "{0} éléments · {1}{2}",
+    "es": "{0} elementos · {1}{2}"
+  },
+  "正在列出项目…": {
+    "en": "Listing items…",
+    "ja": "項目を取得中…",
+    "de": "Objekte werden aufgelistet…",
+    "fr": "Liste des éléments…",
+    "es": "Enumerando elementos…"
+  },
+  "等待扫描": {
+    "en": "Ready to scan",
+    "ja": "スキャン待機中",
+    "de": "Bereit zum Scannen",
+    "fr": "Prêt à analyser",
+    "es": "Listo para analizar"
+  },
+  "搜索名称或类别": {
+    "en": "Search name or category",
+    "ja": "名前やカテゴリで検索",
+    "de": "Name oder Kategorie suchen",
+    "fr": "Rechercher un nom ou une catégorie",
+    "es": "Buscar por nombre o categoría"
+  },
+  "给 Mac 腾出一点空间": {
+    "en": "Make a little room on your Mac",
+    "ja": "Mac に少し空き容量を",
+    "de": "Mehr Platz auf deinem Mac",
+    "fr": "Faites de la place sur votre Mac",
+    "es": "Libere espacio en su Mac"
+  },
+  "与不再使用的应用告别": {
+    "en": "Say goodbye to apps you no longer use",
+    "ja": "使わなくなったアプリを整理",
+    "de": "Nicht mehr genutzte Apps entfernen",
+    "fr": "Dites adieu aux applications inutilisées",
+    "es": "Despídase de las aplicaciones que ya no usa"
+  },
+  "让每一层大小清晰可见": {
+    "en": "See the size of every folder",
+    "ja": "各フォルダの容量を明確に",
+    "de": "Jede Ordnergröße im Blick",
+    "fr": "Voyez la taille de chaque dossier",
+    "es": "Vea el tamaño de cada carpeta"
+  },
+  "扫描只读取文件信息，不会删除任何文件。": {
+    "en": "Scanning only reads file information. It does not delete files.",
+    "ja": "スキャンはファイル情報を読み取るだけで、削除はしません。",
+    "de": "Scans lesen nur Dateiinformationen. Es werden keine Dateien gelöscht.",
+    "fr": "L’analyse lit uniquement les informations des fichiers, sans les supprimer.",
+    "es": "El análisis solo lee información de archivos. No los elimina."
+  },
+  "开始扫描": {
+    "en": "Start scan",
+    "ja": "スキャン開始",
+    "de": "Scan starten",
+    "fr": "Lancer l’analyse",
+    "es": "Iniciar análisis"
+  },
+  "选择 ": {
+    "en": "Select ",
+    "ja": "選択 ",
+    "de": "Auswählen ",
+    "fr": "Sélectionner ",
+    "es": "Seleccionar "
+  },
+  "扫描或处理进行中，请稍候": {
+    "en": "Scan or operation in progress. Please wait.",
+    "ja": "スキャンまたは処理中です。お待ちください。",
+    "de": "Scan oder Vorgang läuft. Bitte warten.",
+    "fr": "Analyse ou opération en cours. Patientez.",
+    "es": "Análisis u operación en curso. Espere."
+  },
+  "选择此项目进行审查": {
+    "en": "Select this item for review",
+    "ja": "確認する項目を選択",
+    "de": "Objekt zur Prüfung auswählen",
+    "fr": "Sélectionner cet élément pour vérification",
+    "es": "Seleccionar este elemento para revisión"
+  },
+  " · 个人数据，请仔细确认": {
+    "en": " · Personal data; review carefully",
+    "ja": " · 個人データ。慎重に確認してください",
+    "de": " · Persönliche Daten; sorgfältig prüfen",
+    "fr": " · Données personnelles, vérifiez attentivement",
+    "es": " · Datos personales; revise con cuidado"
+  },
+  "（不完整）": {
+    "en": " (incomplete)",
+    "ja": "（不完全）",
+    "de": " (unvollständig)",
+    "fr": " (incomplet)",
+    "es": " (incompleto)"
+  },
+  "等待统计…": {
+    "en": "Waiting for measurement…",
+    "ja": "統計待ち…",
+    "de": "Warte auf Erfassung…",
+    "fr": "En attente du calcul…",
+    "es": "Esperando cálculo…"
+  },
+  "在 Finder 中显示": {
+    "en": "Show in Finder",
+    "ja": "Finder で表示",
+    "de": "Im Finder zeigen",
+    "fr": "Afficher dans Finder",
+    "es": "Mostrar en Finder"
+  },
+  "打开": {
+    "en": "Open",
+    "ja": "開く",
+    "de": "Öffnen",
+    "fr": "Ouvrir",
+    "es": "Abrir"
+  },
+  "审查并移入废纸篓…": {
+    "en": "Review and move to Trash…",
+    "ja": "確認してゴミ箱に移動…",
+    "de": "Prüfen und in Papierkorb verschieben…",
+    "fr": "Vérifier et mettre à la corbeille…",
+    "es": "Revisar y mover a la papelera…"
+  },
+  "没有找到可访问的项目。可在系统设置中检查文件访问权限。": {
+    "en": "No accessible items found. Check file access in System Settings.",
+    "ja": "アクセス可能な項目がありません。システム設定でファイルのアクセス権を確認してください。",
+    "de": "Keine zugänglichen Objekte. Dateizugriff in den Systemeinstellungen prüfen.",
+    "fr": "Aucun élément accessible. Vérifiez l’accès aux fichiers dans Réglages Système.",
+    "es": "No se encontraron elementos accesibles. Revise el acceso a archivos en Ajustes del Sistema."
+  },
+  "未发现读取错误": {
+    "en": "No read errors found",
+    "ja": "読み取りエラーなし",
+    "de": "Keine Lesefehler gefunden",
+    "fr": "Aucune erreur de lecture",
+    "es": "Sin errores de lectura"
+  },
+  "{0} 项已跳过 · 详情见上方": {
+    "en": "{0} items skipped · See details above",
+    "ja": "{0} 項目をスキップ · 詳細は上部を確認",
+    "de": "{0} Objekte übersprungen · Details oben",
+    "fr": "{0} éléments ignorés · Détails ci-dessus",
+    "es": "{0} elementos omitidos · Detalles arriba"
+  },
+  "全选": {
+    "en": "Select all",
+    "ja": "すべて選択",
+    "de": "Alle auswählen",
+    "fr": "Tout sélectionner",
+    "es": "Seleccionar todo"
+  },
+  "全选搜索结果": {
+    "en": "Select all search results",
+    "ja": "検索結果をすべて選択",
+    "de": "Alle Suchergebnisse auswählen",
+    "fr": "Sélectionner tous les résultats",
+    "es": "Seleccionar todos los resultados"
+  },
+  "取消全选": {
+    "en": "Deselect all",
+    "ja": "すべて解除",
+    "de": "Auswahl aufheben",
+    "fr": "Tout désélectionner",
+    "es": "Deseleccionar todo"
+  },
+  "审查 {0} 项 · {1}": {
+    "en": "Review {0} · {1}",
+    "ja": "{0} 項目を確認 · {1}",
+    "de": "{0} prüfen · {1}",
+    "fr": "Vérifier {0} · {1}",
+    "es": "Revisar {0} · {1}"
+  },
+  "查看扫描详情（{0} 项）": {
+    "en": "Scan details ({0})",
+    "ja": "スキャン詳細（{0} 件）",
+    "de": "Scandetails ({0})",
+    "fr": "Détails de l’analyse ({0})",
+    "es": "Detalles del análisis ({0})"
+  },
+  "不存在的目录通常表示未安装对应软件；权限不足会导致统计大小偏低。扫描会继续处理其余目录。": {
+    "en": "Missing folders usually mean the related software is not installed. Permission errors can underestimate sizes. Scanning continues for other folders.",
+    "ja": "存在しないフォルダは通常、関連ソフトが未導入であることを示します。権限不足で容量が過小になる場合があります。他のフォルダのスキャンは続行します。",
+    "de": "Fehlende Ordner bedeuten meist, dass die Software nicht installiert ist. Zugriffsfehler können Größen unterschätzen. Andere Ordner werden weiter gescannt.",
+    "fr": "Un dossier absent indique généralement un logiciel non installé. Les erreurs d’autorisation peuvent sous-estimer la taille. L’analyse des autres dossiers continue.",
+    "es": "Las carpetas ausentes suelen indicar software no instalado. Los errores de permisos pueden subestimar tamaños. El análisis de otras carpetas continúa."
+  },
+  "打开完全磁盘访问权限设置…": {
+    "en": "Open Full Disk Access settings…",
+    "ja": "フルディスクアクセスの設定を開く…",
+    "de": "Festplattenvollzugriff öffnen…",
+    "fr": "Ouvrir l’accès complet au disque…",
+    "es": "Abrir acceso total al disco…"
+  },
+  "将当前 Clean.app 添加到列表并开启权限，然后退出、重新打开 Clean 再扫描。部分系统保护位置仍不可访问。": {
+    "en": "Add this Clean.app to the list and enable access, then quit and reopen Clean before rescanning. Some system-protected locations remain inaccessible.",
+    "ja": "現在の Clean.app を一覧に追加して許可を有効にし、終了・再起動後にスキャンしてください。一部のシステム保護対象にはアクセスできません。",
+    "de": "Diese Clean.app hinzufügen und Zugriff aktivieren, dann Clean beenden und vor dem erneuten Scan öffnen. Einige Systemorte bleiben geschützt.",
+    "fr": "Ajoutez cette Clean.app et activez l’accès, puis quittez et rouvrez Clean avant de relancer. Certains emplacements système restent protégés.",
+    "es": "Añada esta Clean.app y active el acceso; cierre y vuelva a abrir Clean antes de analizar. Algunas ubicaciones del sistema siguen protegidas."
+  },
+  "审查应用与关联文件": {
+    "en": "Review apps and related files",
+    "ja": "アプリと関連ファイルの確認",
+    "de": "Apps und zugehörige Dateien prüfen",
+    "fr": "Vérifier applications et fichiers associés",
+    "es": "Revisar aplicaciones y archivos asociados"
+  },
+  "最后确认一下": {
+    "en": "One last review",
+    "ja": "最後の確認",
+    "de": "Letzte Prüfung",
+    "fr": "Dernière vérification",
+    "es": "Última revisión"
+  },
+  "所选应用与勾选的关联文件将移入废纸篓。含个人数据的目录默认不勾选；仍被其他应用使用的共享容器和系统服务会保留。": {
+    "en": "Selected apps and checked related files will go to Trash. Personal-data folders are unchecked by default. Shared containers still used by other apps and system services are kept.",
+    "ja": "選択したアプリと関連ファイルはゴミ箱へ移動します。個人データのフォルダは初期状態で未選択です。他のアプリが使う共有コンテナやシステムサービスは保持します。",
+    "de": "Ausgewählte Apps und markierte Dateien kommen in den Papierkorb. Persönliche Daten sind standardmäßig abgewählt. Weiterhin genutzte Container und Systemdienste bleiben erhalten.",
+    "fr": "Les applications et fichiers cochés iront à la corbeille. Les dossiers personnels sont décochés par défaut. Les conteneurs encore utilisés et services système sont conservés.",
+    "es": "Las aplicaciones y archivos marcados irán a la papelera. Las carpetas personales no se marcan por defecto. Se conservan contenedores aún usados y servicios del sistema."
+  },
+  "所选文件或文件夹将移入系统废纸篓，可从废纸篓恢复。请仔细核对路径和大小；受保护位置、未完成或无法完整统计的项目不会加入全选。": {
+    "en": "Selected files and folders will go to system Trash and can be restored. Check paths and sizes carefully. Protected, unfinished and incompletely measured items are excluded from Select all.",
+    "ja": "選択したファイルやフォルダをゴミ箱へ移動します。復元できます。パスと容量を慎重に確認してください。保護対象、未完了、不完全な統計の項目は全選択から除外します。",
+    "de": "Ausgewählte Dateien und Ordner kommen wiederherstellbar in den Papierkorb. Pfade und Größen prüfen. Geschützte, unfertige oder unvollständig erfasste Objekte werden nicht mit ausgewählt.",
+    "fr": "Les fichiers et dossiers sélectionnés iront à la corbeille et pourront être restaurés. Vérifiez chemins et tailles. Les éléments protégés, non terminés ou incomplets sont exclus de Tout sélectionner.",
+    "es": "Los archivos y carpetas irán a la papelera y podrán restaurarse. Revise rutas y tamaños. Los elementos protegidos, pendientes o incompletos no se incluyen al seleccionar todo."
+  },
+  "普通缓存和日志将永久删除；标记个人数据或共享容器的项目将移入废纸篓。请先退出相关应用。缓存会重新生成，大小不等于实际释放空间。": {
+    "en": "Regular caches and logs are permanently deleted. Items marked as personal data or shared containers go to Trash. Quit related apps first. Caches can regenerate; measured sizes may differ from space recovered.",
+    "ja": "通常のキャッシュとログは完全に削除します。個人データや共有コンテナの項目はゴミ箱へ移動します。先に関連アプリを終了してください。キャッシュは再生成される場合があり、容量と解放量は一致しない場合があります。",
+    "de": "Normale Caches und Protokolle werden endgültig gelöscht. Persönliche Daten und geteilte Container kommen in den Papierkorb. Zugehörige Apps zuerst beenden. Caches können neu entstehen; Größe und freier Speicher können abweichen.",
+    "fr": "Les caches et journaux ordinaires sont supprimés définitivement. Les données personnelles et conteneurs partagés vont à la corbeille. Quittez d’abord les applications concernées. Les caches peuvent se régénérer ; l’espace récupéré peut différer.",
+    "es": "Los cachés y registros normales se eliminan permanentemente. Los datos personales y contenedores compartidos van a la papelera. Cierre las aplicaciones relacionadas. Los cachés pueden regenerarse y el espacio recuperado puede variar."
+  },
+  "虚拟机、模型、备份及开发文件可能包含重要数据。请先停止相关应用或虚拟机；移除数据可能导致容器、镜像、卷或离线模型不可用。清空废纸篓后才会释放空间。": {
+    "en": "VMs, models, backups and developer files may contain important data. Stop related apps or VMs first. Removal may make containers, images, volumes or offline models unavailable. Space is freed only after emptying Trash.",
+    "ja": "仮想マシン、モデル、バックアップ、開発ファイルには重要なデータが含まれる場合があります。先に関連アプリや仮想マシンを停止してください。削除するとコンテナ、イメージ、ボリューム、オフラインモデルが使えなくなる可能性があります。ゴミ箱を空にすると容量が解放されます。",
+    "de": "VMs, Modelle, Backups und Entwicklerdateien können wichtige Daten enthalten. Apps oder VMs zuerst stoppen. Entfernen kann Container, Images, Volumes oder Offline-Modelle unbrauchbar machen. Speicher wird erst beim Leeren des Papierkorbs frei.",
+    "fr": "VM, modèles, sauvegardes et fichiers de développement peuvent contenir des données importantes. Arrêtez les applications ou VM concernées. La suppression peut rendre conteneurs, images, volumes ou modèles hors ligne indisponibles. L’espace se libère après vidage de la corbeille.",
+    "es": "Las máquinas virtuales, modelos, copias y archivos de desarrollo pueden contener datos importantes. Detenga las aplicaciones o máquinas relacionadas. Eliminarlos puede inutilizar contenedores, imágenes, volúmenes o modelos locales. El espacio se libera al vaciar la papelera."
+  },
+  "并行统计关联文件：{0} / {1}": {
+    "en": "Measuring related files: {0} / {1}",
+    "ja": "関連ファイルを集計中：{0} / {1}",
+    "de": "Zugehörige Dateien erfassen: {0} / {1}",
+    "fr": "Calcul des fichiers associés : {0} / {1}",
+    "es": "Calculando archivos asociados: {0} / {1}"
+  },
+  " · 含个人数据，默认保留": {
+    "en": " · Personal data; kept by default",
+    "ja": " · 個人データ。既定で保持",
+    "de": " · Persönliche Daten; standardmäßig behalten",
+    "fr": " · Données personnelles, conservées par défaut",
+    "es": " · Datos personales; conservados por defecto"
+  },
+  "统计中…": {
+    "en": "Measuring…",
+    "ja": "集計中…",
+    "de": "Wird erfasst…",
+    "fr": "Calcul…",
+    "es": "Calculando…"
+  },
+  "未找到明确关联的文件；不会猜测或删除未知目录。": {
+    "en": "No clearly associated files found. Unknown folders will not be guessed or deleted.",
+    "ja": "明確な関連ファイルがありません。不明なフォルダを推測して削除することはありません。",
+    "de": "Keine eindeutig zugeordneten Dateien. Unbekannte Ordner werden nicht auf Verdacht gelöscht.",
+    "fr": "Aucun fichier clairement associé. Les dossiers inconnus ne seront pas supprimés par supposition.",
+    "es": "No se encontraron archivos claramente asociados. No se adivinarán ni eliminarán carpetas desconocidas."
+  },
+  "移除所选应用的 Dock 图标（会刷新 Dock）": {
+    "en": "Remove selected apps’ Dock icons (refreshes Dock)",
+    "ja": "選択アプリの Dock アイコンを削除（Dock を更新）",
+    "de": "Dock-Symbole ausgewählter Apps entfernen (Dock wird neu geladen)",
+    "fr": "Retirer les icônes du Dock (actualise le Dock)",
+    "es": "Quitar los iconos del Dock (actualiza el Dock)"
+  },
+  "权限不足时请求 Finder 系统授权": {
+    "en": "Request Finder authorization if permission is denied",
+    "ja": "権限不足時に Finder の認証を要求",
+    "de": "Bei Zugriffsfehler Finder-Freigabe anfordern",
+    "fr": "Demander l’autorisation Finder si l’accès est refusé",
+    "es": "Solicitar autorización de Finder si se deniega el acceso"
+  },
+  "可能弹出“允许 Clean 控制 Finder”或管理员验证。隐私目录仍需完全磁盘访问权限；拒绝授权的项目会列出失败原因。密码由 macOS 处理。": {
+    "en": "macOS may ask to let Clean control Finder or request administrator authentication. Private folders still require Full Disk Access. Denied items show failure reasons. Passwords are handled by macOS.",
+    "ja": "macOS が Clean による Finder 操作の許可や管理者認証を求める場合があります。プライベートフォルダにはフルディスクアクセスが必要です。拒否された項目は理由を表示します。パスワードは macOS が処理します。",
+    "de": "macOS fragt eventuell nach Finder-Steuerung durch Clean oder Administratorrechten. Private Ordner benötigen weiter Festplattenvollzugriff. Abgewiesene Objekte zeigen Gründe. Passwörter verarbeitet macOS.",
+    "fr": "macOS peut demander le contrôle de Finder par Clean ou une authentification administrateur. Les dossiers privés nécessitent l’accès complet. Les refus indiquent la raison. Les mots de passe sont gérés par macOS.",
+    "es": "macOS puede solicitar controlar Finder o autenticación de administrador. Las carpetas privadas requieren acceso total. Los elementos denegados muestran el motivo. macOS gestiona las contraseñas."
+  },
+  "遇到运行中的应用": {
+    "en": "When related apps are running",
+    "ja": "関連アプリが実行中の場合",
+    "de": "Bei laufenden Apps",
+    "fr": "Si les applications sont actives",
+    "es": "Si hay aplicaciones activas"
+  },
+  "跳过运行中项目": {
+    "en": "Skip running items",
+    "ja": "実行中の項目をスキップ",
+    "de": "Laufende Objekte überspringen",
+    "fr": "Ignorer les éléments actifs",
+    "es": "Omitir elementos activos"
+  },
+  "退出相关应用后清理": {
+    "en": "Quit related apps, then clean",
+    "ja": "関連アプリを終了してからクリーンアップ",
+    "de": "Apps beenden, dann bereinigen",
+    "fr": "Quitter les applications puis nettoyer",
+    "es": "Cerrar aplicaciones y después limpiar"
+  },
+  "仅正常退出相关第三方桌面应用与 Safari，最多等待 8 秒；请先保存工作。其他系统应用、后台服务、命令行任务以及未退出的应用会跳过，不会强制结束进程。": {
+    "en": "Only related third-party desktop apps and Safari are asked to quit normally, with up to 8 seconds to exit. Save your work first. Other system apps, services, command-line tasks and apps that do not exit are skipped; processes are never force-quit.",
+    "ja": "関連するサードパーティのデスクトップアプリと Safari のみ、通常終了を要求して最大8秒待ちます。作業を保存してください。他のシステムアプリ、サービス、コマンドラインタスク、終了しないアプリはスキップし、強制終了しません。",
+    "de": "Nur betroffene Drittanbieter-Desktop-Apps und Safari werden normal beendet, mit bis zu 8 Sekunden Wartezeit. Arbeit vorher speichern. Andere System-Apps, Dienste, Kommandozeilenaufgaben und nicht beendete Apps werden übersprungen; kein erzwungenes Beenden.",
+    "fr": "Seules les applications tierces concernées et Safari sont invitées à quitter normalement, avec un délai de 8 secondes. Enregistrez votre travail. Les autres applications système, services, tâches et applications non fermées sont ignorés ; aucun arrêt forcé.",
+    "es": "Solo se solicita el cierre normal de aplicaciones de escritorio de terceros relacionadas y Safari, esperando hasta 8 segundos. Guarde su trabajo. Se omiten otras aplicaciones del sistema, servicios, tareas y aplicaciones que no cierren; nunca se fuerza el cierre."
+  },
+  "取消": {
+    "en": "Cancel",
+    "ja": "キャンセル",
+    "de": "Abbrechen",
+    "fr": "Annuler",
+    "es": "Cancelar"
+  },
+  "确认处理 {0} 项": {
+    "en": "Confirm {0} item(s)",
+    "ja": "{0} 項目の処理を確認",
+    "de": "{0} Objekt(e) bestätigen",
+    "fr": "Confirmer {0} élément(s)",
+    "es": "Confirmar {0} elementos"
+  },
+  "文件": {
+    "en": "File",
+    "ja": "ファイル",
+    "de": "Datei",
+    "fr": "Fichier",
+    "es": "Archivo"
+  },
+  "未生成卸载审查列表，请重新扫描。": {
+    "en": "No uninstall review was prepared. Please rescan.",
+    "ja": "アンインストールの確認一覧がありません。再スキャンしてください。",
+    "de": "Keine Deinstallationsprüfung erstellt. Erneut scannen.",
+    "fr": "Aucune liste de désinstallation préparée. Relancez l’analyse.",
+    "es": "No se preparó la revisión de desinstalación. Vuelva a analizar."
+  },
+  "系统维护": {
+    "en": "System maintenance",
+    "ja": "システムメンテナンス",
+    "de": "Systemwartung",
+    "fr": "Maintenance système",
+    "es": "Mantenimiento del sistema"
+  },
+  "管理员维护由 macOS 弹出授权。不会保存密码。索引重建可能暂时增加 CPU 使用率。": {
+    "en": "macOS requests administrator authorization when needed. Passwords are not stored. Reindexing may temporarily increase CPU usage.",
+    "ja": "必要に応じて macOS が管理者認証を要求します。パスワードは保存しません。再索引中は CPU 使用率が一時的に増加する場合があります。",
+    "de": "macOS fordert bei Bedarf Administratorrechte an. Passwörter werden nicht gespeichert. Neuindizierung kann die CPU-Last vorübergehend erhöhen.",
+    "fr": "macOS demande l’autorisation administrateur si nécessaire. Aucun mot de passe stocké. La réindexation peut temporairement augmenter l’utilisation CPU.",
+    "es": "macOS solicita autorización de administrador si hace falta. No se guardan contraseñas. La reindexación puede aumentar temporalmente el uso de CPU."
+  },
+  "刷新 DNS": {
+    "en": "Flush DNS",
+    "ja": "DNS を更新",
+    "de": "DNS leeren",
+    "fr": "Vider le cache DNS",
+    "es": "Vaciar caché DNS"
+  },
+  "清除 DNS 缓存，并通知系统重新加载。": {
+    "en": "Clear the DNS cache and ask the system to reload.",
+    "ja": "DNS キャッシュを消去し、システムに再読み込みを通知します。",
+    "de": "DNS-Cache leeren und System zum Neuladen auffordern.",
+    "fr": "Vider le cache DNS et demander le rechargement au système.",
+    "es": "Borrar el caché DNS y solicitar su recarga al sistema."
+  },
+  "重建 Spotlight 索引": {
+    "en": "Rebuild Spotlight index",
+    "ja": "Spotlight 索引を再構築",
+    "de": "Spotlight-Index neu erstellen",
+    "fr": "Reconstruire l’index Spotlight",
+    "es": "Reconstruir índice de Spotlight"
+  },
+  "重新索引启动磁盘，完成时间由系统决定。": {
+    "en": "Reindex the startup disk; completion time is managed by macOS.",
+    "ja": "起動ディスクを再索引します。完了時刻は macOS が決定します。",
+    "de": "Startvolume neu indizieren; die Dauer bestimmt macOS.",
+    "fr": "Réindexer le disque de démarrage ; macOS gère la durée.",
+    "es": "Reindexar el disco de arranque; macOS determina la duración."
+  },
+  "查看本地快照": {
+    "en": "List local snapshots",
+    "ja": "ローカルスナップショットを表示",
+    "de": "Lokale Snapshots anzeigen",
+    "fr": "Afficher les instantanés locaux",
+    "es": "Ver instantáneas locales"
+  },
+  "只列出 Time Machine 快照，不删除备份。": {
+    "en": "List Time Machine snapshots without deleting backups.",
+    "ja": "Time Machine スナップショットを表示します。バックアップは削除しません。",
+    "de": "Time-Machine-Snapshots auflisten, ohne Backups zu löschen.",
+    "fr": "Lister les instantanés Time Machine sans supprimer les sauvegardes.",
+    "es": "Enumerar instantáneas de Time Machine sin eliminar copias."
+  },
+  "运行": {
+    "en": "Run",
+    "ja": "実行",
+    "de": "Ausführen",
+    "fr": "Exécuter",
+    "es": "Ejecutar"
+  },
+  "仅提供已实现且可核实的维护任务。系统缓存、交换文件和受保护系统目录不会直接删除。": {
+    "en": "Only implemented and verifiable maintenance tasks are offered. System caches, swap files and protected system folders are not directly deleted.",
+    "ja": "実装済みで検証可能なタスクのみ提供します。システムキャッシュ、スワップファイル、保護されたシステムフォルダを直接削除しません。",
+    "de": "Nur implementierte und überprüfbare Wartungsaufgaben. System-Caches, Auslagerungsdateien und geschützte Systemordner werden nicht direkt gelöscht.",
+    "fr": "Seules les tâches implémentées et vérifiables sont proposées. Caches système, fichiers d’échange et dossiers protégés ne sont pas supprimés directement.",
+    "es": "Solo se ofrecen tareas implementadas y verificables. No se eliminan directamente cachés del sistema, archivos de intercambio ni carpetas protegidas."
+  },
+  "操作未完成：{0}": {
+    "en": "Operation incomplete: {0}",
+    "ja": "操作が未完了です：{0}",
+    "de": "Vorgang unvollständig: {0}",
+    "fr": "Opération incomplète : {0}",
+    "es": "Operación incompleta: {0}"
+  },
+  "任务已提交给 macOS。": {
+    "en": "Task submitted to macOS.",
+    "ja": "タスクを macOS に送信しました。",
+    "de": "Aufgabe an macOS übergeben.",
+    "fr": "Tâche transmise à macOS.",
+    "es": "Tarea enviada a macOS."
+  },
+  "实时状态": {
+    "en": "Live status",
+    "ja": "リアルタイム状態",
+    "de": "Live-Status",
+    "fr": "État en direct",
+    "es": "Estado en directo"
+  },
+  "采样中…": {
+    "en": "Sampling…",
+    "ja": "計測中…",
+    "de": "Messung…",
+    "fr": "Échantillonnage…",
+    "es": "Muestreando…"
+  },
+  "{0} 核心 · 系统总使用率": {
+    "en": "{0} cores · Total system usage",
+    "ja": "{0} コア · システム全体の使用率",
+    "de": "{0} Kerne · Gesamtauslastung",
+    "fr": "{0} cœurs · Utilisation totale",
+    "es": "{0} núcleos · Uso total del sistema"
+  },
+  "内存": {
+    "en": "Memory",
+    "ja": "メモリ",
+    "de": "Arbeitsspeicher",
+    "fr": "Mémoire",
+    "es": "Memoria"
+  },
+  "不可用": {
+    "en": "Unavailable",
+    "ja": "利用不可",
+    "de": "Nicht verfügbar",
+    "fr": "Indisponible",
+    "es": "No disponible"
+  },
+  "下载速度 ↓": {
+    "en": "Download ↓",
+    "ja": "受信 ↓",
+    "de": "Download ↓",
+    "fr": "Réception ↓",
+    "es": "Descarga ↓"
+  },
+  "上传速度 ↑": {
+    "en": "Upload ↑",
+    "ja": "送信 ↑",
+    "de": "Upload ↑",
+    "fr": "Envoi ↑",
+    "es": "Subida ↑"
+  },
+  "物理网卡合计 · 字节/秒": {
+    "en": "Physical interfaces combined · Bytes/sec",
+    "ja": "物理インターフェース合計 · バイト/秒",
+    "de": "Physische Schnittstellen gesamt · Byte/s",
+    "fr": "Interfaces physiques cumulées · Octets/s",
+    "es": "Interfaces físicas combinadas · Bytes/s"
+  },
+  "磁盘容量": {
+    "en": "Disk capacity",
+    "ja": "ディスク容量",
+    "de": "Festplattenkapazität",
+    "fr": "Capacité du disque",
+    "es": "Capacidad del disco"
+  },
+  "{0} 已用": {
+    "en": "{0} used",
+    "ja": "{0} 使用済み",
+    "de": "{0} belegt",
+    "fr": "{0} utilisés",
+    "es": "{0} usados"
+  },
+  "总量 {0}": {
+    "en": "Total {0}",
+    "ja": "合計 {0}",
+    "de": "Gesamt {0}",
+    "fr": "Total {0}",
+    "es": "Total {0}"
+  },
+  "温度": {
+    "en": "Temperature",
+    "ja": "温度",
+    "de": "Temperatur",
+    "fr": "Température",
+    "es": "Temperatura"
+  },
+  "%.1f °C · 传感器最高值": {
+    "en": "%.1f °C · Highest sensor reading",
+    "ja": "%.1f °C · センサー最高値",
+    "de": "%.1f °C · Höchster Sensorwert",
+    "fr": "%.1f °C · Capteur le plus élevé",
+    "es": "%.1f °C · Lectura máxima"
+  },
+  "当前接口未返回读数": {
+    "en": "No reading from current interface",
+    "ja": "現在のインターフェースから値を取得できません",
+    "de": "Keine Messwerte von der Schnittstelle",
+    "fr": "Aucune mesure de l’interface actuelle",
+    "es": "Sin lecturas de la interfaz actual"
+  },
+  "查看 {0} 个温度传感器": {
+    "en": "View {0} temperature sensors",
+    "ja": "{0} 個の温度センサーを表示",
+    "de": "{0} Temperatursensoren anzeigen",
+    "fr": "Voir {0} capteurs de température",
+    "es": "Ver {0} sensores de temperatura"
+  },
+  "系统热状态": {
+    "en": "Thermal state",
+    "ja": "システム温度状態",
+    "de": "Thermischer Zustand",
+    "fr": "État thermique",
+    "es": "Estado térmico"
+  },
+  "GPU 使用率": {
+    "en": "GPU usage",
+    "ja": "GPU 使用率",
+    "de": "GPU-Auslastung",
+    "fr": "Utilisation GPU",
+    "es": "Uso de GPU"
+  },
+  "电池": {
+    "en": "Battery",
+    "ja": "バッテリー",
+    "de": "Batterie",
+    "fr": "Batterie",
+    "es": "Batería"
+  },
+  "压缩内存 / 交换": {
+    "en": "Compressed / Swap",
+    "ja": "圧縮メモリ / スワップ",
+    "de": "Komprimiert / Swap",
+    "fr": "Compressée / Échange",
+    "es": "Comprimida / Intercambio"
+  },
+  "负载 1 / 5 / 15 分钟": {
+    "en": "Load · 1 / 5 / 15 min",
+    "ja": "負荷 · 1 / 5 / 15 分",
+    "de": "Last · 1 / 5 / 15 Min.",
+    "fr": "Charge · 1 / 5 / 15 min",
+    "es": "Carga · 1 / 5 / 15 min"
+  },
+  "运行时间": {
+    "en": "Uptime",
+    "ja": "稼働時間",
+    "de": "Betriebszeit",
+    "fr": "Temps de fonctionnement",
+    "es": "Tiempo de actividad"
+  },
+  "曲线保留最近 60 次采样，每秒更新；磁盘、电源和硬件传感器每 5 秒更新。温度为 IOHID / IOHWSensor 实测最高值，可展开查看芯片、电池、SSD 等传感器；各机型支持不同，读取失败不会显示估算数值。": {
+    "en": "Charts keep the latest 60 samples and update each second. Disk, power and sensors update every 5 seconds. Temperature is the highest measured IOHID / IOHWSensor value; expand to see chip, battery and SSD sensors. Availability varies by Mac; failed readings are not replaced with estimates.",
+    "ja": "グラフは直近60サンプルを保持し、毎秒更新します。ディスク、電源、センサーは5秒ごとです。温度は IOHID / IOHWSensor の実測最高値です。展開してチップ、バッテリー、SSD などを確認できます。機種により対応が異なり、取得できない値を推定値で補いません。",
+    "de": "Diagramme zeigen die letzten 60 Messungen und aktualisieren jede Sekunde. Festplatte, Energie und Sensoren alle 5 Sekunden. Temperatur ist der höchste IOHID-/IOHWSensor-Messwert; für Chip, Batterie und SSD aufklappen. Verfügbarkeit je nach Mac; keine geschätzten Ersatzwerte.",
+    "fr": "Les courbes gardent 60 mesures, actualisées chaque seconde. Disque, alimentation et capteurs : toutes les 5 secondes. La température est le maximum mesuré par IOHID / IOHWSensor ; développez pour voir puce, batterie et SSD. Selon le Mac, certaines mesures manquent ; aucune estimation ne les remplace.",
+    "es": "Los gráficos conservan 60 muestras y se actualizan cada segundo. Disco, alimentación y sensores: cada 5 segundos. La temperatura es el máximo medido por IOHID / IOHWSensor; despliegue para ver chip, batería y SSD. Varía según el Mac; las lecturas ausentes no se sustituyen por estimaciones."
+  },
+  "打开主窗口": {
+    "en": "Open main window",
+    "ja": "メインウインドウを開く",
+    "de": "Hauptfenster öffnen",
+    "fr": "Ouvrir la fenêtre principale",
+    "es": "Abrir ventana principal"
+  },
+  "退出 Clean": {
+    "en": "Quit Clean",
+    "ja": "Clean を終了",
+    "de": "Clean beenden",
+    "fr": "Quitter Clean",
+    "es": "Salir de Clean"
+  },
+  "收起到菜单栏": {
+    "en": "Move to menu bar",
+    "ja": "メニューバーに収納",
+    "de": "In Menüleiste ablegen",
+    "fr": "Réduire dans la barre des menus",
+    "es": "Reducir a la barra de menús"
+  },
+  "语言": {
+    "en": "Language",
+    "ja": "言語",
+    "de": "Sprache",
+    "fr": "Langue",
+    "es": "Idioma"
+  },
+  "自动（跟随系统）": {
+    "en": "Automatic (System)",
+    "ja": "自動（システム）",
+    "de": "Automatisch (System)",
+    "fr": "Automatique (système)",
+    "es": "Automático (sistema)"
+  },
+  "Storage Overview": {
+    "en": "Storage Overview",
+    "ja": "ストレージ概要",
+    "de": "Speicherübersicht",
+    "fr": "Vue du stockage",
+    "es": "Resumen del almacenamiento"
+  },
+  "（已统计）": {
+    "en": " (measured so far)",
+    "ja": "（集計済み）",
+    "de": " (bisher erfasst)",
+    "fr": " (calculés à ce stade)",
+    "es": " (calculado hasta ahora)"
+  },
+  "检查更新…": {
+    "en": "Check for Updates…",
+    "ja": "アップデートを確認…",
+    "de": "Nach Updates suchen…",
+    "fr": "Rechercher des mises à jour…",
+    "es": "Buscar actualizaciones…"
+  },
+  "自动检查更新": {
+    "en": "Check automatically",
+    "ja": "自動的に確認",
+    "de": "Automatisch prüfen",
+    "fr": "Vérifier automatiquement",
+    "es": "Comprobar automáticamente"
+  },
+  "应用界面立即切换；系统对话框的语言在重新打开应用后生效。": {
+    "en": "The app interface changes immediately; system dialogs use this language after reopening the app.",
+    "ja": "アプリの表示はすぐ切り替わります。システムダイアログは再起動後に反映されます。",
+    "de": "Die Oberfläche wechselt sofort; Systemdialoge verwenden die Sprache nach erneutem Öffnen.",
+    "fr": "L’interface change immédiatement ; les dialogues système suivent après réouverture.",
+    "es": "La interfaz cambia al instante; los diálogos del sistema cambian al volver a abrir la aplicación."
+  }
+}
