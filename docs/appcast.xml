@@ -5,6 +5,15 @@
     <link>https://bennix.github.io/Clean/</link>
     <description>Signed updates for Clean.</description>
     <item>
+      <title>Clean 1.3.0 — Supplemental Cleanup &amp; Precise Usage Checks</title>
+      <pubDate>Sun, 18 Oct 2026 13:08:22 GMT</pubDate>
+      <sparkle:version>7</sparkle:version>
+      <sparkle:shortVersionString>1.3.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>27.0</sparkle:minimumSystemVersion>
+      <description>&lt;p&gt;新增旧安装包、工程产物、微信重复附件检测；可清理补充项目加入全选，确认后移入废纸篓。疑似应用残留仅提示。&lt;/p&gt;&lt;p&gt;开发缓存按实际打开的路径检查占用，显示进程名称和 PID。Supplemental cleanup with review and precise open-path usage checks.&lt;/p&gt;</description>
+      <enclosure url="https://github.com/bennix/Clean/releases/download/v1.3.0/Clean-1.3.0-AppleSilicon.dmg" length="5184437" type="application/octet-stream" sparkle:edSignature="NKudY9P2ZYQMXbVTg5eNNREZUMI+fPzrko8ArBaKo9H0E0d7fStaQokhrYX9LkmtKRNsjVGybVIv16BF3IXuDw==" />
+    </item>
+    <item>
       <title>Clean 1.2.0 — Languages &amp; Signed Updates</title>
       <pubDate>Sun, 18 Oct 2026 07:08:35 GMT</pubDate>
       <sparkle:version>6</sparkle:version>
